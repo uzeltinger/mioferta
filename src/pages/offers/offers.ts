@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { OfferPage } from '../offer/offer';
+import { StatusBar } from '@ionic-native/status-bar';
 import { ProveedorProvider } from '../../providers/proveedor/proveedor';
 
 
@@ -21,13 +22,14 @@ export class OffersPage {
   offers: any
   whatsappText:string
   showSplash = true; // <-- show animation
-  constructor(public navCtrl: NavController, public navParams: NavParams, public proveedor:ProveedorProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public proveedor:ProveedorProvider, public statusBar: StatusBar) {
     this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OffersPage');
+    this.statusBar.hide();
     setTimeout(() => {
       this.getOffers();
      }, 1000);
