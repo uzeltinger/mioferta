@@ -2,11 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
+import {Facebook} from '@ionic-native/facebook';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,7 +21,8 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     MyApp,
     HomePage,
     OffersPage,
-    OfferPage
+    OfferPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -31,14 +34,16 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     MyApp,
     HomePage,
     OffersPage,
-    OfferPage
+    OfferPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HeaderColor,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProveedorProvider
+    ProveedorProvider,
+    Facebook
   ]
 })
 export class AppModule {}
