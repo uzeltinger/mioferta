@@ -1,0 +1,8 @@
+{
+  "name": "mioferta",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
