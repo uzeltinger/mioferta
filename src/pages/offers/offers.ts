@@ -30,7 +30,7 @@ export class OffersPage {
     console.log('ionViewDidLoad OffersPage');
     setTimeout(() => {
       this.getOffers();
-     }, 3000);
+     }, 1000);
   }
   getOffers(){
     this.proveedor.obtenerOfertas()

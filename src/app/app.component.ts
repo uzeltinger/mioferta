@@ -17,13 +17,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private headerColor: HeaderColor) {
-    
-    this.statusBar.styleBlackOpaque();
-    this.statusBar.backgroundColorByHexString('#B40F00');
-    this.headerColor.tint('#E72000');
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public headerColor: HeaderColor) {        
     this.initializeApp();
-
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
@@ -36,9 +31,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleBlackOpaque();
-      this.statusBar.backgroundColorByHexString('#333');
-      
+      this.statusBar.styleLightContent();
+      this.statusBar.backgroundColorByHexString('#B40F00');
+      this.headerColor.tint('#E72000');
       this.splashScreen.hide();
     });
   }
