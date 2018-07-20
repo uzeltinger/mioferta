@@ -14,13 +14,15 @@
 
 
 <ion-content padding>
+  
   <div *ngIf="isUserLoggedIn" style="text-align:center">
-  <img src="{{userInfo.picture.data.url}}">
-  <h3>{{userInfo.first_name}}</h3>
-  <p>{{userInfo.email}}</p>
-  <button ion-button clear (click)="logout()">Logout</button>
+    <img src="{{userInfo.picture.data.url}}">
+    <h3>{{userInfo.first_name}}</h3>
+    <p>{{userInfo.email}}</p>
+    <button ion-button clear (click)="logout()">Logout</button>
   </div>
- </ion-content>
- <ion-footer *ngIf="!isUserLoggedIn">
+
+</ion-content>
+<ion-footer *ngIf="!isUserLoggedIn">
   <button ion-button block (click)="loginWithFB()">Login with Facebook</button>
- </ion-footer>
+</ion-footer>
