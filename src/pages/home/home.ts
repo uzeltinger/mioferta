@@ -42,7 +42,9 @@ export class HomePage {
         console.log('line 42 : Your name is', first_name);
         this.userInfo.first_name = first_name;
 
-        this.showWelcomeToast();
+        if (this.platform.is('android')) {
+          this.showWelcomeToast();
+        }
         
       });
       

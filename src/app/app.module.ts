@@ -19,6 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HeaderColor } from '@ionic-native/header-color';
 
 import { ProveedorProvider } from '../providers/proveedor/proveedor';
+import { AboutPage } from '../pages/about/about';
+import { ProfilePage } from '../pages/profile/profile';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,ProfilePage,AboutPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,ProfilePage,AboutPage
   ],
   providers: [
     StatusBar,

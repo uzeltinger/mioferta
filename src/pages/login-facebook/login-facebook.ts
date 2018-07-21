@@ -33,13 +33,12 @@ export class LoginFacebookPage {
       this.storage.get('name').then((val) => {
         console.log('line: 34 Your name is', val);
         //this.onClickCancel();
-      });
-    
-    
+      });    
+      
   }
   loginWithFB(){
     this.fb.login(["public_profile","email"]).then( loginRes => {
-      this.fb.api('me/?fields=id,email,first_name,picture',["public_profile","email"]).then( apiRes => {
+      this.fb.api('me/?fields=id,email,first_name,last_name,picture',["public_profile","email"]).then( apiRes => {
         
         this.userInfo = apiRes;
         this.isUserLoggedIn = true;
@@ -50,6 +49,7 @@ export class LoginFacebookPage {
         this.storage.set('id', apiRes.id);
         this.storage.set('email', apiRes.email);
         this.storage.set('first_name', apiRes.first_name);
+        this.storage.set('last_name', apiRes.last_name);
         this.storage.set('picture', apiRes.picture.data.url);
         //this.onClickCancel();
 
