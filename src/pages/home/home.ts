@@ -17,34 +17,53 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad HomePage');
 
     if (this.platform.is('core')) {
       this.storage.get('name').then((val) => {
-        console.log('Your name is', val);
+        console.log('line 24 : Your name is', val);
       });
     }
 
-    if (this.platform.is('core')) {
+    
       this.storage.get('userLogued').then((userLogued) => {
-        console.log('userLogued is ', userLogued);
+        console.log('line 30 : userLogued is ', userLogued);
         this.isUserLoggedIn = userLogued;
       });
-      this.storage.get('first_name').then((first_name) => {
-        console.log('Your name is', first_name);
-        this.userInfo.first_name = first_name;
+      this.storage.get('id').then((id) => {
+        console.log('line 34 : Your id is', id);
+        this.userInfo.id = id;
       });
-    }
+      this.storage.get('email').then((email) => {
+        console.log('line 38 : Your email is', email);
+        this.userInfo.email = email;
+      });
+      this.storage.get('first_name').then((first_name) => {
+        console.log('line 42 : Your name is', first_name);
+        this.userInfo.first_name = first_name;
+
+        this.showWelcomeToast();
+        
+      });
+      
+      this.storage.get('picture').then((picture) => {
+        console.log('line 46 : Your picture is', picture);
+        this.userInfo.picture = picture;
+      });
+    
 
 
+    
+    
+  }
+
+  public showWelcomeToast(){
     this.toast.show(this.userInfo.first_name, '5000', 'center').subscribe(
       toast => {
         console.log(this.userInfo.first_name);
       }
     );
-    
   }
-
 
   public goLoginFacebookPage(){
     this.navCtrl.push(LoginFacebookPage);

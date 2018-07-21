@@ -28,14 +28,13 @@ export class LoginFacebookPage {
 
 
     
-    if (this.platform.is('core')) {
-      console.log('I am an core platform!');
+      
       this.storage.set('name', 'Max');
       this.storage.get('name').then((val) => {
-        console.log('Your name is', val);
+        console.log('line: 34 Your name is', val);
         //this.onClickCancel();
       });
-    }
+    
     
   }
   loginWithFB(){
@@ -44,17 +43,19 @@ export class LoginFacebookPage {
         
         this.userInfo = apiRes;
         this.isUserLoggedIn = true;
-        console.log('apiRes',apiRes);
-        console.log('this.userInfo',this.userInfo);
-        //this.storage.set('id', apiRes.id);
+        console.log('line: 46  apiRes',apiRes);
+        console.log('line: 47 this.userInfo',this.userInfo);
+        
+        this.storage.set('userLogued', true);
+        this.storage.set('id', apiRes.id);
         this.storage.set('email', apiRes.email);
-        //this.storage.set('first_name', apiRes.first_name);
-        //this.storage.set('picture', apiRes.picture.data.url);
+        this.storage.set('first_name', apiRes.first_name);
+        this.storage.set('picture', apiRes.picture.data.url);
         //this.onClickCancel();
 
         this.toast.show(this.userInfo.first_name, '5000', 'center').subscribe(
           toast => {
-            console.log('toast this.userInfo.first_name ',this.userInfo.first_name);
+            console.log('line: 58  toast this.userInfo.first_name ',this.userInfo.first_name);
           }
         );
 
