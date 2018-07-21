@@ -29,12 +29,21 @@ export class MyApp {
 
   }
 
-  initializeApp() {
+  initializeApp() {    
+    if (this.platform.is('android')) {
+      console.log('I am an android device!');
+    }
+    if (this.platform.is('windows')) {
+      console.log('I am an windows device!');
+    }
+    if (this.platform.is('core')) {
+      console.log('I am an core platform!');
+    }
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleBlackOpaque();
-      this.statusBar.backgroundColorByHexString('#B40F00');      
+      this.statusBar.backgroundColorByHexString('#B40F00');
       this.statusBar.show();
       //this.headerColor.tint('#E72000');
       this.splashScreen.hide();

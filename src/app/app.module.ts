@@ -3,12 +3,16 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import {Facebook} from '@ionic-native/facebook';
+import { IonicStorageModule } from '@ionic/storage';
+import { Toast } from '@ionic-native/toast';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
 import { LoginPage } from '../pages/login/login';
+import { LoginGooglePage } from '../pages/login-google/login-google';
+import { LoginFacebookPage } from '../pages/login-facebook/login-facebook';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,12 +26,13 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage
+    LoginPage,LoginGooglePage,LoginFacebookPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +40,7 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage
+    LoginPage,LoginGooglePage,LoginFacebookPage
   ],
   providers: [
     StatusBar,
@@ -43,7 +48,8 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
     HeaderColor,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProveedorProvider,
-    Facebook
+    Facebook,
+    Toast
   ]
 })
 export class AppModule {}

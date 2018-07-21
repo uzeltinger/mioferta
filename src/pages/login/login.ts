@@ -41,4 +41,8 @@ export class LoginPage {
       console.log(logoutErr)
     );
   }
+  
+  public onClickCancel() {
+    this.navCtrl.pop();
+  }
 }

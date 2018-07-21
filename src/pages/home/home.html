@@ -7,6 +7,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>  
+<ion-content padding>
+
+  <div *ngIf="isUserLoggedIn" style="text-align:center">
+    <img src="{{userInfo.picture.data.url}}">
+    <h3>{{userInfo.first_name}}</h3>
+    <p>{{userInfo.email}}</p>
+    <button ion-button clear (click)="logout()">Logout</button>
+  </div>
+
+  <div *ngIf="!isUserLoggedIn" style="text-align:center">    
+      <button ion-button icon-start color="facebookButton" (click)="goLoginFacebookPage()">
+        <ion-icon name="logo-facebook"></ion-icon>
+        Ingresar con Facebook
+      </button>
+    </div>
+      <div *ngIf="!isUserLoggedIn" style="text-align:center">
+      <button ion-button icon-start color="googleButton" (click)="goLoginGooglePage()">
+        <ion-icon name="logo-googleplus"></ion-icon>
+        Ingresar con Google
+      </button>    
+  </div>
 
 </ion-content>
