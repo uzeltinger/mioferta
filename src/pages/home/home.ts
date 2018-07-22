@@ -4,6 +4,7 @@ import { LoginGooglePage } from '../login-google/login-google';
 import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { Storage } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @Component({
   selector: 'page-home',
@@ -12,8 +13,12 @@ import { Toast } from '@ionic-native/toast';
 export class HomePage {
   userInfo: any = {};
   isUserLoggedIn: boolean = false;
-  constructor(public platform: Platform,public navCtrl: NavController, private storage: Storage, private toast: Toast) {
-
+  
+  constructor(public platform: Platform,
+    public navCtrl: NavController, 
+    private storage: Storage, 
+    private toast: Toast,
+    public userService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -21,41 +26,12 @@ export class HomePage {
 
     if (this.platform.is('core')) {
       this.storage.get('name').then((val) => {
-        console.log('line 24 : Your name is', val);
+        console.log('line 28 : Your name is', val);
       });
     }
 
-    
-      this.storage.get('userLogued').then((userLogued) => {
-        console.log('line 30 : userLogued is ', userLogued);
-        this.isUserLoggedIn = userLogued;
-      });
-      this.storage.get('id').then((id) => {
-        console.log('line 34 : Your id is', id);
-        this.userInfo.id = id;
-      });
-      this.storage.get('email').then((email) => {
-        console.log('line 38 : Your email is', email);
-        this.userInfo.email = email;
-      });
-      this.storage.get('first_name').then((first_name) => {
-        console.log('line 42 : Your name is', first_name);
-        this.userInfo.first_name = first_name;
-
-        if (this.platform.is('android')) {
-          this.showWelcomeToast();
-        }
-        
-      });
-      
-      this.storage.get('picture').then((picture) => {
-        console.log('line 46 : Your picture is', picture);
-        this.userInfo.picture = picture;
-      });
-    
-
-
-    
+    this.userInfo = this.userService.getUser();
+    console.log('HomePage : ionViewDidLoad : line 34 : this.userInfo ' , this.userInfo);
     
   }
 

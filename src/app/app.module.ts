@@ -21,6 +21,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
 import { ProfilePage } from '../pages/profile/profile';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ProfilePage } from '../pages/profile/profile';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProveedorProvider,
     Facebook,
-    Toast
+    Toast,
+    UserServiceProvider
   ]
 })
 export class AppModule {}

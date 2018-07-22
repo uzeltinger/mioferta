@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <div *ngIf="isUserLoggedIn" style="text-align:center">
-    <img src="{{userInfo.picture.data.url}}">
+    <img src="{{userInfo.picture}}">
     <h3>{{userInfo.first_name}}</h3>
     <p>{{userInfo.email}}</p>
     <button ion-button clear (click)="logout()">Logout</button>
