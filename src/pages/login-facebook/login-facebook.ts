@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import {Facebook} from '@ionic-native/facebook';
-import { Storage } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook';
 import { HomePage } from '../home/home';
 import { Toast } from '@ionic-native/toast';
 import { User } from '../../models/user';
@@ -26,7 +25,6 @@ export class LoginFacebookPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public fb: Facebook, 
-    private storage: Storage, 
     private toast: Toast,
     public userService: UserServiceProvider) {
   }
@@ -43,14 +41,14 @@ export class LoginFacebookPage {
     }
   }
 
-  loginWithFBCore(){        
+  loginWithFBCore(){
         this.isUserLoggedIn = true;        
         this.userInfo.facebook_id = "123456";
         this.userInfo.google_id = "123456";
         this.userInfo.email = "emilio@hotmail.com";
         this.userInfo.first_name = "Emilio";
         this.userInfo.last_name = "Uzeltinger";
-        this.userInfo.picture = "image";
+        this.userInfo.picture = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10156529424594907&height=50&width=50&ext=1532533092&hash=AeTtgpZ8u1AifWe2";
 
         console.log('line: 55 this.userInfo',this.userInfo);
 
@@ -62,6 +60,7 @@ export class LoginFacebookPage {
       this.fb.api('me/?fields=id,email,first_name,last_name,picture',["public_profile","email"]).then( apiRes => {
         
         this.userInfo = apiRes;
+        this.userInfo.picture = apiRes.picture.data.url;
         this.isUserLoggedIn = true;
         console.log('line: 65  apiRes',apiRes);
         console.log('line: 65 this.userInfo',this.userInfo);
@@ -80,8 +79,14 @@ export class LoginFacebookPage {
   }
 
   logout(){
+    if (this.platform.is('core')) {
+      this.isUserLoggedIn = false;
+      this.userService.logoutUser(this.userInfo);
+      this.onClickCancel();
+    }
     this.fb.logout().then( logoutRes => 
-      this.isUserLoggedIn = false
+      function (){this.isUserLoggedIn = false;
+        this.userService.logoutUser(this.userInfo);}
     ).catch(logoutErr => 
       console.log(logoutErr)
     );

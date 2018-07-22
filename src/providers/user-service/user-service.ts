@@ -56,7 +56,7 @@ isUserLoggedIn: boolean = false;
     console.log('UserServiceProvider : getUser : line 56 : this.user ', this.user);
     return this.user;
   }
-  logoutUser(){
-    this.storage.set('userLogued', false);
+  logoutUser(user: User){
+    this.storage.set('UserServiceProvider : logoutUser : line 60', false);
   }
 }
