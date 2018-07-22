@@ -25,13 +25,11 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
 
     if (this.platform.is('core')) {
-      this.storage.get('name').then((val) => {
-        console.log('line 28 : Your name is', val);
-      });
+      
     }
 
     this.userInfo = this.userService.getUser();
-    console.log('HomePage : ionViewDidLoad : line 34 : this.userInfo ' , this.userInfo);
+    console.log('HomePage : ionViewDidLoad : line 32 : this.userInfo ' , this.userInfo);
     
   }
 
