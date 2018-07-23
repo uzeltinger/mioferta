@@ -36,9 +36,7 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
-    console.log('ProfilePage : ionViewDidLoad : line 37 : this.userInfo ', this.userInfo);
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
-    console.log('ionViewDidLoad ProfilePage this.isUserLoggedIn ', this.isUserLoggedIn);
   }
 
 
@@ -81,7 +79,7 @@ export class ProfilePage {
     }
 
   }
-  
+
   public logoutFromGoogle(){
     this.googlePlus.logout()
     .then(res => {
