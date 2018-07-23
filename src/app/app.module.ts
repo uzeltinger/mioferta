@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
-import {Facebook} from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { IonicStorageModule } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
 
@@ -52,6 +53,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProveedorProvider,
     Facebook,
+    GooglePlus,
     Toast,
     UserServiceProvider
   ]

@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { LoginGooglePage } from '../login-google/login-google';
 import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 /**
  * Generated class for the ProfilePage page.
@@ -28,6 +29,7 @@ export class ProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: Facebook,
+    private googlePlus: GooglePlus,
     public userService: UserServiceProvider) {
     console.log('constructor ProfilePage');
   }
@@ -38,6 +40,9 @@ export class ProfilePage {
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     console.log('ionViewDidLoad ProfilePage this.isUserLoggedIn ', this.isUserLoggedIn);
   }
+
+
+
   logout() {
 
     if (this.platform.is('android')) {
@@ -48,34 +53,24 @@ export class ProfilePage {
           console.log('Perfil logout line 48 res.status: ', res.status);
           if (res.status === "connect") {
 
+            this.fb.logout().then(logoutRes => {
+              this.isUserLoggedIn = false;
+              this.userService.logoutUser(this.userInfo);
+              console.log('Perfil logout line 61 logoutRes', logoutRes);
+              //this.navCtrl.setRoot(HomePage);
+            }
+            ).catch(logoutErr =>
+              console.log('logoutErr', logoutErr)
+            );
+
           } else {
+
+            this.logoutFromGoogle();
 
           }
         })
         .catch(e => console.log(e)
-        );
-
-      this.fb.logout().then(logoutRes => {
-        this.isUserLoggedIn = false;
-        this.userService.logoutUser(this.userInfo);
-        console.log('Perfil logout line 61 logoutRes', logoutRes);
-        //this.navCtrl.setRoot(HomePage);
-      }
-      ).catch(logoutErr =>
-        console.log('logoutErr', logoutErr)
-      );
-
-      this.fb.getLoginStatus()
-        .then(res => {
-          console.log('Perfil logout line 70 res.status: ', res.status);
-          if (res.status === "connect") {
-
-          } else {
-
-          }
-        })
-        .catch(e => console.log(e)
-        );
+        );      
     }
 
     if (this.platform.is('core')) {
@@ -86,6 +81,17 @@ export class ProfilePage {
     }
 
   }
+  
+  public logoutFromGoogle(){
+    this.googlePlus.logout()
+    .then(res => {
+      console.log('LoginGooglePage logout : res : line 54', res);
+      this.isUserLoggedIn = false;
+      this.userService.logoutUser(this.userInfo);
+    })
+    .catch(err => console.error('error logout line 91: ' ,err));
+  }
+
   public goLoginFacebookPage() {
     this.navCtrl.push(LoginFacebookPage);
   }

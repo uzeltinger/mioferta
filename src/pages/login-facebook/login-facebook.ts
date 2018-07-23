@@ -49,8 +49,8 @@ export class LoginFacebookPage {
         this.isUserLoggedIn = false;     
         this.facebookUserData.isUserLoggedIn = false;   
         this.facebookUserData.facebook_id = "123456";
-        this.facebookUserData.google_id = "";
-        this.facebookUserData.email = "emilio@hotmail.com";
+        this.facebookUserData.google_id = null;
+        this.facebookUserData.email = "emilio22@hotmail.com";
         this.facebookUserData.first_name = "Emilio";
         this.facebookUserData.last_name = "Uzeltinger";
         this.facebookUserData.picture = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10156529424594907&height=50&width=50&ext=1532533092&hash=AeTtgpZ8u1AifWe2";
@@ -61,10 +61,16 @@ export class LoginFacebookPage {
         this.userService.setUserFacebook(this.facebookUserData)
         .subscribe(
           userRegisteredData => {
-            console.log('userRegisteredData: ',userRegisteredData);  
-            this.userInfo = userRegisteredData.userData;
-            this.goProfilePage();
-            this.showSplash = false;
+            console.log('userRegisteredData: ',userRegisteredData);
+            if(userRegisteredData.error){
+              console.log('userRegisteredData.error : ',userRegisteredData.error);
+              this.showSplash = false;
+            }else{
+              this.userInfo = userRegisteredData.userData;
+              this.goProfilePage();
+              this.showSplash = false;
+            }
+            
           },
           error => {
             this.errorMessage = <any>error;
@@ -92,10 +98,15 @@ export class LoginFacebookPage {
         this.userService.setUserFacebook(this.facebookUserData)
         .subscribe(
           userRegisteredData => {
-          console.log('userRegisteredData: ',userRegisteredData);  
-          this.userInfo = userRegisteredData.userData;
-          this.goProfilePage();
-          this.showSplash = false;
+            if(userRegisteredData.error){
+              console.log('userRegisteredData.error : ',userRegisteredData.error);
+              this.showSplash = false;
+            }else{
+              console.log('userRegisteredData: ',userRegisteredData);  
+              this.userInfo = userRegisteredData.userData;
+              this.goProfilePage();
+              this.showSplash = false;
+            }
           },
           error => {
             this.errorMessage = <any>error;

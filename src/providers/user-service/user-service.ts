@@ -16,8 +16,8 @@ export class UserServiceProvider {
 
   user: User = new User;
   isUserLoggedIn: boolean = false;
-  apiUrl: string = 'http://miofertarestapi.local/';
-  //apiUrl: string = 'http://la.mioferta.com.ar/api/';
+  //apiUrl: string = 'http://miofertarestapi.local/';
+  apiUrl: string = 'http://la.mioferta.com.ar/api/';
   httpOptions:any = {};
   /*
   headers = {
@@ -37,6 +37,23 @@ export class UserServiceProvider {
         this.storage.set('last_name', user.last_name);
         this.storage.set('picture', user.picture);
         console.log('UserServiceProvider : setUserFacebook : line 38 : user ', user);
+
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl+"register.php", user, this.httpOptions)
+      .pipe(        
+        catchError(this.handleError)
+      );  
+  }
+
+  setUserGoogle(user:any): Observable<any>{
+    this.storage.set('userLogued', true);
+        this.storage.set('facebook_id', user.facebook_id);
+        this.storage.set('google_id', user.google_id);
+        this.storage.set('email', user.email);
+        this.storage.set('first_name', user.first_name);
+        this.storage.set('last_name', user.last_name);
+        this.storage.set('picture', user.picture);
+        console.log('UserServiceProvider : setUserFacebook : line 56 : user ', user);
 
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"register.php", user, this.httpOptions)

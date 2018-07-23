@@ -6,12 +6,15 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Ingresar con Google</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<div *ngIf="showSplash" class="splash">
+  <div class="spinner"><ion-spinner></ion-spinner></div>
+</div>
 
 <ion-content padding>
 

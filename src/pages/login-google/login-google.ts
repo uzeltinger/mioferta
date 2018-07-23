@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Toast } from '@ionic-native/toast';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { User } from '../../models/user';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { ProfilePage } from '../profile/profile';
 /**
  * Generated class for the LoginGooglePage page.
  *
@@ -11,14 +15,128 @@ import { NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-login-google',
   templateUrl: 'login-google.html',
+  providers: [GooglePlus]
 })
 export class LoginGooglePage {
+  showSplash = true; // <-- show animation
+  isUserLoggedIn: any = false;
+  user: User = new User;
+  userInfo: any;
+  errorMessage: string;
+  googleUserData: any = {};  
+  isLoggedIn:boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public platform: Platform,
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private toast: Toast,
+    private googlePlus: GooglePlus,
+    public userService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginGooglePage');
+
+      if (this.platform.is('core')) {
+        this.loginCore();   
+      }
+      
+      if (this.platform.is('android')) {
+        this.login();   
+      }
+
+  }
+  loginCore(){
+    this.isUserLoggedIn = false;     
+        this.googleUserData.isUserLoggedIn = false;   
+        this.googleUserData.facebook_id = null;
+        this.googleUserData.google_id = "123456";
+        this.googleUserData.email = "emilio22@hotmail.com";
+        this.googleUserData.first_name = "Emilio";
+        this.googleUserData.last_name = "Uzeltinger";
+        this.googleUserData.picture = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10156529424594907&height=50&width=50&ext=1532533092&hash=AeTtgpZ8u1AifWe2";
+        
+        //this.userInfo = this.googleUserData;
+        console.log('line: 55 this.userInfo',this.userInfo);
+
+        this.userService.setUserGoogle(this.googleUserData)
+        .subscribe(
+          userRegisteredData => {
+            if(userRegisteredData.error){
+              console.log('userRegisteredData.error : ',userRegisteredData.error);
+              this.showSplash = false;
+            }else{
+              console.log('userRegisteredData: ',userRegisteredData);  
+              this.userInfo = userRegisteredData.userData;
+              //this.goProfilePage();
+              this.showSplash = false;
+              this.goProfilePage();
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+            //console.log('error: ',error);          
+          }
+        );    
+  }
+  login() {
+    this.googlePlus.login({})
+      .then(res => {
+        console.log('LoginGooglePage login : res : line 94', res);
+        
+        //this.accessToken = res.accessToken;
+
+
+        this.isUserLoggedIn = false;     
+        this.googleUserData.isUserLoggedIn = false;   
+        this.googleUserData.facebook_id = "";
+        this.googleUserData.google_id = res.userId;
+        this.googleUserData.email = res.email;
+        this.googleUserData.first_name = res.givenName;
+        this.googleUserData.last_name = res.familyName;
+        this.googleUserData.picture = res.imageUrl;
+        
+
+        this.userService.setUserGoogle(this.googleUserData)
+        .subscribe(
+          userRegisteredData => {
+            if(userRegisteredData.error){
+              console.log('LoginGooglePage setUserGoogle userRegisteredData.error 119: ',userRegisteredData.error);
+              this.showSplash = false;
+            }else{
+              console.log('LoginGooglePage setUserGoogle userRegisteredData: 122',userRegisteredData);  
+              //this.userInfo = userRegisteredData.userData;
+              //this.goProfilePage();
+              this.showSplash = false;
+              this.goProfilePage();
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+            //console.log('error: ',error);          
+          }
+        );
+        
+        this.toast.show('Bienvenido ' + this.googleUserData.first_name, '3000', 'bottom').subscribe(
+          toast => {
+            console.log('LoginGooglePage line: 109  toast this.userInfo.first_name ',this.googleUserData.first_name);
+          }
+        );
+
+
+      })
+      .catch(err => console.error('LoginGooglePage login : err : line 128: ',err));
   }
 
+  logout() {
+    this.googlePlus.logout()
+      .then(res => {
+        console.log('LoginGooglePage logout : res : line 134', res);        
+        this.isLoggedIn = false;
+      })
+      .catch(err => console.error(err));
+  }
+  goProfilePage(){
+    this.navCtrl.setRoot(ProfilePage);
+  }
 }
