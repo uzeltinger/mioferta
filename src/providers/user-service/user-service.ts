@@ -16,8 +16,8 @@ export class UserServiceProvider {
 
   user: User = new User;
   isUserLoggedIn: boolean = false;
-  //apiUrl: string = 'http://miofertarestapi.local/';
-  apiUrl: string = 'http://la.mioferta.com.ar/api/';
+  apiUrl: string = 'http://miofertarestapi.local/';
+  //apiUrl: string = 'http://la.mioferta.com.ar/api/';
   httpOptions:any = {};
   /*
   headers = {
@@ -31,6 +31,7 @@ export class UserServiceProvider {
   setUserFacebook(user:any): Observable<any>{
     this.storage.set('userLogued', true);
         this.storage.set('facebook_id', user.facebook_id);
+        this.storage.set('google_id', user.google_id);
         this.storage.set('email', user.email);
         this.storage.set('first_name', user.first_name);
         this.storage.set('last_name', user.last_name);
@@ -54,6 +55,10 @@ export class UserServiceProvider {
         this.storage.get('facebook_id').then((facebook_id) => {
           console.log('line 57 : Your facebook_id is', facebook_id);
           this.user.facebook_id = facebook_id;
+        });
+        this.storage.get('google_id').then((google_id) => {
+          console.log('line 60 : Your google_id is', google_id);
+          this.user.google_id = google_id;
         });
         this.storage.get('email').then((email) => {
           //console.log('line 42 : Your email is', email);

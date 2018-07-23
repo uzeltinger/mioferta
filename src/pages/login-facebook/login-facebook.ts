@@ -49,7 +49,7 @@ export class LoginFacebookPage {
         this.isUserLoggedIn = false;     
         this.facebookUserData.isUserLoggedIn = false;   
         this.facebookUserData.facebook_id = "123456";
-        this.facebookUserData.google_id = "123456";
+        this.facebookUserData.google_id = "";
         this.facebookUserData.email = "emilio@hotmail.com";
         this.facebookUserData.first_name = "Emilio";
         this.facebookUserData.last_name = "Uzeltinger";
