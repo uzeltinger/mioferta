@@ -29,7 +29,7 @@ export class OffersPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OffersPage');
-    this.statusBar.hide();
+    //this.statusBar.hide();
     setTimeout(() => {
       this.getOffers();
      }, 1000);

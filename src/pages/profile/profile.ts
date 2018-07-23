@@ -81,13 +81,27 @@ export class ProfilePage {
   }
 
   public logoutFromGoogle(){
+
+    this.googlePlus.trySilentLogin().then(res => {
+      console.log('LoginGooglePage logout : trySilentLogin : line 86', res);      
+    })
+    .catch(
+      err => console.error('error logout line 89: ' ,err)
+    );
+
+
     this.googlePlus.logout()
     .then(res => {
-      console.log('LoginGooglePage logout : res : line 54', res);
+      console.log('LoginGooglePage logout : res : line 95', res);
       this.isUserLoggedIn = false;
       this.userService.logoutUser(this.userInfo);
     })
-    .catch(err => console.error('error logout line 91: ' ,err));
+    .catch(err => {
+      console.error('error logout line 99: ' ,err);
+      this.isUserLoggedIn = false;
+      this.userService.logoutUser(this.userInfo);
+  }
+  );
   }
 
   public goLoginFacebookPage() {

@@ -7,26 +7,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="bg-image">
 
-  <div *ngIf="isUserLoggedIn" style="text-align:center">
-    <img src="{{userInfo.picture}}">
-    <h3>{{userInfo.first_name}}</h3>
-    <p>{{userInfo.email}}</p>
-    <button ion-button clear (click)="logout()">Logout</button>
-  </div>
+  <div class="home-logo"></div>
 
-  <div *ngIf="!isUserLoggedIn" style="text-align:center">    
-      <button ion-button icon-start color="facebookButton" (click)="goLoginFacebookPage()">
-        <ion-icon name="logo-facebook"></ion-icon>
-        Ingresar con Facebook
+  <div style="text-align:center">    
+      <button ion-button class="seleccione" (click)="goOffersPage()">        
+        <span>Buscar Ofertas</span>
       </button>
-    </div>
-      <div *ngIf="!isUserLoggedIn" style="text-align:center">
-      <button ion-button icon-start color="googleButton" (click)="goLoginGooglePage()">
-        <ion-icon name="logo-googleplus"></ion-icon>
-        Ingresar con Google
-      </button>    
   </div>
+
+  <div style="text-align:center">
+      <button ion-button class="seleccione" (click)="goProfilePage()">        
+        <span>Agregar mi Negocio</span>
+      </button>    
+  </div> 
 
 </ion-content>

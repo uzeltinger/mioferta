@@ -21,7 +21,6 @@ import { HeaderColor } from '@ionic-native/header-color';
 
 import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
-import { ProfilePage } from '../pages/profile/profile';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
@@ -30,7 +29,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage,ProfilePage,AboutPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage,ProfilePage,AboutPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage
   ],
   providers: [
     StatusBar,
