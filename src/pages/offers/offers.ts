@@ -33,9 +33,9 @@ export class OffersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OffersPage');
     //this.statusBar.hide();
-    setTimeout(() => {
+    //setTimeout(() => {
       this.getOffers();
-     }, 1000);
+     //}, 1000);
   }
   getOffers(){
     this.proveedor.obtenerOfertas()

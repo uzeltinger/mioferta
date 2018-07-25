@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProveedorProvider } from '../../providers/proveedor/proveedor';
+import { OfferPage } from '../offer/offer';
 
 /**
  * Generated class for the CategoryPage page.
@@ -40,5 +41,9 @@ export class CategoryPage {
       (error)=>{console.log('error',error);}
     )
   }
-
+  navToOfferPage(event, offer){
+    this.navCtrl.push(OfferPage, {
+      offer: offer
+    });
+  }
 }
