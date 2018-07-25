@@ -5,6 +5,7 @@ import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { Toast } from '@ionic-native/toast';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { OffersPage } from '../offers/offers';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-home',
@@ -52,6 +53,6 @@ export class HomePage {
     this.navCtrl.setRoot(OffersPage);    
   }
   public goProfilePage(){
-    this.navCtrl.setRoot('ProfilePage');    
+    this.navCtrl.setRoot(ProfilePage);    
   }
 }

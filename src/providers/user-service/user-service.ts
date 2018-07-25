@@ -16,8 +16,10 @@ export class UserServiceProvider {
 
   user: User = new User;
   isUserLoggedIn: boolean = false;
-  //apiUrl: string = 'http://miofertarestapi.local/';
-  apiUrl: string = 'http://la.mioferta.com.ar/api/';
+  //apiUrl: string = 'http://miofertarestapi.local/';   http://miofertarestapi.local/company/update
+  //apiUrl: string = 'http://la.mioferta.com.ar/api/';
+  apiUrl: string = 'http://mioferta.local/api/v1/';
+  registerUrl: string = 'http://miofertarestapi.local/';
   httpOptions:any = {};
   /*
   headers = {
@@ -26,6 +28,11 @@ export class UserServiceProvider {
 */
   constructor(public httpClient: HttpClient, public storage: Storage) {
     console.log('Hello UserServiceProvider Provider');
+  }
+
+  setUserToken(token){
+    this.storage.set('token', token);
+    console.log('token',token);
   }
 
   setUserFacebook(user:any): Observable<any>{
@@ -39,7 +46,7 @@ export class UserServiceProvider {
         console.log('UserServiceProvider : setUserFacebook : line 38 : user ', user);
 
     this.httpOptions = this.getHeader();
-    return this.httpClient.post<any>(this.apiUrl+"register.php", user, this.httpOptions)
+    return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
       .pipe(        
         catchError(this.handleError)
       );  
@@ -93,6 +100,10 @@ export class UserServiceProvider {
           //console.log('line 54 : Your picture is', picture);
           this.user.picture = picture;
         });
+        this.storage.get('token').then((token) => {
+          //console.log('line 54 : Your token is', token);
+          this.user.token = token;
+        });
       }
     });
     console.log('UserServiceProvider : getUser : line 77 : this.user ', this.user);
@@ -106,7 +117,17 @@ export class UserServiceProvider {
     this.user.isUserLoggedIn = false;
   }
 
+  // Envío de datos de formulario de registro
+  sendCompanyData(company:any): Observable<any> {    
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl+"company/update", company, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );    
+  }
+
   getHeader() {
+    console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
     return {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

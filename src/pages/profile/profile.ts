@@ -23,6 +23,9 @@ export class ProfilePage {
 
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
+  company: any = {};
+  showSplash: boolean;
+  errorMessage: any;
 
   constructor(public platform: Platform,
     public navCtrl: NavController,
@@ -36,6 +39,8 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
+    this.company.name = 'Mi compañía se llamará';
+    this.company.whatsapp = '2916481551';
   }
 
 
@@ -108,5 +113,29 @@ export class ProfilePage {
   }
   public goLoginGooglePage() {
     this.navCtrl.push(LoginGooglePage);
+  }
+
+  companyForm(form){
+    console.log('form this.company: ',this.company);
+    this.showSplash = true;
+    this.userService.sendCompanyData(this.company)
+        .subscribe(
+          companyData => {
+            console.log('companyData: ',companyData);
+            if(companyData.error){
+              console.log('companyData.error : ',companyData.error);
+              this.showSplash = false;
+            }else{
+              //this.userInfo = companyData.userData;
+              //this.goProfilePage();
+              this.showSplash = false;
+            }
+            
+          },
+          error => {
+            this.errorMessage = <any>error;
+            //console.log('error: ',error);          
+          }
+        );       
   }
 }

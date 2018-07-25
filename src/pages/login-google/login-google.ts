@@ -70,6 +70,7 @@ export class LoginGooglePage {
               this.userInfo = userRegisteredData.userData;
               //this.goProfilePage();
               this.showSplash = false;
+              this.userService.setUserToken(userRegisteredData.userData.token);
               this.goProfilePage();
             }
           },
@@ -107,6 +108,7 @@ export class LoginGooglePage {
               console.log('LoginGooglePage setUserGoogle userRegisteredData: 122',userRegisteredData);  
               //this.userInfo = userRegisteredData.userData;
               //this.goProfilePage();
+              this.userService.setUserToken(userRegisteredData.userData.token);
               this.showSplash = false;
               this.goProfilePage();
             }

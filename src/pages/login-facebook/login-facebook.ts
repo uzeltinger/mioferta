@@ -67,6 +67,7 @@ export class LoginFacebookPage {
               this.showSplash = false;
             }else{
               this.userInfo = userRegisteredData.userData;
+              this.userService.setUserToken(userRegisteredData.userData.token);
               this.goProfilePage();
               this.showSplash = false;
             }
@@ -104,6 +105,7 @@ export class LoginFacebookPage {
             }else{
               console.log('userRegisteredData: ',userRegisteredData);  
               this.userInfo = userRegisteredData.userData;
+              this.userService.setUserToken(userRegisteredData.userData.token);
               this.goProfilePage();
               this.showSplash = false;
             }
