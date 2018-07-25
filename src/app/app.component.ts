@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { OffersPage } from '../pages/offers/offers';
 import { ProfilePage } from '../pages/profile/profile';
 import { AboutPage } from '../pages/about/about';
+import { CategoriesPage } from '../pages/categories/categories';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,8 @@ export class MyApp {
       { title: 'Inicio', component: HomePage, icon: 'home' },
       { title: 'Ofertas', component: OffersPage, icon: 'list-box' },
       { title: 'Mi Perfil', component: ProfilePage, icon: 'person' },
-      { title: 'Acerca de Mi Oferta', component: AboutPage, icon: 'information-circle' }
+      { title: 'Acerca de Mi Oferta', component: AboutPage, icon: 'information-circle' },
+      { title: 'Categorías', component: CategoriesPage, icon: 'albums' }
     ];
 
   }

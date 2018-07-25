@@ -1,0 +1,83 @@
+<!--
+  Generated template for the CategoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{category.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<div *ngIf="showSplash" class="splash">
+    <div class="spinner">
+        <ion-spinner></ion-spinner>
+    </div>
+</div>
+
+<ion-content padding>
+  <ion-card *ngFor="let offer of offers" (click)="navToOfferPage($event, offer)">
+
+    <img src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">
+
+    <ion-card-content>
+        <ion-card-title>
+            {{offer.subject}}
+        </ion-card-title>
+    </ion-card-content>
+
+    <ion-card-content>
+        <p><ion-icon name='podium'></ion-icon> {{offer.company_name}}</p>
+        <p><ion-icon name='pin'></ion-icon> {{offer.full_address}}</p>
+        <p><ion-icon name='calendar'></ion-icon> {{offer.start_to_end_date}}</p>
+        <p><ion-icon name='time'></ion-icon> {{offer.remaining_time}}</p>
+    </ion-card-content>
+
+    <ion-grid class="grid-bottom">
+        <ion-row>
+            <ion-col>
+                <div float-left class="old-price">{{offer.priceFormated}}</div>
+                <div float-left margin-left class="text-white">{{offer.specialPriceFormated}}</div>
+                <br>
+                <div text-left margin-top>Descuento:
+                    <span class="text-white">{{offer.priceDiscount}} %</span>
+                </div>
+            </ion-col>
+
+            <ion-col>
+                <ion-icon float-right>
+                    <a target="_blank" (click)="increaseWhatsappCount(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
+                        <img src="assets/img/whatsappicon.png">
+                    </a>
+                </ion-icon>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+
+
+    <ion-row no-padding>
+        <ion-col>
+            <button ion-button clear small color="danger" icon-start>
+
+            </button>
+        </ion-col>
+        <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+
+            </button>
+        </ion-col>
+        <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='share-alt'></ion-icon>
+                Compartir
+            </button>
+        </ion-col>
+    </ion-row>
+
+</ion-card>
+</ion-content>

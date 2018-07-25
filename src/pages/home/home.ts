@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { LoginGooglePage } from '../login-google/login-google';
 import { LoginFacebookPage } from '../login-facebook/login-facebook';
-import { Storage } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { OffersPage } from '../offers/offers';
@@ -17,7 +16,6 @@ export class HomePage {
   
   constructor(public platform: Platform,
     public navCtrl: NavController, 
-    private storage: Storage, 
     private toast: Toast,
     public userService: UserServiceProvider) {
   }

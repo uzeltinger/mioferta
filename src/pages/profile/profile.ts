@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { User } from '../../models/user';
 import { HomePage } from '../home/home';
@@ -15,7 +15,6 @@ import { GooglePlus } from '@ionic-native/google-plus';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',

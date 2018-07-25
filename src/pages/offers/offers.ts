@@ -22,7 +22,10 @@ export class OffersPage {
   offers: any
   whatsappText:string
   showSplash = true; // <-- show animation
-  constructor(public navCtrl: NavController, public navParams: NavParams, public proveedor:ProveedorProvider, public statusBar: StatusBar) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public proveedor:ProveedorProvider, 
+    public statusBar: StatusBar) {
     this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
   
   }

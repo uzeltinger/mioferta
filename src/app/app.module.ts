@@ -14,6 +14,9 @@ import { OfferPage } from '../pages/offer/offer';
 import { LoginPage } from '../pages/login/login';
 import { LoginGooglePage } from '../pages/login-google/login-google';
 import { LoginFacebookPage } from '../pages/login-facebook/login-facebook';
+import { ProfilePage } from '../pages/profile/profile';
+import { CategoriesPage } from '../pages/categories/categories';
+import { CategoryPage } from '../pages/category/category';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,7 +32,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
+    ProfilePage,CategoriesPage,CategoryPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     HomePage,
     OffersPage,
     OfferPage,
-    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage
+    LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
+    ProfilePage,CategoriesPage,CategoryPage
   ],
   providers: [
     StatusBar,
