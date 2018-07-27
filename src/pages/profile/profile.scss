@@ -1,3 +1,25 @@
 page-profile {
-
+    .profile-avatar {        
+        float: left;
+        width: 100%;
+      }
+      .profile-avatar img {
+        border-radius: 50%;
+        float: left;
+      }
+      .profile-avatar .user-first_name {
+        float: left;
+        margin-top:0.5rem;
+        margin-left: 1rem;
+        width: 100%;
+      }
+      .profile-avatar .user-email {
+        float: left;
+        margin-top:0.5rem;
+        margin-left: 1rem;
+        width: 100%;
+      }
+      .profile-avatar .button {
+          float: left;
+      }
 }

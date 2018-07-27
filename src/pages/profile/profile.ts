@@ -9,6 +9,7 @@ import { LoginGooglePage } from '../login-google/login-google';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Toast } from '@ionic-native/toast';
+import { EditOffersPage } from '../edit-offers/edit-offers';
 
 /**
  * Generated class for the ProfilePage page.
@@ -120,6 +121,9 @@ export class ProfilePage {
   }
   public goLoginGooglePage() {
     this.navCtrl.push(LoginGooglePage);
+  }
+  public goEditOffersPage(){
+    this.navCtrl.push(EditOffersPage);
   }
 
   companyForm(form){

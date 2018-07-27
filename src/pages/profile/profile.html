@@ -21,11 +21,22 @@
 </div>
 
 <ion-content padding>
-    <div *ngIf="userInfo.isUserLoggedIn" style="text-align:center">
-        <img src="{{userInfo.picture}}">
-        <h3>{{userInfo.first_name}}</h3>
-        <p>{{userInfo.email}}</p>
-        <button ion-button clear (click)="logout()">Logout</button>
+
+    <div class="profile-avatar" *ngIf="userInfo.isUserLoggedIn" style="text-align:left">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <img src="{{userInfo.picture}}">
+                </ion-col>
+                <ion-col col-9>
+                    <div class="user-first_name">{{userInfo.first_name}}</div>
+                    <div class="user-first_name">{{userInfo.email}}</div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <button ion-button clear (click)="logout()">Salir</button>
+            </ion-row>
+        </ion-grid>
     </div>
 
     <div *ngIf="!userInfo.isUserLoggedIn" style="text-align:center">
@@ -42,7 +53,7 @@
     </div>
 
     <div *ngIf="userInfo.isUserLoggedIn">
-            <form (ngSubmit)="companyForm()">
+        <form (ngSubmit)="companyForm()">
 
             <ion-item>
                 <ion-label floating color="primaryDark">Nombre del Comercio</ion-label>
@@ -53,11 +64,40 @@
                 <ion-label floating color="primaryDark">Whatsapp</ion-label>
                 <ion-input type="tel" name="whatsapp" [(ngModel)]="company.whatsapp"></ion-input>
             </ion-item>
-
-            <ion-item><br></ion-item>
-
-            <button ion-button block type="submit">Guardar Comercio</button>
+            <ion-item>
+                <button ion-button block type="submit">Guardar Comercio</button>
+            </ion-item>
 
         </form>
+
+        <ion-item>
+            <a ion-button block (click)="goEditOffersPage()">Mis Ofertas</a>
+        </ion-item>
+
+        <ion-grid>
+            <ion-row align-items-center>
+                <ion-col text-center>
+                    <button ion-button icon-only round>
+                        <ion-icon name="list"></ion-icon>
+                    </button>
+                    <div text-center>Ofertas</div>
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only round>
+                        <ion-icon name="camera"></ion-icon>
+                    </button>
+                    <div text-center>Cámara</div>
+                    
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only round>
+                        <ion-icon name="images"></ion-icon>
+                    </button>
+                    <div text-center>Galería</div>
+                    
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
     </div>
 </ion-content>

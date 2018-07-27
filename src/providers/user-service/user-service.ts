@@ -18,8 +18,8 @@ export class UserServiceProvider {
   user: User = new User;
   company: Company = new Company;
   isUserLoggedIn: boolean = false;
-  apiUrl: string = 'https://mioferta.com.ar/api/v1/';
-  //apiUrl: string = 'http://mioferta.local/api/v1/';
+  //apiUrl: string = 'https://mioferta.com.ar/api/v1/';
+  apiUrl: string = 'http://mioferta.local/api/v1/';
   httpOptions:any = {};
   /*
   headers = {
@@ -167,7 +167,7 @@ export class UserServiceProvider {
         data => {
           this.storeCompanyData(data);
           console.log("data", data);
-          console.log("company", company);                               
+          //console.log("company", company);                               
         },
         error => {
           console.log("error", error);

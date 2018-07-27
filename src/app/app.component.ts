@@ -9,6 +9,8 @@ import { OffersPage } from '../pages/offers/offers';
 import { ProfilePage } from '../pages/profile/profile';
 import { AboutPage } from '../pages/about/about';
 import { CategoriesPage } from '../pages/categories/categories';
+import { User } from '../models/user';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +22,13 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen/*, public headerColor: HeaderColor*/) {        
+  isUserLoggedIn: boolean = false;
+  userInfo: User = new User;
+
+  constructor(public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,/*, public headerColor: HeaderColor*/
+    public userService: UserServiceProvider) {        
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -52,6 +60,9 @@ export class MyApp {
       //this.headerColor.tint('#E72000');
       this.splashScreen.hide();
     });
+    this.userInfo = this.userService.getUser();
+    this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
+    console.log('user',this.userInfo);
   }
 
   openPage(page) {

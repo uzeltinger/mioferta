@@ -17,6 +17,7 @@ import { LoginFacebookPage } from '../pages/login-facebook/login-facebook';
 import { ProfilePage } from '../pages/profile/profile';
 import { CategoriesPage } from '../pages/categories/categories';
 import { CategoryPage } from '../pages/category/category';
+import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +26,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { OfferServiceProvider } from '../providers/offer-service/offer-service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage
   ],
   providers: [
     StatusBar,
@@ -59,7 +61,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     Facebook,
     GooglePlus,
     Toast,
-    UserServiceProvider
+    UserServiceProvider,
+    OfferServiceProvider
   ]
 })
 export class AppModule {}

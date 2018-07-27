@@ -34,6 +34,22 @@ ion-spinner * {
   .spinner-md-crescent circle {
     stroke: #fff;
   }
+  .menu-avatar {
+    padding: 2rem;
+    background: #B40F00;
+    float: left;
+    width: 100%;
+  }
+  .menu-avatar img {
+    border-radius: 50%;
+    float: left;
+  }
+  .menu-avatar .user-first_name {
+    float: left;
+    color: #fff;
+    margin-top: 1rem;
+    margin-left: 1rem;
+  }
 /* card-list*/
 
 .darkbackground {
