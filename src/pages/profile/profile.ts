@@ -8,6 +8,7 @@ import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { LoginGooglePage } from '../login-google/login-google';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Toast } from '@ionic-native/toast';
 
 /**
  * Generated class for the ProfilePage page.
@@ -32,6 +33,7 @@ export class ProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: Facebook,
+    private toast: Toast,
     private googlePlus: GooglePlus,
     public userService: UserServiceProvider) {
     console.log('constructor ProfilePage');
@@ -122,6 +124,7 @@ export class ProfilePage {
 
   companyForm(form){
     console.log('form this.company: ',this.company);
+    this.showSplash = true;
     //this.showSplash = true;
     this.userService.sendCompanyData(this.company)
         .subscribe(
@@ -130,17 +133,32 @@ export class ProfilePage {
             if(companyData.error){
               console.log('companyData.error : ',companyData.error);
               this.showSplash = false;
+              this.showToast('Error: ' + companyData.error);
             }else{
               //this.userInfo = companyData.userData;
               //this.goProfilePage();
               this.showSplash = false;
+              this.showToast('Comercio actualizado');
             }
             
           },
           error => {
             this.errorMessage = <any>error;
+            this.showToast('Error: ' + this.errorMessage);
+            this.showSplash = false;
             //console.log('error: ',error);          
           }
         );       
+  }
+
+  showToast(text:string, duration: string = '3000',position:string = 'bottom'){
+    if(this.platform.is('android')){
+      this.toast.show(text, duration, position).subscribe(
+      toast => {
+        console.log('line: 109  toast this.userInfo.first_name ',this.userInfo.first_name);
+      }
+    );
+    }
+    
   }
 }

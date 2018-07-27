@@ -167,8 +167,7 @@ export class UserServiceProvider {
         data => {
           this.storeCompanyData(data);
           console.log("data", data);
-          console.log("company", company);          
-                               
+          console.log("company", company);                               
         },
         error => {
           console.log("error", error);
