@@ -152,7 +152,11 @@ export class UserServiceProvider {
     this.isUserLoggedIn = false;
     this.user.isUserLoggedIn = false;
   }  
-
+  storeCompanyData(data:any){
+    this.storage.set('company_id', data.companyData.id);
+    this.storage.set('company_name', data.companyData.name);
+    this.storage.set('company_whatsapp', data.companyData.whatsapp); 
+  }
   // Envío de datos de formulario de registro
   sendCompanyData(company:any): Observable<any> {    
     this.httpOptions = this.getHeader();    
@@ -161,11 +165,10 @@ export class UserServiceProvider {
       .pipe(
         tap(// Log the result or error
         data => {
-          console.log("data.companyData", data.companyData);
+          this.storeCompanyData(data);
+          console.log("data", data);
           console.log("company", company);          
-            this.storage.set('company_id', data.companyData.id);
-            this.storage.set('company_name', data.companyData.name);
-            this.storage.set('company_whatsapp', data.companyData.whatsapp);                    
+                               
         },
         error => {
           console.log("error", error);
