@@ -4,6 +4,7 @@ import { OfferServiceProvider } from '../../providers/offer-service/offer-servic
 import { User } from '../../models/user';
 import { Company } from '../../models/company';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { EditOfferPage } from '../edit-offer/edit-offer';
 
 /**
  * Generated class for the EditOffersPage page.
@@ -22,6 +23,7 @@ export class EditOffersPage {
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
   company: Company = new Company;
+  
   constructor(public navCtrl: NavController, 
     public offerService: OfferServiceProvider, 
     public navParams: NavParams,
@@ -52,6 +54,13 @@ export class EditOffersPage {
       this.showSplash = false;
     }
     )
+  } 
+  
+  addNewOffer(){
+    let newOffer: object = {'id':'0'};    
+    console.log('newOffer',newOffer);
+    this.navCtrl.push(EditOfferPage, {
+          offer: newOffer
+        });
   }
- 
 }

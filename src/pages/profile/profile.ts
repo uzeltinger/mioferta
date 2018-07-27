@@ -10,6 +10,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Toast } from '@ionic-native/toast';
 import { EditOffersPage } from '../edit-offers/edit-offers';
+import { EditOfferPage } from '../edit-offer/edit-offer';
 
 /**
  * Generated class for the ProfilePage page.
@@ -44,11 +45,11 @@ export class ProfilePage {
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
-    
+
     //this.company.name = 'Mi compañía se llamará';
     //this.company.whatsapp = '2916481551';
-    console.log('ionViewDidLoad ProfilePage this.userInfo ' , this.userInfo);
-    console.log('ionViewDidLoad ProfilePage this.company ' , this.company);
+    console.log('ionViewDidLoad ProfilePage this.userInfo ', this.userInfo);
+    console.log('ionViewDidLoad ProfilePage this.company ', this.company);
   }
 
 
@@ -80,7 +81,7 @@ export class ProfilePage {
           }
         })
         .catch(e => console.log(e)
-        );      
+        );
     }
 
     if (this.platform.is('core')) {
@@ -92,28 +93,28 @@ export class ProfilePage {
 
   }
 
-  public logoutFromGoogle(){
+  public logoutFromGoogle() {
 
     this.googlePlus.trySilentLogin().then(res => {
-      console.log('LoginGooglePage logout : trySilentLogin : line 86', res);      
+      console.log('LoginGooglePage logout : trySilentLogin : line 86', res);
     })
-    .catch(
-      err => console.error('error logout line 89: ' ,err)
-    );
+      .catch(
+        err => console.error('error logout line 89: ', err)
+      );
 
 
     this.googlePlus.logout()
-    .then(res => {
-      console.log('LoginGooglePage logout : res : line 95', res);
-      this.isUserLoggedIn = false;
-      this.userService.logoutUser(this.userInfo);
-    })
-    .catch(err => {
-      console.error('error logout line 99: ' ,err);
-      this.isUserLoggedIn = false;
-      this.userService.logoutUser(this.userInfo);
-  }
-  );
+      .then(res => {
+        console.log('LoginGooglePage logout : res : line 95', res);
+        this.isUserLoggedIn = false;
+        this.userService.logoutUser(this.userInfo);
+      })
+      .catch(err => {
+        console.error('error logout line 99: ', err);
+        this.isUserLoggedIn = false;
+        this.userService.logoutUser(this.userInfo);
+      }
+      );
   }
 
   public goLoginFacebookPage() {
@@ -122,47 +123,57 @@ export class ProfilePage {
   public goLoginGooglePage() {
     this.navCtrl.push(LoginGooglePage);
   }
-  public goEditOffersPage(){
+  public goEditOffersPage() {
     this.navCtrl.push(EditOffersPage);
   }
+  goNewOfferPage() {
+    let newOffer: object = { 'id': '0' };
+    console.log('newOffer', newOffer);
+    this.navCtrl.push(EditOfferPage, {
+      offer: newOffer
+    });
+  }
 
-  companyForm(form){
-    console.log('form this.company: ',this.company);
+  companyForm(form) {
+    console.log('form this.company: ', this.company);
     this.showSplash = true;
     //this.showSplash = true;
     this.userService.sendCompanyData(this.company)
-        .subscribe(
-          companyData => {
-            console.log('companyData: ',companyData);
-            if(companyData.error){
-              console.log('companyData.error : ',companyData.error);
-              this.showSplash = false;
-              this.showToast('Error: ' + companyData.error);
-            }else{
-              //this.userInfo = companyData.userData;
-              //this.goProfilePage();
-              this.showSplash = false;
-              this.showToast('Comercio actualizado');
-            }
-            
-          },
-          error => {
-            this.errorMessage = <any>error;
-            this.showToast('Error: ' + this.errorMessage);
+      .subscribe(
+        companyData => {
+          console.log('companyData: ', companyData);
+          if (companyData.error) {
+            console.log('companyData.error : ', companyData.error);
             this.showSplash = false;
-            //console.log('error: ',error);          
+            this.showToast('Error: ' + companyData.error);
+          } else {
+            //this.userInfo = companyData.userData;
+            //this.goProfilePage();
+            this.showSplash = false;
+            this.showToast('Comercio actualizado');
           }
-        );       
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+          this.showToast('Error: ' + this.errorMessage);
+          this.showSplash = false;
+          //console.log('error: ',error);          
+        }
+      );
   }
 
-  showToast(text:string, duration: string = '3000',position:string = 'bottom'){
-    if(this.platform.is('android')){
+  showToast(text: string, duration: string = '3000', position: string = 'bottom') {
+    if (this.platform.is('android')) {
       this.toast.show(text, duration, position).subscribe(
-      toast => {
-        console.log('line: 109  toast this.userInfo.first_name ',this.userInfo.first_name);
-      }
-    );
+        toast => {
+          console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
+        }
+      );
     }
-    
+
   }
+
+
+
 }

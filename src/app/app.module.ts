@@ -27,6 +27,7 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { OfferServiceProvider } from '../providers/offer-service/offer-service';
+import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage
   ],
   providers: [
     StatusBar,

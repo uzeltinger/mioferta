@@ -74,30 +74,11 @@
             <a ion-button block (click)="goEditOffersPage()">Mis Ofertas</a>
         </ion-item>
 
-        <ion-grid>
-            <ion-row align-items-center>
-                <ion-col text-center>
-                    <button ion-button icon-only round>
-                        <ion-icon name="list"></ion-icon>
-                    </button>
-                    <div text-center>Ofertas</div>
-                </ion-col>
-                <ion-col text-center>
-                    <button ion-button icon-only round>
-                        <ion-icon name="camera"></ion-icon>
-                    </button>
-                    <div text-center>Cámara</div>
-                    
-                </ion-col>
-                <ion-col text-center>
-                    <button ion-button icon-only round>
-                        <ion-icon name="images"></ion-icon>
-                    </button>
-                    <div text-center>Galería</div>
-                    
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <ion-item>
+            <a ion-button block (click)="goNewOfferPage()">Agregar Oferta</a>
+        </ion-item>
+
+        
 
     </div>
 </ion-content>
