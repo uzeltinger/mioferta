@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
+import { Company } from '../../models/company';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -15,11 +16,10 @@ import { catchError } from 'rxjs/operators';
 export class UserServiceProvider {
 
   user: User = new User;
+  company: Company = new Company;
   isUserLoggedIn: boolean = false;
-  //apiUrl: string = 'http://miofertarestapi.local/';   http://miofertarestapi.local/company/update
-  //apiUrl: string = 'http://la.mioferta.com.ar/api/';
-  apiUrl: string = 'http://mioferta.local/api/v1/';
-  registerUrl: string = 'http://miofertarestapi.local/';
+  apiUrl: string = 'https://mioferta.com.ar/api/v1/';
+  //apiUrl: string = 'http://mioferta.local/api/v1/';
   httpOptions:any = {};
   /*
   headers = {
@@ -63,10 +63,33 @@ export class UserServiceProvider {
         console.log('UserServiceProvider : setUserFacebook : line 56 : user ', user);
 
     this.httpOptions = this.getHeader();
-    return this.httpClient.post<any>(this.apiUrl+"register.php", user, this.httpOptions)
+    return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
       .pipe(        
         catchError(this.handleError)
       );  
+  }
+
+  getCompany(){
+    this.storage.get('userLogued').then((userLogued) => {
+      console.log('line 49 : userLogued is ', userLogued);
+      this.isUserLoggedIn = userLogued;
+      if(userLogued){
+        this.storage.get('company_id').then((company_id) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.id = company_id;
+        });
+        this.storage.get('company_name').then((company_name) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.name = company_name;
+        });
+        this.storage.get('company_whatsapp').then((company_whatsapp) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.whatsapp = company_whatsapp;
+        });
+      }
+    });
+    console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
+    return this.company;
   }
 
   getUser(){
@@ -104,6 +127,19 @@ export class UserServiceProvider {
           //console.log('line 54 : Your token is', token);
           this.user.token = token;
         });
+        this.storage.get('company_id').then((company_id) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.id = company_id;
+        });
+        this.storage.get('company_name').then((company_name) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.name = company_name;
+        });
+        this.storage.get('company_whatsapp').then((company_whatsapp) => {
+          //console.log('line 54 : Your token is', token);
+          this.company.whatsapp = company_whatsapp;
+        });         
+
       }
     });
     console.log('UserServiceProvider : getUser : line 77 : this.user ', this.user);
@@ -115,13 +151,29 @@ export class UserServiceProvider {
     this.storage.set('userLogued', false);
     this.isUserLoggedIn = false;
     this.user.isUserLoggedIn = false;
-  }
+  }  
 
   // Envío de datos de formulario de registro
   sendCompanyData(company:any): Observable<any> {    
-    this.httpOptions = this.getHeader();
+    this.httpOptions = this.getHeader();    
+    company.email = this.user.email;
     return this.httpClient.post<any>(this.apiUrl+"company/update", company, this.httpOptions)
       .pipe(
+        tap(// Log the result or error
+        data => {
+          console.log("data.companyData", data.companyData);
+          console.log("company", company);          
+            this.storage.set('company_id', data.companyData.id);
+            this.storage.set('company_name', data.companyData.name);
+            this.storage.set('company_whatsapp', data.companyData.whatsapp);                    
+        },
+        error => {
+          console.log("error", error);
+          if(error.status == 401){            
+            
+          }
+        }
+      ),
         catchError(this.handleError)
       );    
   }

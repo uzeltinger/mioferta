@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { User } from '../../models/user';
+import { Company } from '../../models/company';
 import { HomePage } from '../home/home';
 import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { LoginGooglePage } from '../login-google/login-google';
@@ -23,7 +24,7 @@ export class ProfilePage {
 
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
-  company: any = {};
+  company: Company = new Company;
   showSplash: boolean;
   errorMessage: any;
 
@@ -39,8 +40,12 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
-    this.company.name = 'Mi compañía se llamará';
-    this.company.whatsapp = '2916481551';
+    this.company = this.userService.getCompany();
+    
+    //this.company.name = 'Mi compañía se llamará';
+    //this.company.whatsapp = '2916481551';
+    console.log('ionViewDidLoad ProfilePage this.userInfo ' , this.userInfo);
+    console.log('ionViewDidLoad ProfilePage this.company ' , this.company);
   }
 
 
@@ -117,7 +122,7 @@ export class ProfilePage {
 
   companyForm(form){
     console.log('form this.company: ',this.company);
-    this.showSplash = true;
+    //this.showSplash = true;
     this.userService.sendCompanyData(this.company)
         .subscribe(
           companyData => {

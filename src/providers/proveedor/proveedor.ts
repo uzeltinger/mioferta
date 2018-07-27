@@ -9,9 +9,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ProveedorProvider {
-  //apiUrl: string = 'http://miofertarestapi.local/';
-  //apiUrl: string = 'http://la.mioferta.com.ar/api/';
-  apiUrl: string = 'http://mioferta.local/api/';
+  apiUrl: string = 'https://mioferta.com.ar/api/';
+  //apiUrl: string = 'http://mioferta.local/api/';
   constructor(public http: HttpClient) {
     console.log('Hello ProveedorProvider Provider');
   }
