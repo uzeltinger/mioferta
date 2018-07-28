@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Company } from '../../models/company';
 
 
 /*
@@ -13,8 +12,8 @@ import { Company } from '../../models/company';
 @Injectable()
 export class OfferServiceProvider {
 
-  //apiUrl: string = 'https://mioferta.com.ar/api/';
-  apiUrl: string = 'http://mioferta.local/api/';
+  apiUrl: string = 'https://mioferta.com.ar/api/';
+  //apiUrl: string = 'http://mioferta.local/api/';
 
   constructor(public http: HttpClient, public storage: Storage) {
     console.log('Hello OfferServiceProvider Provider');

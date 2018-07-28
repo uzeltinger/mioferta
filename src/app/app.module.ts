@@ -6,6 +6,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { IonicStorageModule } from '@ionic/storage';
 import { Toast } from '@ionic-native/toast';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -63,7 +64,8 @@ import { EditOfferPage } from '../pages/edit-offer/edit-offer';
     GooglePlus,
     Toast,
     UserServiceProvider,
-    OfferServiceProvider
+    OfferServiceProvider,
+    Camera
   ]
 })
 export class AppModule {}

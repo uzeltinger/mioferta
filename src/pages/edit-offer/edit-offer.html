@@ -18,6 +18,8 @@
 
 <ion-content padding>
 
+    <img [src]="newPhoto">
+
     <ion-grid>
         <ion-row align-items-center>
             <ion-col text-center>
@@ -27,7 +29,7 @@
                 <div text-center>Ofertas</div>
             </ion-col>
             <ion-col text-center>
-                <button ion-button icon-only round>
+                <button ion-button icon-only round (click)="takePhoto()">
                     <ion-icon name="camera"></ion-icon>
                 </button>
                 <div text-center>Cámara</div>
