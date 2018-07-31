@@ -99,5 +99,9 @@
         <variable name="REVERSED_CLIENT_ID" value="1061526641811-6eeq3chqo7btdmjpk20thc114td24bt8.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
+    </plugin>
+    <plugin name="com-badrit-base64" spec="^0.2.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

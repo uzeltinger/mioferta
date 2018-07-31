@@ -18,7 +18,37 @@
 
 <ion-content padding>
 
-    <img [src]="newPhoto">
+    <ion-grid *ngIf="newPhoto">
+        <ion-row align-items-center>
+            <ion-col text-center>
+                <img [src]=newPhoto>                
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+            <ion-col text-center>
+                <button ion-button icon-only round (click)="deletePhoto()">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+                <div text-center>Eliminar</div>    
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="galleryPhoto">
+        <ion-row align-items-center>
+            <ion-col text-center>
+                <img [src]=galleryPhoto *ngIf="galleryPhoto" />
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+            <ion-col text-center>
+                <button ion-button icon-only round (click)="deletePhoto()">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+                <div text-center>Eliminar</div>    
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
     <ion-grid>
         <ion-row align-items-center>
@@ -36,7 +66,7 @@
                 
             </ion-col>
             <ion-col text-center>
-                <button ion-button icon-only round>
+                <button ion-button icon-only round (click)="takePicture()">
                     <ion-icon name="images"></ion-icon>
                 </button>
                 <div text-center>Galería</div>
@@ -44,5 +74,9 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-    
+
+    <ion-item>
+        <a ion-button block (click)="saveOffer()">Guardar Oferta</a>
+    </ion-item>
+
 </ion-content>
