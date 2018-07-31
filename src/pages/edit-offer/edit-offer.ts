@@ -122,7 +122,9 @@ export class EditOfferPage {
 
   saveOffer(){
     this.getBase64CoreString();    
-    let offer = {"id":"1","image": this.base64Image }
+    let oferta = {"offer_id":"0","email":"fabiouz@gmail.com","subject":"Fabio","description":"el detalle de la oferta","price":"1000","specialPrice":"800","companyId":"105","main_subcategory":"1","state":"1","currencyId":"8","image":this.base64Image}
+
+    let offer = oferta;//{"offer_id":"1001","image": this.base64Image }
     this.offerService.saveOffer(offer)
     .subscribe(
       offerSavedData => {
