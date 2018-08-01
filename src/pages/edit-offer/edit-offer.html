@@ -50,6 +50,21 @@
         </ion-row>
     </ion-grid>
 
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
     <ion-grid>
         <ion-row align-items-center>
             <ion-col text-center>
@@ -74,6 +89,54 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+
+
+
+
+
+
+    <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">
+
+            
+                                      
+            <ion-item>
+                <ion-label>Categoría</ion-label>
+                <ion-select [(ngModel)]="offerNew.main_subcategory" #main_subcategory="ngModel" name="main_subcategory" required>
+                    <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Título</ion-label>
+                <ion-input type="text" name="subject" id="subject" #subject="ngModel" [(ngModel)]="offerNew.subject" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Descripción</ion-label>
+                <ion-input type="text" name="description" id="description" #description="ngModel" [(ngModel)]="offerNew.description" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Precio</ion-label>
+                <ion-input type="text" name="price" id="price" #price="ngModel" [(ngModel)]="offerNew.price" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Precio Especial</ion-label>
+                <ion-input type="text" name="specialPrice" id="specialPrice" #specialPrice="ngModel" [(ngModel)]="offerNew.specialPrice" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <button ion-button block type="submit" [disabled]="!offerDataForm.form.valid">Guardar Oferta</button>
+            </ion-item>
+    
+        </form>
+
+
+
+
+
 
     <ion-item>
         <a ion-button block (click)="saveOffer()">Guardar Oferta</a>

@@ -134,7 +134,7 @@ export class ProfilePage {
     });
   }
 
-  companyForm(form) {
+  companyForm(form) {    
     console.log('form this.company: ', this.company);
     this.showSplash = true;
     //this.showSplash = true;

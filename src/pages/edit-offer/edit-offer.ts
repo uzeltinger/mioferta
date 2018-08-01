@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController } from 'ionic-angular';
 import { Base64 } from '@ionic-native/base64';
 import { OfferServiceProvider } from '../../providers/offer-service/offer-service';
+import { ProveedorProvider } from '../../providers/proveedor/proveedor';
+import { User } from '../../models/user';
+import { Company } from '../../models/company';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 /**
  * Generated class for the EditOfferPage page.
  *
@@ -12,112 +16,99 @@ import { OfferServiceProvider } from '../../providers/offer-service/offer-servic
  * Ionic pages and navigation.
  */
 
-
-
 @Component({
   selector: 'page-edit-offer',
   templateUrl: 'edit-offer.html',
 })
 
 export class EditOfferPage {
-
+  isUserLoggedIn: boolean;
+  userInfo: User = new User;
+  company: Company = new Company;
   newPhoto: any;
   galleryPhoto: any;
+  offerNew:any = {};
   offer:any;
   isNewOffer: boolean = false;
   base64Image: string;
   errorMessage: string;
+  categories: any;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public platform: Platform,
+    public navCtrl: NavController, 
     public navParams: NavParams,
     private camera: Camera,
     private alertController: AlertController,
     private imagePicker:ImagePicker,
     private base64: Base64,
-    private offerService: OfferServiceProvider) {
+    private offerService: OfferServiceProvider,  
+    public proveedor:ProveedorProvider,
+    public userService: UserServiceProvider) {
     this.offer = navParams.data.offer;
     console.log('this.offer',this.offer);
   }
 
-  takePicture(){
-   let options = {
-      maximumImagesCount: 1,
-      outType: 0,
-      title: 'titulo',
-      message: 'mensaje',
-      quality: 100    
-    };
-    this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[i]);
-          this.galleryPhoto = results[i];
-      }
-      this.getBase64String(this.galleryPhoto);
-    }, (err) => { });
-  }
-
-  takePhoto(){
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      //destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      correctOrientation: true,
-      allowEdit : true
-      }
-    this.camera.getPicture(options).then((imageData) => {
-    // imageData is either a base64 encoded string or a file URI
-    // If it's base64 (DATA_URL):
-    console.log('imageData',imageData);
-    this.newPhoto = imageData;
-    this.getBase64String(imageData);
-    //this.newPhoto = this.base64Image;
-   }, (err) => {
-    console.log('err',err);
-   });
-  
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditOfferPage');
+
+    this.userInfo = this.userService.getUser();
+    this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
+    this.company = this.userService.getCompany();
+    console.log('this.userInfo',this.userInfo);
+    console.log('this.company',this.company);
+
+    this.offerNew = {"offer_id":"0","subject":"","description":"","price":"","specialPrice":"","companyId":"","main_subcategory":"","state":"1","currencyId":"8","image":""};
     if(this.offer.id==0){
       this.isNewOffer = true;
+      this.getCategories();
+      this.offerNew.main_subcategory = 0;
+      this.offerNew.subject = '';
     }
   }
 
-  deletePhoto() {
-    const confirm = this.alertController.create({
-      title: 'Eliminar?',
-      message: 'Desea eliminar esta imagen de su oferta?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Aceptar',
-          handler: () => {
-            console.log('Agree clicked');
-            this.newPhoto = '';
-            this.galleryPhoto = '';
-          }
-        }
-      ]
-    });
-    confirm.present();
+  getCategories(){
+    this.proveedor.getCategories()
+    .subscribe(
+      (data)=> {         
+        this.categories = data; 
+        console.log('categories',data) ;
+      },
+      (error)=>{console.log('error',error);}
+    )
   }
+  
+  onSubmitSaveOffer(formulario){
+    if(this.platform.is('core')){
+      this.getBase64CoreString();    
+    }
+    if (this.platform.is('android')) {
 
-  getBase64String(filePath: string){
-    this.base64.encodeFile(filePath).then((base64File: string) => {
-      console.log(base64File);
-      this.base64Image = base64File;
-    }, (err) => {
-      console.log(err);
-    });
+    }
+    let formData = formulario.form.value;
+    console.log('formData',formData);
+    this.offerNew.user_id = this.userInfo.id;
+    this.offerNew.offer_id = 0;
+    this.offerNew.subject = formData.subject;
+    this.offerNew.description = formData.description;
+    this.offerNew.price = formData.price;
+    this.offerNew.specialPrice = formData.specialPrice;
+    this.offerNew.companyId = this.company.id;
+    this.offerNew.main_subcategory = formData.main_subcategory;
+    this.offerNew.image = this.base64Image;
+
+    console.log('this.offerNew',this.offerNew);
+
+    this.offerService.saveOffer(this.offerNew)
+    .subscribe(
+      offerSavedData => {
+        console.log('userRegisteredData: ',offerSavedData);                
+      },
+      error => {
+        this.errorMessage = <any>error;
+        //console.log('error: ',error);          
+      }
+    );  
+
   }
 
   saveOffer(){
@@ -138,6 +129,82 @@ export class EditOfferPage {
     );       
   }
 
+  takePicture(){
+    let options = {
+       maximumImagesCount: 1,
+       outType: 0,
+       title: 'titulo',
+       message: 'mensaje',
+       quality: 100    
+     };
+     this.imagePicker.getPictures(options).then((results) => {
+       for (var i = 0; i < results.length; i++) {
+           console.log('Image URI: ' + results[i]);
+           this.galleryPhoto = results[i];
+       }
+       this.getBase64String(this.galleryPhoto);
+     }, (err) => { });
+   }
+ 
+   takePhoto(){
+     const options: CameraOptions = {
+       quality: 50,
+       destinationType: this.camera.DestinationType.FILE_URI,
+       //destinationType: this.camera.DestinationType.DATA_URL,
+       encodingType: this.camera.EncodingType.JPEG,
+       mediaType: this.camera.MediaType.PICTURE,
+       saveToPhotoAlbum: false,
+       correctOrientation: true,
+       allowEdit : true
+       }
+     this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     console.log('imageData',imageData);
+     this.newPhoto = imageData;
+     this.getBase64String(imageData);
+     //this.newPhoto = this.base64Image;
+    }, (err) => {
+     console.log('err',err);
+    });
+   
+   }
+ 
+   
+ 
+   deletePhoto() {
+     const confirm = this.alertController.create({
+       title: 'Eliminar?',
+       message: 'Desea eliminar esta imagen de su oferta?',
+       buttons: [
+         {
+           text: 'Cancelar',
+           handler: () => {
+             console.log('Disagree clicked');
+           }
+         },
+         {
+           text: 'Aceptar',
+           handler: () => {
+             console.log('Agree clicked');
+             this.newPhoto = '';
+             this.galleryPhoto = '';
+           }
+         }
+       ]
+     });
+     confirm.present();
+   }
+ 
+   getBase64String(filePath: string){
+     this.base64.encodeFile(filePath).then((base64File: string) => {
+       console.log(base64File);
+       this.base64Image = base64File;
+     }, (err) => {
+       console.log(err);
+     });
+   }
+ 
 
   getBase64CoreString(){
     let s = `data:image/*;charset=utf-8;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB

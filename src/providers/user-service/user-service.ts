@@ -47,7 +47,20 @@ export class UserServiceProvider {
 
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
-      .pipe(        
+      .pipe(  
+        tap(// Log the result or error
+        data => {
+          this.storeUserData(data);
+          console.log("data", data);
+          //console.log("company", company);                               
+        },
+        error => {
+          console.log("error", error);
+          if(error.status == 401){            
+            
+          }
+        }
+      ),       
         catchError(this.handleError)
       );  
   }
@@ -64,9 +77,27 @@ export class UserServiceProvider {
 
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
-      .pipe(        
+      .pipe(    
+        tap(// Log the result or error
+          data => {
+            this.storeUserData(data);
+            console.log("data", data);
+            //console.log("company", company);                               
+          },
+          error => {
+            console.log("error", error);
+            if(error.status == 401){            
+              
+            }
+          }
+        ),    
         catchError(this.handleError)
       );  
+  }
+
+  storeUserData(data:any){
+    console.log("data", data);
+    this.storage.set('user_id', data.userData.id);
   }
 
   getCompany(){
@@ -98,7 +129,10 @@ export class UserServiceProvider {
       this.isUserLoggedIn = userLogued;
       if(userLogued){
         this.user.isUserLoggedIn = userLogued;         
-    
+        this.storage.get('user_id').then((user_id) => {
+          console.log('line 133 : Your user_id is', user_id);
+          this.user.id = user_id;
+        });
         this.storage.get('facebook_id').then((facebook_id) => {
           console.log('line 57 : Your facebook_id is', facebook_id);
           this.user.facebook_id = facebook_id;

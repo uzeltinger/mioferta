@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { Company } from '../../models/company';
 
@@ -18,8 +18,8 @@ export class OfferServiceProvider {
   user: User = new User;
   company: Company = new Company;
   httpOptions:any = {};
-  //apiUrl: string = 'https://mioferta.com.ar/api';
-  apiUrl: string = 'http://mioferta.local/api';
+  apiUrl: string = 'https://mioferta.com.ar/api';
+  //apiUrl: string = 'http://mioferta.local/api';
 
   constructor(public httpClient: HttpClient, public storage: Storage) {
     console.log('Hello OfferServiceProvider Provider');
