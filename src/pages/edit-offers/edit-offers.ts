@@ -23,22 +23,25 @@ export class EditOffersPage {
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
   company: Company = new Company;
-  
+  pictures_path:string = '';
+
+
   constructor(public navCtrl: NavController, 
     public offerService: OfferServiceProvider, 
     public navParams: NavParams,
     public userService: UserServiceProvider
   ) {
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditOffersPage');
-    
+    this.pictures_path = this.offerService.picturesPath; 
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
     console.log('this.company',this.company);
-    this.getCompanyOffers();
+    this.getUserOffers();
   }
   
   getCompanyOffers(){
@@ -55,7 +58,22 @@ export class EditOffersPage {
     }
     )
   } 
-  
+
+  getUserOffers(){
+    this.offerService.getUserOffers(this.userInfo.id)
+    .subscribe(
+      (data)=> {         
+        this.offers = data; 
+        this.showSplash = false;
+        console.log('data',data) ;
+      },
+      (error)=>{
+        console.log('error',error);
+      this.showSplash = false;
+    }
+    )
+  } 
+
   addNewOffer(){
     let newOffer: object = {'id':'0'};    
     console.log('newOffer',newOffer);

@@ -15,6 +15,9 @@
 
 </ion-header>
 
+<div *ngIf="showSplash" class="splash">
+    <div class="spinner"><ion-spinner></ion-spinner></div>
+</div>
 
 <ion-content padding>
 
@@ -96,16 +99,22 @@
 
 
 
-    <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">
-
-            
+    <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">           
                                       
-            <ion-item>
-                <ion-label>Categoría</ion-label>
-                <ion-select [(ngModel)]="offerNew.main_subcategory" #main_subcategory="ngModel" name="main_subcategory" required>
+
+
+            <ion-list>
+                <ion-item>
+                  <ion-label>Categoría</ion-label>
+                  <ion-select [(ngModel)]="offerNew.main_subcategory" #main_subcategory="ngModel" name="main_subcategory" required>
                     <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
-                </ion-select>
-            </ion-item>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+
+
+            <img *ngIf="offerNew.picture_path" src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offerNew.picture_path}}">       
+
 
             <ion-item>
                 <ion-label floating>Título</ion-label>
@@ -133,13 +142,9 @@
     
         </form>
 
-
-
-
-
-
-    <ion-item>
+<!--    <ion-item>
         <a ion-button block (click)="saveOffer()">Guardar Oferta</a>
     </ion-item>
+-->
 
 </ion-content>

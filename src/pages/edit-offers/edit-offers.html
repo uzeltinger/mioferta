@@ -18,8 +18,30 @@
     </div>
 </div>
 
-<ion-content padding>
 
-    <button ion-button clear (click)="addNewOffer()">Agregar Oferta</button>
+    
 
-</ion-content>
+    <ion-content  class="darkbackground">
+
+
+        <ion-card *ngFor="let offer of offers" (click)="navToOfferPage($event, offer)" class="offer-list-card">    
+            <div class="offer-list-card-img">
+                <img src="{{pictures_path}}{{offer.picture_path}}">        
+                <div class="offer-list-discount"><span>-{{offer.priceDiscount}}%</span></div>
+                <div class="offer-list-icon-whatsapp">
+                    <ion-icon float-right>
+                        <a target="_blank" (click)="increaseWhatsappCount(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
+                            <img src="assets/img/whatsappicon.png">
+                        </a>
+                    </ion-icon>
+                </div>
+            </div>
+            <ion-card-content>
+                <ion-card-title>
+                    <div class="offer-list-price">{{offer.specialPriceFormated}}</div>
+                </ion-card-title>
+                <div class="offer-list-title">{{offer.subject}}</div>            
+            </ion-card-content>
+    
+        </ion-card>
+    </ion-content>

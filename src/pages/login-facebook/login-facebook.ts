@@ -50,8 +50,8 @@ export class LoginFacebookPage {
         this.facebookUserData.isUserLoggedIn = false;   
         this.facebookUserData.facebook_id = "123456";
         this.facebookUserData.google_id = null;
-        this.facebookUserData.email = "emilio22@hotmail.com";
-        this.facebookUserData.first_name = "Emilio";
+        this.facebookUserData.email = "fabiouz@gmail.com";
+        this.facebookUserData.first_name = "Fabio";
         this.facebookUserData.last_name = "Uzeltinger";
         this.facebookUserData.picture = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10156529424594907&height=50&width=50&ext=1532533092&hash=AeTtgpZ8u1AifWe2";
         

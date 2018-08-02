@@ -33,6 +33,7 @@ export class EditOfferPage {
   base64Image: string;
   errorMessage: string;
   categories: any;
+  showSplash:boolean = false;
 
   constructor(public platform: Platform,
     public navCtrl: NavController, 
@@ -58,12 +59,14 @@ export class EditOfferPage {
     console.log('this.company',this.company);
 
     this.offerNew = {"offer_id":"0","subject":"","description":"","price":"","specialPrice":"","companyId":"","main_subcategory":"","state":"1","currencyId":"8","image":""};
+    
     if(this.offer.id==0){
       this.isNewOffer = true;
       this.getCategories();
-      this.offerNew.main_subcategory = 0;
+      this.offerNew.main_subcategory = 130;
       this.offerNew.subject = '';
     }
+
   }
 
   getCategories(){
@@ -101,10 +104,12 @@ export class EditOfferPage {
     this.offerService.saveOffer(this.offerNew)
     .subscribe(
       offerSavedData => {
-        console.log('userRegisteredData: ',offerSavedData);                
+        console.log('userRegisteredData: ',offerSavedData);    
+        this.showSplash = false;            
       },
       error => {
         this.errorMessage = <any>error;
+        this.showSplash = false;
         //console.log('error: ',error);          
       }
     );  
@@ -112,18 +117,35 @@ export class EditOfferPage {
   }
 
   saveOffer(){
-    this.getBase64CoreString();    
-    let oferta = {"offer_id":"0","email":"fabiouz@gmail.com","subject":"Fabio","description":"el detalle de la oferta","price":"1000","specialPrice":"800","companyId":"105","main_subcategory":"1","state":"1","currencyId":"8","image":this.base64Image}
+    this.getBase64CoreString();  
+    this.showSplash = true;
+
+    let oferta = {"offer_id":"0","email":"fabiouz@gmail.com","subject":"Fabio","description":"el detalle de la oferta","price":"1000","specialPrice":"800","companyId":"105","main_subcategory":"130","state":"1","currencyId":"8","image":this.base64Image}
 
     let offer = oferta;//{"offer_id":"1001","image": this.base64Image }
     this.offerService.saveOffer(offer)
     .subscribe(
       offerSavedData => {
         console.log('userRegisteredData: ',offerSavedData);
-                
+        if(offerSavedData.error){
+
+        }else{
+          this.offerNew.offer_id = offerSavedData.post.offer_id;
+          this.offerNew.subject = offerSavedData.post.subject;
+          this.offerNew.description = offerSavedData.post.description;
+          this.offerNew.price = offerSavedData.post.price;
+          this.offerNew.specialPrice = offerSavedData.post.specialPrice;
+          this.offerNew.main_subcategory = offerSavedData.post.main_subcategory;
+          //this.offerNew.main_subcategory = 130;
+          this.offerNew.picture_path = offerSavedData.post.picture_path;
+          console.log('this.offerNew: ',this.offerNew);
+        }
+        
+        this.showSplash = false;
       },
       error => {
         this.errorMessage = <any>error;
+        this.showSplash = false;
         //console.log('error: ',error);          
       }
     );       

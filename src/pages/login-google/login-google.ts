@@ -51,10 +51,10 @@ export class LoginGooglePage {
         this.googleUserData.isUserLoggedIn = false;   
         this.googleUserData.facebook_id = null;
         this.googleUserData.google_id = "123456";
-        this.googleUserData.email = "emilio22@hotmail.com";
+        this.googleUserData.email = "emiliouzeltinger@gmail.com";
         this.googleUserData.first_name = "Emilio";
         this.googleUserData.last_name = "Uzeltinger";
-        this.googleUserData.picture = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10156529424594907&height=50&width=50&ext=1532533092&hash=AeTtgpZ8u1AifWe2";
+        this.googleUserData.picture = "https://scontent.fbhi1-1.fna.fbcdn.net/v/t1.0-1/p160x160/12494725_624104577728266_2934891491423222463_n.jpg?_nc_cat=0&oh=e510dd6c3bb1f09350ce58bb60169a56&oe=5C064A5A";
         
         //this.userInfo = this.googleUserData;
         console.log('line: 55 this.userInfo',this.userInfo);

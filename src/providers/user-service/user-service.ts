@@ -27,23 +27,17 @@ export class UserServiceProvider {
   };
 */
   constructor(public httpClient: HttpClient, public storage: Storage) {
-    console.log('Hello UserServiceProvider Provider');
+    //console.log('Hello UserServiceProvider Provider');
   }
 
   setUserToken(token){
     this.storage.set('token', token);
-    console.log('token',token);
+    //console.log('token',token);
   }
 
   setUserFacebook(user:any): Observable<any>{
-    this.storage.set('userLogued', true);
-        this.storage.set('facebook_id', user.facebook_id);
-        this.storage.set('google_id', user.google_id);
-        this.storage.set('email', user.email);
-        this.storage.set('first_name', user.first_name);
-        this.storage.set('last_name', user.last_name);
-        this.storage.set('picture', user.picture);
-        console.log('UserServiceProvider : setUserFacebook : line 38 : user ', user);
+        
+        //console.log('UserServiceProvider : setUserFacebook : line 38 : user ', user);
 
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
@@ -51,7 +45,7 @@ export class UserServiceProvider {
         tap(// Log the result or error
         data => {
           this.storeUserData(data);
-          console.log("data", data);
+          //console.log("data", data);
           //console.log("company", company);                               
         },
         error => {
@@ -66,22 +60,14 @@ export class UserServiceProvider {
   }
 
   setUserGoogle(user:any): Observable<any>{
-    this.storage.set('userLogued', true);
-        this.storage.set('facebook_id', user.facebook_id);
-        this.storage.set('google_id', user.google_id);
-        this.storage.set('email', user.email);
-        this.storage.set('first_name', user.first_name);
-        this.storage.set('last_name', user.last_name);
-        this.storage.set('picture', user.picture);
-        console.log('UserServiceProvider : setUserFacebook : line 56 : user ', user);
-
+    
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"user/signup", user, this.httpOptions)
       .pipe(    
         tap(// Log the result or error
           data => {
             this.storeUserData(data);
-            console.log("data", data);
+            //console.log("data", data);
             //console.log("company", company);                               
           },
           error => {
@@ -96,13 +82,23 @@ export class UserServiceProvider {
   }
 
   storeUserData(data:any){
-    console.log("data", data);
+    console.log("user", data);
+    this.storage.set('userLogued', true);
+    this.storage.set('facebook_id', data.userData.facebook_id);
+    this.storage.set('google_id', data.userData.google_id);
+    this.storage.set('email', data.userData.email);
+    this.storage.set('first_name', data.userData.first_name);
+    this.storage.set('last_name', data.userData.last_name);
+    this.storage.set('picture', data.userData.picture);
     this.storage.set('user_id', data.userData.id);
+    this.storage.set('company_id', data.userData.company_id);
+    this.storage.set('company_name', data.userData.company_name);
+    this.storage.set('company_whatsapp', data.userData.company_whatsapp); 
   }
 
   getCompany(){
     this.storage.get('userLogued').then((userLogued) => {
-      console.log('line 49 : userLogued is ', userLogued);
+      //console.log('line 49 : userLogued is ', userLogued);
       this.isUserLoggedIn = userLogued;
       if(userLogued){
         this.storage.get('company_id').then((company_id) => {
@@ -119,26 +115,26 @@ export class UserServiceProvider {
         });
       }
     });
-    console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
+    //console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
     return this.company;
   }
 
   getUser(){
     this.storage.get('userLogued').then((userLogued) => {
-      console.log('line 49 : userLogued is ', userLogued);
+      //console.log('line 49 : userLogued is ', userLogued);
       this.isUserLoggedIn = userLogued;
       if(userLogued){
         this.user.isUserLoggedIn = userLogued;         
         this.storage.get('user_id').then((user_id) => {
-          console.log('line 133 : Your user_id is', user_id);
+          //console.log('line 133 : Your user_id is', user_id);
           this.user.id = user_id;
         });
         this.storage.get('facebook_id').then((facebook_id) => {
-          console.log('line 57 : Your facebook_id is', facebook_id);
+          //console.log('line 57 : Your facebook_id is', facebook_id);
           this.user.facebook_id = facebook_id;
         });
         this.storage.get('google_id').then((google_id) => {
-          console.log('line 60 : Your google_id is', google_id);
+          //console.log('line 60 : Your google_id is', google_id);
           this.user.google_id = google_id;
         });
         this.storage.get('email').then((email) => {
@@ -176,13 +172,23 @@ export class UserServiceProvider {
 
       }
     });
-    console.log('UserServiceProvider : getUser : line 77 : this.user ', this.user);
+    //console.log('UserServiceProvider : getUser : line 77 : this.user ', this.user);
     return this.user;
   }
 
   logoutUser(user: User){
-    console.log('UserServiceProvider : logoutUser : line 82', false);
+    //console.log('UserServiceProvider : logoutUser : line 82', false);
     this.storage.set('userLogued', false);
+    this.storage.set('facebook_id', null);
+    this.storage.set('google_id', null);
+    this.storage.set('email', null);
+    this.storage.set('first_name', null);
+    this.storage.set('last_name', null);
+    this.storage.set('picture', null);
+    this.storage.set('user_id', null);
+    this.storage.set('company_id', null);
+    this.storage.set('company_name', null);
+    this.storage.set('company_whatsapp', null); 
     this.isUserLoggedIn = false;
     this.user.isUserLoggedIn = false;
   }  
@@ -200,7 +206,7 @@ export class UserServiceProvider {
         tap(// Log the result or error
         data => {
           this.storeCompanyData(data);
-          console.log("data", data);
+          //console.log("data", data);
           //console.log("company", company);                               
         },
         error => {
@@ -215,7 +221,7 @@ export class UserServiceProvider {
   }
 
   getHeader() {
-    console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
+    //console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
     return {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

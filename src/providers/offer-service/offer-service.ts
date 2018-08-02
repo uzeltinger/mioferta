@@ -20,6 +20,8 @@ export class OfferServiceProvider {
   httpOptions:any = {};
   apiUrl: string = 'https://mioferta.com.ar/api';
   //apiUrl: string = 'http://mioferta.local/api';
+  picturesPath: string = 'https://mioferta.com.ar/media/com_jbusinessdirectory/pictures';
+  //getPicturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
 
   constructor(public httpClient: HttpClient, public storage: Storage) {
     console.log('Hello OfferServiceProvider Provider');
@@ -28,7 +30,10 @@ export class OfferServiceProvider {
     let url = this.apiUrl + '/v1/company/getCompanyOffers/' + id;    
     return this.httpClient.get(url);
   }
-
+  getUserOffers(id: number){
+    let url = this.apiUrl + '/v1/user/getUserOffers/' + id;    
+    return this.httpClient.get(url);
+  }
   
   saveOffer(offer:any): Observable<any>{
     console.log('url',this.apiUrl+"/v1/offer/saveOffer");
