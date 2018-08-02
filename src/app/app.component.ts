@@ -11,6 +11,7 @@ import { AboutPage } from '../pages/about/about';
 import { CategoriesPage } from '../pages/categories/categories';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 
 @Component({
   templateUrl: 'app.html'
@@ -59,10 +60,11 @@ export class MyApp {
       this.statusBar.show();
       //this.headerColor.tint('#E72000');
       this.splashScreen.hide();
+
+      this.userInfo = this.userService.getUser();
+      this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     });
-    this.userInfo = this.userService.getUser();
-    this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
-    console.log('user',this.userInfo);
+    
   }
 
   openPage(page) {

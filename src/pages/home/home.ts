@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-import { LoginGooglePage } from '../login-google/login-google';
-import { LoginFacebookPage } from '../login-facebook/login-facebook';
 import { Toast } from '@ionic-native/toast';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { OffersPage } from '../offers/offers';
@@ -40,15 +38,7 @@ export class HomePage {
       }
     );
   }
-
-  public goLoginFacebookPage(){
-    this.navCtrl.push(LoginFacebookPage);
-    //this.navCtrl.setRoot(LoginFacebookPage);
-  }
-  public goLoginGooglePage(){
-    this.navCtrl.push(LoginGooglePage);    
-  }
-
+  
   public goOffersPage(){
     this.navCtrl.setRoot(OffersPage);    
   }

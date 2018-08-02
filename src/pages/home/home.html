@@ -19,7 +19,8 @@
 
   <div style="text-align:center">
       <button ion-button class="seleccione" (click)="goProfilePage()">        
-        <span>Agregar mi Negocio</span>
+        <span *ngIf="userInfo.isUserLoggedIn">Mi Negocio</span>     
+        <span *ngIf="!userInfo.isUserLoggedIn">Agregar mi Negocio</span>
       </button>    
   </div> 
 

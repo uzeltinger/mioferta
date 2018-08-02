@@ -53,4 +53,7 @@ export class OffersPage {
       offer: offer
     });
   }
+  increaseWhatsappCount(offer){
+    
+  }
 }

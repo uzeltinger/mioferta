@@ -1,6 +1,7 @@
 export class User {
   isUserLoggedIn: boolean;
   id: number;
+  name: string;
   facebook_id: string;
   google_id: string;
   email: string;

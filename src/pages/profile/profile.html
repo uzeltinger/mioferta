@@ -29,7 +29,7 @@
                     <img src="{{userInfo.picture}}">
                 </ion-col>
                 <ion-col col-9>
-                    <div class="user-first_name">{{userInfo.first_name}}</div>
+                    <div class="user-first_name">{{userInfo.name}}</div>
                     <div class="user-first_name">{{userInfo.email}}</div>
                 </ion-col>
             </ion-row>
@@ -65,18 +65,35 @@
                 <ion-input type="tel" name="whatsapp" [(ngModel)]="company.whatsapp"></ion-input>
             </ion-item>
             <ion-item>
-                <button ion-button block type="submit" >Guardar Comercio</button>
+                <button ion-button round color="verdeDaniel" type="submit" >Guardar Comercio</button>
             </ion-item>
 
-        </form>
+        </form>        
 
-        <ion-item>
-            <a ion-button block (click)="goEditOffersPage()">Mis Ofertas</a>
-        </ion-item>
-
-        <ion-item>
-            <a ion-button block (click)="goNewOfferPage()">Agregar Oferta</a>
-        </ion-item>
+        <ion-grid>
+            <ion-row align-items-center>
+                <ion-col text-center>
+                    <button ion-button icon-only round (click)="goEditOffersPage()">
+                        <ion-icon name="list"></ion-icon>
+                    </button>
+                    <div text-center>Mis Ofertas</div>
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only round (click)="goNewOfferPage()">
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+                    <div text-center>Agregar Oferta</div>
+                    
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only round (click)="logout()">
+                        <ion-icon name="exit"></ion-icon>
+                    </button>
+                    <div text-center>Salir</div>
+                    
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 
         
 

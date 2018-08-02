@@ -38,10 +38,10 @@ export class ProfilePage {
     private toast: Toast,
     private googlePlus: GooglePlus,
     public userService: UserServiceProvider) {
-    console.log('constructor ProfilePage');
+    //console.log('constructor ProfilePage');
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    //console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();

@@ -91,6 +91,7 @@ export class UserServiceProvider {
     this.storage.set('last_name', data.userData.last_name);
     this.storage.set('picture', data.userData.picture);
     this.storage.set('user_id', data.userData.id);
+    this.storage.set('name', data.userData.name);
     this.storage.set('company_id', data.userData.company_id);
     this.storage.set('company_name', data.userData.company_name);
     this.storage.set('company_whatsapp', data.userData.company_whatsapp); 
@@ -128,6 +129,10 @@ export class UserServiceProvider {
         this.storage.get('user_id').then((user_id) => {
           //console.log('line 133 : Your user_id is', user_id);
           this.user.id = user_id;
+        });
+        this.storage.get('name').then((name) => {
+          //console.log('line 46 : Your first_name is', first_name);
+          this.user.name = name;            
         });
         this.storage.get('facebook_id').then((facebook_id) => {
           //console.log('line 57 : Your facebook_id is', facebook_id);
@@ -182,6 +187,7 @@ export class UserServiceProvider {
     this.storage.set('facebook_id', null);
     this.storage.set('google_id', null);
     this.storage.set('email', null);
+    this.storage.set('name', null);
     this.storage.set('first_name', null);
     this.storage.set('last_name', null);
     this.storage.set('picture', null);

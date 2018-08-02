@@ -96,6 +96,7 @@ export class EditOfferPage {
     this.offerNew.price = formData.price;
     this.offerNew.specialPrice = formData.specialPrice;
     this.offerNew.companyId = this.company.id;
+    this.offerNew.phone = this.company.whatsapp;
     this.offerNew.main_subcategory = formData.main_subcategory;
     this.offerNew.image = this.base64Image;
 
@@ -136,6 +137,7 @@ export class EditOfferPage {
           this.offerNew.price = offerSavedData.post.price;
           this.offerNew.specialPrice = offerSavedData.post.specialPrice;
           this.offerNew.main_subcategory = offerSavedData.post.main_subcategory;
+          this.offerNew.phone = this.company.whatsapp;
           //this.offerNew.main_subcategory = 130;
           this.offerNew.picture_path = offerSavedData.post.picture_path;
           console.log('this.offerNew: ',this.offerNew);
@@ -226,7 +228,21 @@ export class EditOfferPage {
        console.log(err);
      });
    }
- 
+   
+   increaseWhatsappCount(offer){
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   getBase64CoreString(){
     let s = `data:image/*;charset=utf-8;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
