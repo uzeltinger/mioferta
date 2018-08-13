@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { OfferServiceProvider } from '../../providers/offer-service/offer-service';
 import { User } from '../../models/user';
 import { Company } from '../../models/company';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { EditOfferPage } from '../edit-offer/edit-offer';
 import { OfferPage } from '../offer/offer';
+import { Toast } from '@ionic-native/toast';
 
 /**
  * Generated class for the EditOffersPage page.
@@ -27,14 +28,16 @@ export class EditOffersPage {
   company: Company = new Company;
   pictures_path:string = '';
   toolbarShow: boolean = false;
-  taskCreate: boolean = true;
+  taskCreate: boolean = false;
   taskShare: boolean = false;
-  taskDelete: boolean = false;
+  taskDelete: boolean = true;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public platform: Platform,
+    public navCtrl: NavController, 
     public offerService: OfferServiceProvider, 
     public navParams: NavParams,
-    public userService: UserServiceProvider
+    public userService: UserServiceProvider,
+    private toast: Toast
   ) {
     this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
   
@@ -102,9 +105,13 @@ export class EditOffersPage {
     this.toolbarShow = this.toolbarShow ? false : true;
   }
 
-  itemsSelectedCreate(){
+  editOffer(event, offer){
     this.toolbarToggle();
+    this.navCtrl.push(EditOfferPage, {
+      offer: offer
+    });
   }
+
   itemsSelectedTrash(){
     this.toolbarToggle();
   }
@@ -120,4 +127,38 @@ export class EditOffersPage {
       offer: newOffer
     });
   }
+  deleteOffer(event,offer){
+    this.showSplash = true;    
+    this.offerService.deleteOffer(offer)
+    .subscribe(
+      offerDeletedData => {
+        console.log('offerDeletedData: ',offerDeletedData);    
+          
+        this.showToast('Oferta eliminada!');   
+        this.getUserOffers();
+         
+        //this.navCtrl.setRoot(ProfilePage);  
+        //this.navCtrl.push(EditOffersPage);
+      },
+      error => {
+        //this.errorMessage = <any>error;
+        this.showSplash = false;
+        this.showToast('Error: ' + error);     
+        //console.log('error: ',error);          
+      }
+    );  
+  }
+
+  showToast(text: string, duration: string = '3000', position: string = 'bottom') {
+    if (this.platform.is('android')) {
+      this.toast.show(text, duration, position).subscribe(
+        toast => {
+          console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
+        }
+      );
+    }else{
+      console.log('showToast ', text);
+    }
+  }
+
 }

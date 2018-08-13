@@ -9,6 +9,9 @@ import { ProveedorProvider } from '../../providers/proveedor/proveedor';
 import { User } from '../../models/user';
 import { Company } from '../../models/company';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { Toast } from '@ionic-native/toast';
+import { EditOffersPage } from '../edit-offers/edit-offers';
+import { ProfilePage } from '../profile/profile';
 /**
  * Generated class for the EditOfferPage page.
  *
@@ -34,6 +37,7 @@ export class EditOfferPage {
   errorMessage: string;
   categories: any;
   showSplash:boolean = false;
+  pictures_path:string;
 
   constructor(public platform: Platform,
     public navCtrl: NavController, 
@@ -44,13 +48,17 @@ export class EditOfferPage {
     private base64: Base64,
     private offerService: OfferServiceProvider,  
     public proveedor:ProveedorProvider,
-    public userService: UserServiceProvider) {
+    public userService: UserServiceProvider,
+    private toast: Toast) {
     this.offer = navParams.data.offer;
     console.log('this.offer',this.offer);
   }
 
   ionViewDidLoad() {
+    this.pictures_path = this.offerService.picturesPath; 
     console.log('ionViewDidLoad EditOfferPage');
+    this.offer = this.navParams.data.offer;
+    console.log('this.offer',this.offer);
 
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
@@ -59,12 +67,14 @@ export class EditOfferPage {
     console.log('this.company',this.company);
 
     this.offerNew = {"offer_id":"0","subject":"","description":"","price":"","specialPrice":"","companyId":"","main_subcategory":"","state":"1","currencyId":"8","image":""};
-    
+    this.getCategories();
     if(this.offer.id==0){
-      this.isNewOffer = true;
-      this.getCategories();
+      this.isNewOffer = true;      
       this.offerNew.main_subcategory = 130;
       this.offerNew.subject = '';
+    }else{
+      this.offerNew = this.offer;
+      this.offerNew.offer_id = this.offer.id;
     }
 
   }
@@ -87,10 +97,11 @@ export class EditOfferPage {
     if (this.platform.is('android')) {
 
     }
+
     let formData = formulario.form.value;
     console.log('formData',formData);
     this.offerNew.user_id = this.userInfo.id;
-    this.offerNew.offer_id = 0;
+    //this.offerNew.offer_id = 0;
     this.offerNew.subject = formData.subject;
     this.offerNew.description = formData.description;
     this.offerNew.price = formData.price;
@@ -100,24 +111,35 @@ export class EditOfferPage {
     this.offerNew.main_subcategory = formData.main_subcategory;
     this.offerNew.image = this.base64Image;
 
+    this.showSplash = true;     
+
     console.log('this.offerNew',this.offerNew);
 
     this.offerService.saveOffer(this.offerNew)
     .subscribe(
       offerSavedData => {
-        console.log('userRegisteredData: ',offerSavedData);    
-        this.showSplash = false;            
+        console.log('offerSavedData: ',offerSavedData);   
+        this.navCtrl.pop(); 
+        this.showSplash = false;       
+        this.showToast('Oferta guardada!');
+        //this.navCtrl.setRoot(ProfilePage);  
+        //this.navCtrl.push(EditOffersPage);
+        
       },
       error => {
         this.errorMessage = <any>error;
         this.showSplash = false;
+        this.showToast('Error: ' + error);     
         //console.log('error: ',error);          
       }
     );  
 
   }
 
-  saveOffer(){
+  deleteOldImage(){
+    this.offerNew.picture_path='';
+  }
+  saveOfferBorrar(){
     this.getBase64CoreString();  
     this.showSplash = true;
 
@@ -233,7 +255,17 @@ export class EditOfferPage {
     
   }
 
-
+  showToast(text: string, duration: string = '3000', position: string = 'bottom') {
+    if (this.platform.is('android')) {
+      this.toast.show(text, duration, position).subscribe(
+        toast => {
+          console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
+        }
+      );
+    }else{
+      console.log('showToast ', text);
+    }
+  }
 
 
 

@@ -21,6 +21,7 @@ export class OfferServiceProvider {
   apiUrl: string = 'https://mioferta.com.ar/api';
   //apiUrl: string = 'http://mioferta.local/api';
   picturesPath: string = 'https://mioferta.com.ar/media/com_jbusinessdirectory/pictures';
+  //picturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
   //getPicturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
 
   constructor(public httpClient: HttpClient, public storage: Storage) {
@@ -38,13 +39,21 @@ export class OfferServiceProvider {
   saveOffer(offer:any): Observable<any>{
     console.log('url',this.apiUrl+"/v1/offer/saveOffer");
     console.log('offer',offer);
-  this.httpOptions = this.getHeader();
+    this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl+"/v1/offer/saveOffer", offer, this.httpOptions)
       .pipe(        
         catchError(this.handleError)
       );
     }
-
+    deleteOffer(offer:any): Observable<any>{
+      console.log('url',this.apiUrl+"/v1/offer/deleteOffer");
+      console.log('offer',offer);
+      this.httpOptions = this.getHeader();
+      return this.httpClient.post<any>(this.apiUrl+"/v1/offer/deleteOffer", offer, this.httpOptions)
+        .pipe(        
+          catchError(this.handleError)
+        );
+      }
     getHeader() {
       console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
       return {

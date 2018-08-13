@@ -97,7 +97,20 @@
 
 
 
-
+        <ion-grid *ngIf="offerNew.picture_path">
+                <ion-row align-items-center>
+                    <img src="{{pictures_path}}{{offerNew.picture_path}}">
+                </ion-row>
+                <ion-row align-items-center>
+                    
+                    <ion-col text-center>
+                        <button ion-button icon-only round (click)="deleteOldImage()">
+                            <ion-icon name="trash"></ion-icon>
+                        </button>
+                        <div text-center>Eliminar</div>    
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
 
     <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">           
                                       
@@ -110,11 +123,7 @@
                     <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
                   </ion-select>
                 </ion-item>
-              </ion-list>
-
-
-            <img *ngIf="offerNew.picture_path" src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offerNew.picture_path}}">       
-
+              </ion-list>              
 
             <ion-item>
                 <ion-label floating>Título</ion-label>
