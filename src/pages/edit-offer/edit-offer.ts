@@ -10,8 +10,8 @@ import { User } from '../../models/user';
 import { Company } from '../../models/company';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { Toast } from '@ionic-native/toast';
-import { EditOffersPage } from '../edit-offers/edit-offers';
-import { ProfilePage } from '../profile/profile';
+//import { EditOffersPage } from '../edit-offers/edit-offers';
+//import { ProfilePage } from '../profile/profile';
 /**
  * Generated class for the EditOfferPage page.
  *
@@ -33,7 +33,7 @@ export class EditOfferPage {
   offerNew:any = {};
   offer:any;
   isNewOffer: boolean = false;
-  base64Image: string;
+  base64Image: string = '';
   errorMessage: string;
   categories: any;
   showSplash:boolean = false;
@@ -57,24 +57,26 @@ export class EditOfferPage {
   ionViewDidLoad() {
     this.pictures_path = this.offerService.picturesPath; 
     console.log('ionViewDidLoad EditOfferPage');
-    this.offer = this.navParams.data.offer;
-    console.log('this.offer',this.offer);
+    //this.offer = this.navParams.data.offer;
+    //console.log('this.offer',this.offer);
 
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
-    console.log('this.userInfo',this.userInfo);
-    console.log('this.company',this.company);
+    //console.log('this.userInfo',this.userInfo);
+    //console.log('this.company',this.company);
 
     this.offerNew = {"offer_id":"0","subject":"","description":"","price":"","specialPrice":"","companyId":"","main_subcategory":"","state":"1","currencyId":"8","image":""};
     this.getCategories();
     if(this.offer.id==0){
       this.isNewOffer = true;      
-      this.offerNew.main_subcategory = 130;
+      this.offerNew.main_subcategory = 105;
       this.offerNew.subject = '';
     }else{
       this.offerNew = this.offer;
       this.offerNew.offer_id = this.offer.id;
+      //this.offerNew.main_subcategory = 105;
+      console.log('this.offerNew.main_subcategory',this.offerNew.main_subcategory);
     }
 
   }
@@ -84,7 +86,7 @@ export class EditOfferPage {
     .subscribe(
       (data)=> {         
         this.categories = data; 
-        console.log('categories',data) ;
+        //console.log('categories',data) ;
       },
       (error)=>{console.log('error',error);}
     )
@@ -92,14 +94,14 @@ export class EditOfferPage {
   
   onSubmitSaveOffer(formulario){
     if(this.platform.is('core')){
-      this.getBase64CoreString();    
+      //this.getBase64CoreString();    
     }
     if (this.platform.is('android')) {
 
     }
 
     let formData = formulario.form.value;
-    console.log('formData',formData);
+    //console.log('formData',formData);
     this.offerNew.user_id = this.userInfo.id;
     //this.offerNew.offer_id = 0;
     this.offerNew.subject = formData.subject;
@@ -109,7 +111,10 @@ export class EditOfferPage {
     this.offerNew.companyId = this.company.id;
     this.offerNew.phone = this.company.whatsapp;
     this.offerNew.main_subcategory = formData.main_subcategory;
-    this.offerNew.image = this.base64Image;
+    if(this.base64Image!=''){
+      this.offerNew.image = this.base64Image;
+    }
+    
 
     this.showSplash = true;     
 
@@ -118,7 +123,12 @@ export class EditOfferPage {
     this.offerService.saveOffer(this.offerNew)
     .subscribe(
       offerSavedData => {
-        console.log('offerSavedData: ',offerSavedData);   
+        console.log('offerSavedData: ',offerSavedData);  
+        this.offerNew = offerSavedData.post;
+        this.offer = offerSavedData.post;
+        this.offerNew.picture_path=offerSavedData.post.picture_path;
+        this.offer.picture_path=offerSavedData.post.picture_path;
+        console.log('this.offerNew: ',this.offerNew);   
         this.navCtrl.pop(); 
         this.showSplash = false;       
         this.showToast('Oferta guardada!');
@@ -175,22 +185,68 @@ export class EditOfferPage {
     );       
   }
 
+
+  
+  resize(img, MAX_WIDTH: number, MAX_HEIGHT: number, callback) {
+    // This will wait until the img is loaded before calling this function
+    //https://jinalshahblog.wordpress.com/2017/01/10/how-to-upload-imageangular2/
+    return img.onload = () => {
+        // Get the images current width and height
+        var width = img.width;
+        var height = img.height;
+        // Set the WxH to fit the Max values (but maintain proportions)
+        if (width > height) {
+            if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+            }
+        } else {
+            if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+            }
+        }
+        // create a canvas object
+        var canvas = document.createElement("canvas");
+        // Set the canvas to the new calculated dimensions
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        // Get this encoded as a jpeg
+        // IMPORTANT: 'jpeg' NOT 'jpg'
+        var dataUrl = canvas.toDataURL('image/jpeg');
+        // callback with the results
+        callback(dataUrl, img.src.length, dataUrl.length);
+    };
+}
+  
   takePicture(){
-    let options = {
-       maximumImagesCount: 1,
-       outType: 0,
-       title: 'titulo',
-       message: 'mensaje',
-       quality: 100    
-     };
-     this.imagePicker.getPictures(options).then((results) => {
-       for (var i = 0; i < results.length; i++) {
-           console.log('Image URI: ' + results[i]);
-           this.galleryPhoto = results[i];
-       }
-       this.getBase64String(this.galleryPhoto);
-     }, (err) => { });
-   }
+    if (this.platform.is('core')) {
+      var img = document.createElement("img");
+      img.src = 'http://localhost:8100/4.jpg';
+      this.resize(img, 600, 600, (resized_jpeg) => {
+        this.base64Image = resized_jpeg;
+        this.galleryPhoto = resized_jpeg;
+        console.log('this.base64Image',this.base64Image);
+      });      
+    }else{
+      let options = {
+        maximumImagesCount: 1,
+        outType: 0,
+        title: 'titulo',
+        message: 'mensaje',
+        quality: 100    
+      };
+      this.imagePicker.getPictures(options).then((results) => {
+        for (var i = 0; i < results.length; i++) {
+            console.log('Image URI: ' + results[i]);
+            this.galleryPhoto = results[i];
+        }
+        this.getBase64String(this.galleryPhoto);
+      }, (err) => { });
+    }
+  }
  
    takePhoto(){
      const options: CameraOptions = {
@@ -244,7 +300,7 @@ export class EditOfferPage {
  
    getBase64String(filePath: string){
      this.base64.encodeFile(filePath).then((base64File: string) => {
-       console.log(base64File);
+       console.log('getBase64String',base64File);
        this.base64Image = base64File;
      }, (err) => {
        console.log(err);

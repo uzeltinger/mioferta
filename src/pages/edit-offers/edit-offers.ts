@@ -29,8 +29,9 @@ export class EditOffersPage {
   pictures_path:string = '';
   toolbarShow: boolean = false;
   taskCreate: boolean = false;
-  taskShare: boolean = false;
-  taskDelete: boolean = true;
+  taskShare: boolean = true;
+  taskDelete: boolean = false;
+  shareOffers:any 
 
   constructor(public platform: Platform,
     public navCtrl: NavController, 
@@ -39,8 +40,8 @@ export class EditOffersPage {
     public userService: UserServiceProvider,
     private toast: Toast
   ) {
-    this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
-  
+    //this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
+    console.log('constructor EditOffersPage');
   }
 
   ionViewDidLoad() {
@@ -51,8 +52,16 @@ export class EditOffersPage {
     
     this.company = this.userService.getCompany();
     console.log('this.company',this.company);
+    //this.getUserOffers();    
+  }
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter EditOffersPage');
     this.getUserOffers();
-    
+    this.toolbarShow = false;
+    //setTimeout(() => {    }, 2000);
+  }
+  ionViewDidEnter(){
+    console.log('ionViewDidEnter EditOffersPage');
   }
   
   getCompanyOffers(){
@@ -117,6 +126,27 @@ export class EditOffersPage {
   }
   itemsSelectedShare(){
     this.toolbarToggle();
+    this.shareOffers  = Object.assign([], this.offers);
+    let msg = '';
+    /*this.shareOffers.forEach(function (value) {
+      let msg = '';
+      if(value.isAssigned){
+        console.log('share',value);
+        let linkToShare:string = 'https://mioferta.com.ar/offer/'+value.id;
+        msg = msg + linkToShare;
+      }      
+    });*/
+    for (let i = 0; i < this.shareOffers.length; i++) {
+      console.log(this.shareOffers[i]);
+      
+      if(this.shareOffers.isAssigned){
+        console.log('share',this.shareOffers);
+        let linkToShare:string = 'https://mioferta.com.ar/offer/'+this.shareOffers.id;
+        msg = msg + linkToShare;
+      }  
+    }
+    this.whatsappText = msg;
+    console.log('whatsappText',this.whatsappText);
   }
 
   goNewOfferPage() {
