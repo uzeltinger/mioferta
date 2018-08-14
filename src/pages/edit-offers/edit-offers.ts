@@ -7,7 +7,7 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { EditOfferPage } from '../edit-offer/edit-offer';
 import { OfferPage } from '../offer/offer';
 import { Toast } from '@ionic-native/toast';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 /**
  * Generated class for the EditOffersPage page.
  *
@@ -22,6 +22,8 @@ import { Toast } from '@ionic-native/toast';
 export class EditOffersPage {
   offers: any
   whatsappText:string
+  whatsappImage:string
+  whatsappUrl:string
   showSplash = true;
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
@@ -38,7 +40,8 @@ export class EditOffersPage {
     public offerService: OfferServiceProvider, 
     public navParams: NavParams,
     public userService: UserServiceProvider,
-    private toast: Toast
+    private toast: Toast,
+    private socialSharing: SocialSharing
   ) {
     //this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
     console.log('constructor EditOffersPage');
@@ -142,12 +145,38 @@ export class EditOffersPage {
       
       if(offerToShare.isAssigned){
         console.log('share',offerToShare);
-        let linkToShare:string = '%0Ahttps://mioferta.com.ar/offer/'+offerToShare.id;
-        msg = msg + linkToShare;
+        this.whatsappText = offerToShare.subject+"\r\n"+offerToShare.description+"\r\n"+offerToShare.specialPriceFormated;
+        this.whatsappImage = this.pictures_path + offerToShare.picture_path;
+        this.whatsappUrl = "\r\n" + 'https://mioferta.com.ar/offer/'+offerToShare.id;
+        //this.whatsappText = window.encodeURIComponent(this.whatsappText);
+        //msg = msg + linkToShare;
       }  
     }
-    this.whatsappText = msg;
+    
+    
     console.log('whatsappText',this.whatsappText);
+    console.log('whatsappImage',this.whatsappImage);
+    console.log('whatsappUrl',this.whatsappUrl);
+
+
+    this.socialSharing.shareViaWhatsApp(this.whatsappText, this.whatsappImage, this.whatsappUrl)
+/*
+    // Check if sharing via email is supported
+    this.socialSharing.canShareViaEmail().then(() => {
+      // Sharing via email is possible
+      console.log('canShareViaEmail ssii');
+        // Share via email
+        this.socialSharing.shareViaEmail(this.whatsappText, 'Compartiendo info', ['fabiouz@gmail.com']).then(() => {
+          // Success!
+          console.log('canShareViaEmail Success');
+        }).catch(() => {
+          // Error!
+        });
+    }).catch(() => {
+      // Sharing via email is not possible
+      console.log('canShareViaEmail Sharing via email is not possible');
+    });
+*/
   }
 
   goNewOfferPage() {

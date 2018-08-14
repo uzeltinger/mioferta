@@ -9,6 +9,7 @@ import { Toast } from '@ionic-native/toast';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -69,7 +70,8 @@ import { EditOfferPage } from '../pages/edit-offer/edit-offer';
     OfferServiceProvider,
     Camera,
     ImagePicker,
-    Base64
+    Base64,
+    SocialSharing
   ]
 })
 export class AppModule {}

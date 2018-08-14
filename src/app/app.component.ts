@@ -11,7 +11,7 @@ import { AboutPage } from '../pages/about/about';
 import { CategoriesPage } from '../pages/categories/categories';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-import { EditOffersPage } from '../pages/edit-offers/edit-offers';
+//import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 
 @Component({
   templateUrl: 'app.html'
