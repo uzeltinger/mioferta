@@ -137,11 +137,12 @@ export class EditOffersPage {
       }      
     });*/
     for (let i = 0; i < this.shareOffers.length; i++) {
-      console.log(this.shareOffers[i]);
+      //console.log(this.shareOffers[i]);
+      let offerToShare = this.shareOffers[i];
       
-      if(this.shareOffers.isAssigned){
-        console.log('share',this.shareOffers);
-        let linkToShare:string = 'https://mioferta.com.ar/offer/'+this.shareOffers.id;
+      if(offerToShare.isAssigned){
+        console.log('share',offerToShare);
+        let linkToShare:string = '%0Ahttps://mioferta.com.ar/offer/'+offerToShare.id;
         msg = msg + linkToShare;
       }  
     }
