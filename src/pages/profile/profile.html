@@ -19,25 +19,16 @@
         <ion-spinner></ion-spinner>
     </div>
 </div>
+<!--
 
-<ion-content padding>
-
-    <div class="profile-avatar" *ngIf="userInfo.isUserLoggedIn" style="text-align:left">
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <img src="{{userInfo.picture}}">
-                </ion-col>
-                <ion-col col-9>
-                    <div class="user-first_name">{{userInfo.name}}</div>
-                    <div class="user-first_name">{{userInfo.email}}</div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <button ion-button clear (click)="logout()">Salir</button>
-            </ion-row>
-        </ion-grid>
+-->
+<ion-content class="bg-image">
+    <div class="profile-avatar-center" *ngIf="userInfo.isUserLoggedIn">    
+    <div class="profile-avatar-center-inner">
+        <img src="{{userInfo.picture}}">        
     </div>
+    <div class="user-first_name">{{userInfo.name}}</div>
+</div>
 
     <div *ngIf="!userInfo.isUserLoggedIn" style="text-align:center">
         <button ion-button icon-start color="facebookButton" (click)="goLoginFacebookPage()">
@@ -54,43 +45,43 @@
 
     <div *ngIf="userInfo.isUserLoggedIn">
         <form (ngSubmit)="companyForm()">
-
             <ion-item>
-                <ion-label floating color="primaryDark">Nombre del Comercio</ion-label>
-                <ion-input type="text" name="name" [(ngModel)]="company.name"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating color="primaryDark">Whatsapp</ion-label>
-                <ion-input type="tel" name="whatsapp" [(ngModel)]="company.whatsapp"></ion-input>
+                <ion-label color="light" stacked>Nombre del Comercio</ion-label>
+                <ion-input class="ion-input-trans" type="text" name="name" placeholder="Nombre" [(ngModel)]="company.name"></ion-input>
             </ion-item>
             <ion-item>
-                <button ion-button round color="verdeDaniel" type="submit" >Guardar Comercio</button>
+                <ion-label color="light" stacked>Whatsapp</ion-label>
+                <ion-input class="ion-input-trans" type="tel" name="whatsapp" placeholder="Whatsapp" [(ngModel)]="company.whatsapp"></ion-input>
             </ion-item>
+            <ion-item>
+                <ion-label color="light" stacked>Direccion del Comercio</ion-label>
+                <ion-input class="ion-input-trans" type="text" name="address" placeholder="Dirección" [(ngModel)]="company.address"></ion-input>
+            </ion-item>
+            <ion-item text-center>
+                <button class="button-action" ion-button color="verdeDaniel" type="submit" >Guardar Comercio</button>
+            </ion-item>           
 
         </form>        
 
         <ion-grid>
             <ion-row align-items-center>
                 <ion-col text-center>
-                    <button ion-button icon-only round (click)="goEditOffersPage()">
+                    <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="goEditOffersPage()">
                         <ion-icon name="list"></ion-icon>
                     </button>
-                    <div text-center>Mis Ofertas</div>
+                    <div text-center class="text-uppercase">Mis <br>Ofertas</div>
                 </ion-col>
                 <ion-col text-center>
-                    <button ion-button icon-only round (click)="goNewOfferPage()">
+                    <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="goNewOfferPage()">
                         <ion-icon name="add"></ion-icon>
                     </button>
-                    <div text-center>Agregar Oferta</div>
-                    
+                    <div text-center  class="text-uppercase">Agregar <br>Oferta</div>                    
                 </ion-col>
                 <ion-col text-center>
-                    <button ion-button icon-only round (click)="logout()">
+                    <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="logout()">
                         <ion-icon name="exit"></ion-icon>
                     </button>
-                    <div text-center>Salir</div>
-                    
+                    <div text-center  class="text-uppercase salir">Salir</div>                    
                 </ion-col>
             </ion-row>
         </ion-grid>

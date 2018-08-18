@@ -13,46 +13,23 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="darkbackground">
-<!--
-    <ion-card *ngIf="offer" class="offer-list-card">
-        <div class="offer-list-card-img">
-            <img src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">        
-            <div class="offer-list-discount"><span>-{{offer.priceDiscount}}</span></div>
-            <div class="offer-list-icon-whatsapp">
-                <ion-icon float-right>
-                    <a target="_blank" (click)="increaseWhatsappCount(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
-                        <img src="assets/img/whatsappicon.png">
-                    </a>
-                </ion-icon>
-            </div>
-        </div>
-        <ion-card-content>
-            <ion-card-title>
-                <div class="offer-list-price">{{offer.specialPriceFormated}}</div>
-            </ion-card-title>
-            <div class="offer-list-title">{{offer.subject}}</div>            
-        </ion-card-content>
-
-        <ion-row no-padding>
-            <ion-col>
-                <button ion-button clear small color="danger" icon-start>
-
-                </button>
-            </ion-col>
-            <ion-col text-center>
-                <button ion-button clear small color="danger" icon-start>
-
-                </button>
-            </ion-col>
-            <ion-col text-right>
-                <button ion-button clear small color="danger" icon-start>
-                    <ion-icon name='share-alt'></ion-icon>
-                    Compartir
-                </button>
-            </ion-col>
-        </ion-row>
-
-    </ion-card>
--->
+<ion-content>
+    <div padding class="contenido">
+    <p>Hola! Nos alegra tenerte aquí, queremos compartir con vos las mejores ofertas de La Matanza, ¡sin que te pierdas ninguna!</p>
+    <p>Mi Oferta es una aplicación de fácil acceso e instalación, segura y confiable que te permitirá tener en la palma de tus manos las últimas promociones, ofertas y precios de los comerciantes de la zona.</p>
+    <p>Los volantes se pierden, ensucian, incomodan y pocas veces los tenés, en el momento oportuno.</p>
+    <p>Con <a (click)="goOffersPage()"><strong>Mi Oferta</strong></a> podrás recorrer todas las propuestas. Una vez elegida tu favorita la aplicación te llevará directamente al WhatsApp del comerciante, para terminar de sacarte todas las dudas o concretar tu pedido.</p>
+    <p></p>
+    <p>Conseguí con Mi Oferta los mejores beneficios:</p>
+    <ul>
+        <li>Conocer todas las <strong>ofertas</strong> en tiempo real</li>
+        <li>Tener las mejores actualizadas.</li>
+        <li>Comparar</li>
+        <li>Sacarte todas las dudas</li>
+        <li>Sin intermediarios, conectarte directamente con los comerciantes</li>
+        <li>¡Ahorrar!</li>
+    </ul>
+    <p>Y de paso… cuidar el medio ambiente, con menos basura en las calles.</p>    
+    <p>¡Animate! <strong>recorre</strong> y digitaliza tus oportunidades 😉</p>   
+</div>     
 </ion-content>
