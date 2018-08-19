@@ -35,7 +35,8 @@ export class EditOffersPage {
   taskDelete: boolean = false;
   shareOffers:any ;
   linkToShare: string = 'https://mioferta.com.ar/index.php?option=com_jbusinessdirectory&view=companies&companyId=';
-
+  offersTotal:number=0;
+  offersActives:number=0;
   constructor(public platform: Platform,
     public navCtrl: NavController, 
     public offerService: OfferServiceProvider, 
@@ -86,12 +87,16 @@ export class EditOffersPage {
     this.offerService.getUserOffers(this.userInfo.id)
     .subscribe(
       (data)=> {
+        let offersActives = 0;
         this.offers = data; 
-        this.offers.forEach(function (value) {          
+        this.offersTotal = this.offers.length;
+        this.offers.forEach(function (value) {    
           if(value.state == 1){
             value.isAssigned = true;
+            offersActives++;
           }
-        });        
+        }); 
+        this.offersActives = offersActives;       
         this.showSplash = false;
         console.log('data',data) ;
       },
@@ -106,6 +111,9 @@ export class EditOffersPage {
     let newState = 1;
     if(offer.state == 1){
       newState = 2;
+      this.offersActives--;
+    }else{
+      this.offersActives++;
     }
     offer.state = newState;
     this.showSplash = true;
@@ -113,6 +121,7 @@ export class EditOffersPage {
     .subscribe(
       dataOfferState => {
         console.log('dataOfferState: ',dataOfferState);
+
         this.showToast('Oferta ocultada!');   
         this.showSplash = false;   
       },

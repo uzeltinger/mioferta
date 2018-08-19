@@ -64,12 +64,12 @@
     <ion-row class="topEditOffers">        
         <ion-col col-3><p></p></ion-col>
         <ion-col col-3 text-center>
-            <ion-badge class="ion-badge-x2" color="colorAmarillo">22</ion-badge>
-            <small>PRODUCTOS</small>
+            <ion-badge class="ion-badge-x2" color="colorAmarillo">{{offersTotal}}</ion-badge>
+            <br><small>PRODUCTOS</small>
         </ion-col>
         <ion-col col-3 text-center>
-            <ion-badge class="ion-badge-x2" color="colorRosa">15</ion-badge>
-            <small>ACTIVOS</small>
+            <ion-badge class="ion-badge-x2" color="colorRosa">{{offersActives}}</ion-badge>
+            <br><small>ACTIVOS</small>
         </ion-col>
         <ion-col col-3 text-center>
             <ion-icon class="icon-share-x3" color="white" name="share" (click)="sendOffersList()"></ion-icon>
