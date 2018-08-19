@@ -1,3 +1,22 @@
 page-edit-offers {
-
+    ion-avatar img {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    }
+    .colorRojoOscurobackground {
+        background: #7C0000;
+    }
+    .topEditOffers {
+        background: #000;
+        color: #fff;
+        padding: 2rem 0;
+    }
+    .icon-share-x3 {
+        font-size: 3rem;
+        margin-top: .5rem;
+    }
+    .ion-badge-x2 {
+    font-size: 2rem;
+    }
 }

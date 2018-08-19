@@ -130,7 +130,7 @@ export class EditOffersPage {
   itemsSelectedShare(){
     this.toolbarToggle();
     this.shareOffers  = Object.assign([], this.offers);
-    let msg = '';
+    
     /*this.shareOffers.forEach(function (value) {
       let msg = '';
       if(value.isAssigned){
