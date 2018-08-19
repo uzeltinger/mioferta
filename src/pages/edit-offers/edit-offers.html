@@ -9,13 +9,14 @@
     <ion-navbar color="primary">
         <ion-title>Mis ofertas</ion-title>
 
-        <ion-buttons end>
+        <!--<ion-buttons end>
             <button ion-button icon-only (click)="toolbarToggle()">
                 <ion-icon name="more"></ion-icon>
             </button>
-        </ion-buttons>
+        </ion-buttons>-->
 
     </ion-navbar>
+
     <ion-toolbar *ngIf="toolbarShow">
         <ion-buttons end>
             <button *ngIf="taskCreate" ion-button icon-only (click)="goNewOfferPage()">
@@ -71,7 +72,7 @@
             <small>ACTIVOS</small>
         </ion-col>
         <ion-col col-3 text-center>
-            <ion-icon class="icon-share-x3" color="white" name="share"></ion-icon>
+            <ion-icon class="icon-share-x3" color="white" name="share" (click)="sendOffersList()"></ion-icon>
         </ion-col>
     </ion-row>
     <ion-card color="colorRojoOscuro" *ngFor="let offer of offers">
@@ -95,12 +96,12 @@
                         </button>
                     </ion-col>
                     <ion-col>
-                        <button color="verde" clear ion-button icon-only (click)="itemsSelectedShare()">
+                        <button color="verde" clear ion-button icon-only (click)="itemsSelectedShare(offer)">
                             <ion-icon name="logo-whatsapp"></ion-icon>
                         </button>
                     </ion-col>
                     <ion-col>
-                        <ion-toggle color="verde" [(ngModel)]="offer.isAssigned"></ion-toggle>
+                        <ion-toggle color="verde" (ionChange)="toggleOfferState(offer)" [(ngModel)]="offer.isAssigned"></ion-toggle>
                     </ion-col>
                 </ion-row>
             </ion-col>

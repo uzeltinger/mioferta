@@ -31,9 +31,10 @@ export class EditOffersPage {
   pictures_path:string = '';
   toolbarShow: boolean = false;
   taskCreate: boolean = false;
-  taskShare: boolean = true;
+  taskShare: boolean = false;
   taskDelete: boolean = false;
-  shareOffers:any 
+  shareOffers:any ;
+  linkToShare: string = 'https://mioferta.com.ar/index.php?option=com_jbusinessdirectory&view=companies&companyId=';
 
   constructor(public platform: Platform,
     public navCtrl: NavController, 
@@ -51,8 +52,7 @@ export class EditOffersPage {
     console.log('ionViewDidLoad EditOffersPage');
     this.pictures_path = this.offerService.picturesPath; 
     this.isUserLoggedIn = this.userService.isUserLoggedIn;
-    this.userInfo = this.userService.getUser();
-    
+    this.userInfo = this.userService.getUser();    
     this.company = this.userService.getCompany();
     console.log('this.company',this.company);
     //this.getUserOffers();    
@@ -85,8 +85,13 @@ export class EditOffersPage {
   getUserOffers(){
     this.offerService.getUserOffers(this.userInfo.id)
     .subscribe(
-      (data)=> {         
+      (data)=> {
         this.offers = data; 
+        this.offers.forEach(function (value) {          
+          if(value.state == 1){
+            value.isAssigned = true;
+          }
+        });        
         this.showSplash = false;
         console.log('data',data) ;
       },
@@ -96,6 +101,27 @@ export class EditOffersPage {
     }
     )
   } 
+  toggleOfferState(offer){
+    console.log('toggleOfferState offer : ',offer);
+    let newState = 1;
+    if(offer.state == 1){
+      newState = 2;
+    }
+    offer.state = newState;
+    this.showSplash = true;
+    this.offerService.setOfferState(offer)
+    .subscribe(
+      dataOfferState => {
+        console.log('dataOfferState: ',dataOfferState);
+        this.showToast('Oferta ocultada!');   
+        this.showSplash = false;   
+      },
+      error => {
+        this.showSplash = false;
+        this.showToast('Error: ' + error);          
+      }
+    );  
+  }
 
   addNewOffer(){
     let newOffer: object = {'id':'0'};    
@@ -124,13 +150,14 @@ export class EditOffersPage {
     });
   }
 
-  itemsSelectedTrash(){
-    this.toolbarToggle();
+  sendOffersList(){
+    //this.toolbarToggle();    
+    this.socialSharing.shareViaWhatsApp('Listado de ofertas', '', this.linkToShare+this.company.id)
   }
-  itemsSelectedShare(){
-    this.toolbarToggle();
-    this.shareOffers  = Object.assign([], this.offers);
-    
+
+  itemsSelectedShare(offerToShare){
+    //this.toolbarToggle();
+    //this.shareOffers  = Object.assign([], this.offers);    
     /*this.shareOffers.forEach(function (value) {
       let msg = '';
       if(value.isAssigned){
@@ -139,18 +166,18 @@ export class EditOffersPage {
         msg = msg + linkToShare;
       }      
     });*/
-    for (let i = 0; i < this.shareOffers.length; i++) {
+    //for (let i = 0; i < this.shareOffers.length; i++) {
       //console.log(this.shareOffers[i]);
-      let offerToShare = this.shareOffers[i];
+      //let offerToShare = this.shareOffers[i];
       
-      if(offerToShare.isAssigned){
+      if(offerToShare){
         console.log('share',offerToShare);
         this.whatsappText = offerToShare.subject+"\r\n"+offerToShare.description+"\r\n"+offerToShare.specialPriceFormated;
         this.whatsappImage = this.pictures_path + offerToShare.picture_path;
         this.whatsappUrl = "\r\n" + 'https://mioferta.com.ar/offer/'+offerToShare.id;
         //this.whatsappText = window.encodeURIComponent(this.whatsappText);
         //msg = msg + linkToShare;
-      }  
+      //}  
     }
     
     

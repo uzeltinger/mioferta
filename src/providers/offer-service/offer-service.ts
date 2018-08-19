@@ -54,6 +54,14 @@ export class OfferServiceProvider {
           catchError(this.handleError)
         );
       }
+      setOfferState(offer:any): Observable<any>{
+        console.log('offer',offer);
+        this.httpOptions = this.getHeader();
+        return this.httpClient.post<any>(this.apiUrl+"/v1/offer/setOfferState", offer, this.httpOptions)
+          .pipe(        
+            catchError(this.handleError)
+          );
+        }
     getHeader() {
       console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
       return {
