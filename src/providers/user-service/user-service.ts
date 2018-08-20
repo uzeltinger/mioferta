@@ -82,7 +82,7 @@ export class UserServiceProvider {
   }
 
   storeUserData(data:any){
-    console.log("user", data);
+    console.log("storeUserData", data);
     this.storage.set('userLogued', true);
     this.storage.set('facebook_id', data.userData.facebook_id);
     this.storage.set('google_id', data.userData.google_id);
@@ -95,11 +95,18 @@ export class UserServiceProvider {
     this.storage.set('company_id', data.userData.company_id);
     this.storage.set('company_name', data.userData.company_name);
     this.storage.set('company_whatsapp', data.userData.company_whatsapp); 
+    this.storage.set('company_address', data.userData.company_address); 
+    this.storage.set('company_street_number', data.userData.company_street_number); 
+    this.storage.set('company_city', data.userData.company_city); 
+    this.storage.set('company_county', data.userData.company_county); 
+    this.storage.set('company_province', data.userData.company_province); 
+    this.storage.set('company_latitude', data.userData.company_latitude); 
+    this.storage.set('company_longitude', data.userData.company_longitude); 
   }
 
   getCompany(){
     this.storage.get('userLogued').then((userLogued) => {
-      //console.log('line 49 : userLogued is ', userLogued);
+     
       this.isUserLoggedIn = userLogued;
       if(userLogued){
         this.storage.get('company_id').then((company_id) => {
@@ -111,11 +118,32 @@ export class UserServiceProvider {
           this.company.name = company_name;
         });
         this.storage.get('company_whatsapp').then((company_whatsapp) => {
-          //console.log('line 54 : Your token is', token);
           this.company.whatsapp = company_whatsapp;
+        });
+        this.storage.get('company_address').then((company_address) => {
+          this.company.address = company_address;
+        });
+        this.storage.get('company_street_number').then((company_street_number) => {
+          this.company.street_number = company_street_number;
+        });
+        this.storage.get('company_city').then((company_city) => {
+          this.company.city = company_city;
+        });
+        this.storage.get('company_county').then((company_county) => {
+          this.company.county = company_county;
+        });
+        this.storage.get('company_province').then((company_province) => {
+          this.company.province = company_province;
+        });
+        this.storage.get('company_latitude').then((company_latitude) => {
+          this.company.latitude = company_latitude;
+        });
+        this.storage.get('company_longitude').then((company_longitude) => {
+          this.company.longitude = company_longitude;
         });
       }
     });
+    console.log('line 149 : getCompany is this.company ', this.company);
     //console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
     return this.company;
   }
@@ -127,53 +155,62 @@ export class UserServiceProvider {
       if(userLogued){
         this.user.isUserLoggedIn = userLogued;         
         this.storage.get('user_id').then((user_id) => {
-          //console.log('line 133 : Your user_id is', user_id);
           this.user.id = user_id;
         });
         this.storage.get('name').then((name) => {
-          //console.log('line 46 : Your first_name is', first_name);
           this.user.name = name;            
         });
         this.storage.get('facebook_id').then((facebook_id) => {
-          //console.log('line 57 : Your facebook_id is', facebook_id);
           this.user.facebook_id = facebook_id;
         });
         this.storage.get('google_id').then((google_id) => {
-          //console.log('line 60 : Your google_id is', google_id);
           this.user.google_id = google_id;
         });
         this.storage.get('email').then((email) => {
-          //console.log('line 42 : Your email is', email);
           this.user.email = email;
         });
         this.storage.get('first_name').then((first_name) => {
-          //console.log('line 46 : Your first_name is', first_name);
           this.user.first_name = first_name;            
         });
         this.storage.get('last_name').then((last_name) => {
-          //console.log('line 50 : Your last_name is', last_name);
           this.user.last_name = last_name;            
         }); 
         this.storage.get('picture').then((picture) => {
-          //console.log('line 54 : Your picture is', picture);
           this.user.picture = picture;
         });
         this.storage.get('token').then((token) => {
-          //console.log('line 54 : Your token is', token);
           this.user.token = token;
         });
         this.storage.get('company_id').then((company_id) => {
-          //console.log('line 54 : Your token is', token);
           this.company.id = company_id;
         });
-        this.storage.get('company_name').then((company_name) => {
-          //console.log('line 54 : Your token is', token);
+        /*this.storage.get('company_name').then((company_name) => {
           this.company.name = company_name;
         });
         this.storage.get('company_whatsapp').then((company_whatsapp) => {
-          //console.log('line 54 : Your token is', token);
           this.company.whatsapp = company_whatsapp;
-        });         
+        });  
+        this.storage.get('company_address').then((company_address) => {
+          this.company.address = company_address;
+        });
+        this.storage.get('company_street_number').then((company_street_number) => {
+          this.company.street_number = company_street_number;
+        });
+        this.storage.get('company_city').then((company_city) => {
+          this.company.city = company_city;
+        });
+        this.storage.get('company_county').then((company_county) => {
+          this.company.county = company_county;
+        });
+        this.storage.get('company_province').then((company_province) => {
+          this.company.province = company_province;
+        });
+        this.storage.get('company_latitude').then((company_latitude) => {
+          this.company.latitude = company_latitude;
+        });
+        this.storage.get('company_longitude').then((company_longitude) => {
+          this.company.longitude = company_longitude;
+        });       */
 
       }
     });
@@ -195,16 +232,34 @@ export class UserServiceProvider {
     this.storage.set('company_id', null);
     this.storage.set('company_name', null);
     this.storage.set('company_whatsapp', null); 
+    this.storage.set('company_address', null); 
+    this.storage.set('company_street_number', null); 
+    this.storage.set('company_city', null); 
+    this.storage.set('company_county', null); 
+    this.storage.set('company_province', null); 
+    this.storage.set('company_latitude', null); 
+    this.storage.set('company_longitude', null); 
     this.isUserLoggedIn = false;
     this.user.isUserLoggedIn = false;
   }  
+
   storeCompanyData(data:any){
+    if(typeof data!="undefined"){
     this.storage.set('company_id', data.companyData.id);
     this.storage.set('company_name', data.companyData.name);
     this.storage.set('company_whatsapp', data.companyData.whatsapp); 
+    this.storage.set('company_address', data.companyData.address); 
+    this.storage.set('company_street_number', data.companyData.street_number); 
+    this.storage.set('company_city', data.companyData.city); 
+    this.storage.set('company_county', data.companyData.county); 
+    this.storage.set('company_province', data.companyData.province); 
+    this.storage.set('company_latitude', data.companyData.latitude); 
+    this.storage.set('company_longitude', data.companyData.longitude); 
+    }
   }
   // Envío de datos de formulario de registro
   sendCompanyData(company:any): Observable<any> {    
+    console.log("company", company);
     this.httpOptions = this.getHeader();    
     company.email = this.user.email;
     return this.httpClient.post<any>(this.apiUrl+"company/update", company, this.httpOptions)
@@ -212,7 +267,7 @@ export class UserServiceProvider {
         tap(// Log the result or error
         data => {
           this.storeCompanyData(data);
-          //console.log("data", data);
+          console.log("data", data);
           //console.log("company", company);                               
         },
         error => {

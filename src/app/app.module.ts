@@ -10,6 +10,9 @@ import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { AgmCoreModule } from '@agm/core';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -22,6 +25,9 @@ import { ProfilePage } from '../pages/profile/profile';
 import { CategoriesPage } from '../pages/categories/categories';
 import { CategoryPage } from '../pages/category/category';
 import { EditOffersPage } from '../pages/edit-offers/edit-offers';
+import { EditOfferPage } from '../pages/edit-offer/edit-offer';
+import { ProfileAddressPage } from '../pages/profile-address/profile-address';
+import { ProfileAutocompleteAddressPage } from '../pages/profile-autocomplete-address/profile-autocomplete-address';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +37,6 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { OfferServiceProvider } from '../providers/offer-service/offer-service';
-import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @NgModule({
   declarations: [
@@ -40,13 +45,18 @@ import { EditOfferPage } from '../pages/edit-offer/edit-offer';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
+    ProfileAddressPage, ProfileAutocompleteAddressPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCnahpwY4LRTYlzEHnER3B_Y8NR1HzmrVE",
+      libraries: ["places"]
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,7 +65,8 @@ import { EditOfferPage } from '../pages/edit-offer/edit-offer';
     OffersPage,
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
-    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage
+    ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
+    ProfileAddressPage, ProfileAutocompleteAddressPage
   ],
   providers: [
     StatusBar,
@@ -71,7 +82,9 @@ import { EditOfferPage } from '../pages/edit-offer/edit-offer';
     Camera,
     ImagePicker,
     Base64,
-    SocialSharing
+    SocialSharing,
+    Geolocation,
+    NativeGeocoder
   ]
 })
 export class AppModule {}

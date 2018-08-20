@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { User } from '../../models/user';
 import { Company } from '../../models/company';
@@ -11,6 +11,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Toast } from '@ionic-native/toast';
 import { EditOffersPage } from '../edit-offers/edit-offers';
 import { EditOfferPage } from '../edit-offer/edit-offer';
+import { ProfileAutocompleteAddressPage } from '../profile-autocomplete-address/profile-autocomplete-address';
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,27 +32,46 @@ export class ProfilePage {
   showSplash: boolean;
   errorMessage: any;
 
+  profileAddress: any = {"place":""};
+    latitude: string;
+    longitude: string;
+    address: string;
+    street_number: string;
+    countryId: number;
+    county: string;
+    province: string;
+    city: string;
+    postal_code: string;
+
   constructor(public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: Facebook,
     private toast: Toast,
     private googlePlus: GooglePlus,
-    public userService: UserServiceProvider) {
+    public userService: UserServiceProvider,
+    private modalCtrl:ModalController) {
     //console.log('constructor ProfilePage');
+    
   }
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
-
+    this.formatCompanyAddress();    
     //this.company.name = 'Mi compañía se llamará';
     //this.company.whatsapp = '2916481551';
     console.log('ionViewDidLoad ProfilePage this.userInfo ', this.userInfo);
     console.log('ionViewDidLoad ProfilePage this.company ', this.company);
   }
-
+  formatCompanyAddress(){
+    let addressFormated = this.company.address + ' ' + this.company.street_number;
+    addressFormated = addressFormated + ', ' + this.company.city;
+    addressFormated = addressFormated + ', ' + this.company.county;
+    addressFormated = addressFormated + ', Argentina';
+    this.profileAddress.place = addressFormated;    
+  }
 
 
   logout() {
@@ -162,6 +182,61 @@ export class ProfilePage {
         }
       );
   }
+
+
+
+
+  showAddressModal () {
+    let modal = this.modalCtrl.create(ProfileAutocompleteAddressPage);
+    let me = this;
+    modal.onDidDismiss(data => {
+      console.log('aca', typeof data);
+      if(typeof data!="undefined" && data != null){
+        console.log('data', data);
+        this.profileAddress.place = data.formatted_address;
+        this.placeToAddress(data);
+        console.log('this.profileAddress.place',this.profileAddress.place);
+      }
+        
+    });
+    modal.present();
+  }
+  
+  placeToAddress(place){
+    this.company.latitude = place.geometry.location.lat();
+    this.company.longitude = place.geometry.location.lng();
+    place.address_components.forEach( c =>  {
+        switch(c.types[0]){
+            case 'street_number':
+            this.company.street_number = c.long_name;
+                break;
+            case 'route':
+            this.company.address = c.long_name;
+                break;
+            case 'neighborhood': case 'locality':    // North Hollywood or Los Angeles?
+            this.company.city = c.long_name;
+                break;
+            case 'administrative_area_level_1':     //  Note some countries don't have states
+            this.company.county = c.long_name;
+                break;
+            case 'postal_code':
+            this.company.postal_code = c.long_name;
+                break;
+            case 'administrative_area_level_2':
+            this.company.province = c.long_name;
+                break;                
+        }
+    });
+    
+    console.log('street_number',this.company.street_number);
+    console.log('address',this.company.address);
+    console.log('city',this.company.city);
+    console.log('county',this.company.county);
+    console.log('postal_code',this.company.postal_code);
+    console.log('province',this.company.province);
+}
+
+
 
   showToast(text: string, duration: string = '3000', position: string = 'bottom') {
     if (this.platform.is('android')) {

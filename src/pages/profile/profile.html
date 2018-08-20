@@ -55,7 +55,8 @@
             </ion-item>
             <ion-item>
                 <ion-label color="light" stacked>Direccion del Comercio</ion-label>
-                <ion-input class="ion-input-trans" type="text" name="address" placeholder="Dirección" [(ngModel)]="company.address"></ion-input>
+                <ion-input disable class="ion-input-trans" type="text" name="address" placeholder="Dirección" (click)="showAddressModal()" [(ngModel)]="profileAddress.place"></ion-input>
+                            
             </ion-item>
             <ion-item text-center>
                 <button class="button-action" ion-button color="verdeDaniel" type="submit" >Guardar Comercio</button>
