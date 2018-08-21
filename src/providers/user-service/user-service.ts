@@ -103,7 +103,7 @@ export class UserServiceProvider {
     this.storage.set('company_latitude', data.userData.company_latitude); 
     this.storage.set('company_longitude', data.userData.company_longitude); 
   }
-
+    
   getCompany(){
     this.storage.get('userLogued').then((userLogued) => {
      
@@ -145,6 +145,7 @@ export class UserServiceProvider {
     });
     console.log('line 149 : getCompany is this.company ', this.company);
     //console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
+    //setInterval(() => { return this.company }, 1000)
     return this.company;
   }
 

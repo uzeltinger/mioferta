@@ -11,7 +11,7 @@ import { AboutPage } from '../pages/about/about';
 import { CategoriesPage } from '../pages/categories/categories';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-import { ProfileAddressPage } from '../pages/profile-address/profile-address';
+//import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 //import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 
 @Component({
@@ -20,7 +20,7 @@ import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProfilePage;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

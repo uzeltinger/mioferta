@@ -13,25 +13,16 @@ import { EditOffersPage } from '../edit-offers/edit-offers';
 import { EditOfferPage } from '../edit-offer/edit-offer';
 import { ProfileAutocompleteAddressPage } from '../profile-autocomplete-address/profile-autocomplete-address';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
   isUserLoggedIn: boolean = false;
   userInfo: User = new User;
   company: Company = new Company;
   showSplash: boolean;
   errorMessage: any;
-
   profileAddress: any = {"place":""};
     latitude: string;
     longitude: string;
@@ -50,40 +41,29 @@ export class ProfilePage {
     private toast: Toast,
     private googlePlus: GooglePlus,
     public userService: UserServiceProvider,
-    private modalCtrl:ModalController) {
-    //console.log('constructor ProfilePage');
-    
-  }
+    private modalCtrl:ModalController) {  }
+
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad ProfilePage');
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
     this.formatCompanyAddress();    
-    //this.company.name = 'Mi compañía se llamará';
-    //this.company.whatsapp = '2916481551';
-    console.log('ionViewDidLoad ProfilePage this.userInfo ', this.userInfo);
-    console.log('ionViewDidLoad ProfilePage this.company ', this.company);
   }
   formatCompanyAddress(){
     let addressFormated = this.company.address + ' ' + this.company.street_number;
     addressFormated = addressFormated + ', ' + this.company.city;
     addressFormated = addressFormated + ', ' + this.company.county;
     addressFormated = addressFormated + ', Argentina';
-    this.profileAddress.place = addressFormated;    
+    this.profileAddress.place = addressFormated;
   }
 
-
   logout() {
-
     if (this.platform.is('android')) {
       console.log('Perfil logout line 44 platform.is.android');
-
       this.fb.getLoginStatus()
         .then(res => {
           console.log('Perfil logout line 48 res.status: ', res.status);
           if (res.status === "connect") {
-
             this.fb.logout().then(logoutRes => {
               this.isUserLoggedIn = false;
               this.userService.logoutUser(this.userInfo);
@@ -93,11 +73,8 @@ export class ProfilePage {
             ).catch(logoutErr =>
               console.log('logoutErr', logoutErr)
             );
-
           } else {
-
             this.logoutFromGoogle();
-
           }
         })
         .catch(e => console.log(e)
@@ -114,14 +91,12 @@ export class ProfilePage {
   }
 
   public logoutFromGoogle() {
-
     this.googlePlus.trySilentLogin().then(res => {
       console.log('LoginGooglePage logout : trySilentLogin : line 86', res);
     })
       .catch(
         err => console.error('error logout line 89: ', err)
       );
-
 
     this.googlePlus.logout()
       .then(res => {
