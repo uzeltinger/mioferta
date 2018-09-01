@@ -1,17 +1,7 @@
 page-profile {
   .bg-image{
       background: url('../assets/img/perfilFondo.jpg') no-repeat center center;
-  }
-  .bg-image.content-md {
-    color: #fff;
-  }
-  .bg-image .item-md{
-    background: none;
-    color: #fff;
-  }
-  .header-md::after {
-    background: none;
-  }
+  }  
   .profile-avatar-center {
     z-index: 99;    
     width: 100%;    
@@ -38,51 +28,10 @@ page-profile {
     width: 100%;
     float: left;
   }    
-  .item-md .item-button.button-action {
-    padding: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(0, 107, 9, 0.65); 
-    font-size: 2rem; 
-    margin-top: 1rem;
-  }  
   
-  .item-md.item-block .item-inner {
-    border-bottom: none;
-  }
-  .text-uppercase {
-    text-transform: uppercase;
-
-  }
   .text-uppercase.salir {
     line-height: 4rem;
   }
-  form {
-    padding: 1rem;
-  }
-  form .ion-input-trans {
-    border-bottom: none;
-    background-color: rgba(26, 24, 24, 0.6);
-    padding-left: 1rem; 
-    border-radius: .5rem;
-  }
-  form .item-md.item-block .item-inner {
-    padding-right: 0;
-  }
-  form .item-md {
-    padding-left: 0;
-  }
-  .label-md[stacked] {
-    padding-bottom: .5rem;
-  }
-  .item-md.item-input .item-inner {
-     border-bottom: none!important; 
-    -webkit-box-shadow: none!important; 
-    box-shadow: none!important; 
-  }
-  .item-input-has-focus .label-md[stacked]{
-    color: #fff;
-
-  }
+  
   
 }
