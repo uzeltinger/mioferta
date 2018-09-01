@@ -163,7 +163,7 @@ export class ProfilePage {
 
   showAddressModal () {
     let modal = this.modalCtrl.create(ProfileAutocompleteAddressPage);
-    let me = this;
+    //let me = this;
     modal.onDidDismiss(data => {
       console.log('aca', typeof data);
       if(typeof data!="undefined" && data != null){

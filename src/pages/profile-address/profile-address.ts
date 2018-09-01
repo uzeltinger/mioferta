@@ -36,7 +36,7 @@ export class ProfileAddressPage {
 
     showAddressModal () {
         let modal = this.modalCtrl.create(ProfileAutocompleteAddressPage);
-        let me = this;
+        //let me = this;
         modal.onDidDismiss(data => {
             this.profileAddress.place = data.formatted_address;
             this.placeToAddress(data);

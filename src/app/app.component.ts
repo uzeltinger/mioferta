@@ -13,6 +13,7 @@ import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 //import { EditOffersPage } from '../pages/edit-offers/edit-offers';
+import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

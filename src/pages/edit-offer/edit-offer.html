@@ -8,8 +8,8 @@
 
   <ion-navbar color="primary">
     <ion-title>
-      <span *ngIf="offer.subject">{{offer.subject}}</span>
-      <span *ngIf="isNewOffer">Oferta Nueva</span>
+      <span *ngIf="offerPageTitle">{{offerPageTitle}}</span>
+      <span *ngIf="isNewOffer">Agregar Oferta</span>
     </ion-title>
 </ion-navbar>
 
@@ -19,55 +19,122 @@
     <div class="spinner"><ion-spinner></ion-spinner></div>
 </div>
 
-<ion-content padding>
+<ion-content padding class="bg-image">
 
-    <ion-grid *ngIf="newPhoto">
-        <ion-row align-items-center>
-            <ion-col text-center>
-                <img [src]=newPhoto>                
-            </ion-col>
-        </ion-row>
-        <ion-row align-items-center>
-            <ion-col text-center>
-                <button ion-button icon-only round (click)="deletePhoto()">
-                    <ion-icon name="trash"></ion-icon>
-                </button>
-                <div text-center>Eliminar</div>    
-            </ion-col>
+    <ion-grid>
+        <ion-row class="topEditOffers">        
+            <ion-col col-12 text-center>
+                <ion-badge class="ion-badge-x2" color="colorAmarillo">1</ion-badge>                    
+            </ion-col>                             
         </ion-row>
     </ion-grid>
 
-    <ion-grid *ngIf="galleryPhoto">
-        <ion-row align-items-center>
-            <ion-col text-center>
-                <img [src]=galleryPhoto *ngIf="galleryPhoto" />
-            </ion-col>
+    <div *ngIf="!offerNew.picture_path && !newPhoto && !galleryPhoto" class="divNewImage">
+        <div class="newImageCenteredIcon">
+            <ion-icon name="camera"></ion-icon>
+        </div>
+        <div class="newImageActions">
+            <ion-grid>                
+                <ion-row align-items-center> 
+                    <ion-col col-4></ion-col>                   
+                    <ion-col col-4 text-center>
+                        <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="takePhoto()">
+                            <ion-icon name="camera"></ion-icon>
+                        </button>                
+                    </ion-col>
+                    <ion-col col-4 text-center>
+                        <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="takePicture()">
+                            <ion-icon name="images"></ion-icon>
+                        </button>                
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+
+    <div *ngIf="offerNew.picture_path" class="divOldImage">
+        <ion-grid>
+            <div class="oldImageCentered">
+                <ion-row align-items-center>
+                    <img src="{{pictures_path}}{{offerNew.picture_path}}">
+                </ion-row>            
+                <div class="oldImageActions">
+                    <ion-grid>                
+                        <ion-row align-items-center> 
+                            <ion-col col-4></ion-col>                   
+                            <ion-col col-4 text-center>                                         
+                            </ion-col>
+                            <ion-col col-4 text-center>
+                                <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="deleteOldImage()">
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>                
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </div>
+        </ion-grid>
+    </div>
+
+    <div *ngIf="newPhoto" class="divNewPhoto">
+        <ion-grid>
+            <div class="newPhotoCentered">
+                <ion-row align-items-center>
+                    <img [src]=newPhoto>
+                </ion-row>            
+                <div class="newPhotoActions">
+                    <ion-grid>                
+                        <ion-row align-items-center> 
+                            <ion-col col-4></ion-col>                   
+                            <ion-col col-4 text-center>                                         
+                            </ion-col>
+                            <ion-col col-4 text-center>
+                                <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="deletePhoto()">
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>                
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </div>
+        </ion-grid>
+    </div>
+
+    <div *ngIf="galleryPhoto" class="divGalleryPhoto">
+        <ion-grid>
+            <div class="newGalleryCentered">
+                <ion-row align-items-center>
+                    <img [src]=galleryPhoto *ngIf="galleryPhoto" />
+                </ion-row>            
+                <div class="newGalleryActions">
+                    <ion-grid>                
+                        <ion-row align-items-center> 
+                            <ion-col col-4></ion-col>                   
+                            <ion-col col-4 text-center>                                         
+                            </ion-col>
+                            <ion-col col-4 text-center>
+                                <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="deletePhoto()">
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>                
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </div>
+        </ion-grid>
+    </div>    
+        
+    <ion-grid>
+        <ion-row class="topEditOffers">                    
+            <ion-col col-12 text-center>
+                <ion-badge class="ion-badge-x2" color="colorRosa">2</ion-badge>
+            </ion-col>                
         </ion-row>
-        <ion-row align-items-center>
-            <ion-col text-center>
-                <button ion-button icon-only round (click)="deletePhoto()">
-                    <ion-icon name="trash"></ion-icon>
-                </button>
-                <div text-center>Eliminar</div>    
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    </ion-grid>  
 
 
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
+<!--
     <ion-grid>
         <ion-row align-items-center>
             <ion-col text-center>
@@ -80,37 +147,22 @@
                 <button ion-button icon-only round (click)="takePhoto()">
                     <ion-icon name="camera"></ion-icon>
                 </button>
-                <div text-center>Cámara</div>
-                
+                <div text-center>Cámara</div>                
             </ion-col>
             <ion-col text-center>
                 <button ion-button icon-only round (click)="takePicture()">
                     <ion-icon name="images"></ion-icon>
                 </button>
-                <div text-center>Galería</div>
-                
+                <div text-center>Galería</div>                
             </ion-col>
         </ion-row>
     </ion-grid>
+-->
 
 
 
 
-
-        <ion-grid *ngIf="offerNew.picture_path">
-                <ion-row align-items-center>
-                    <img src="{{pictures_path}}{{offerNew.picture_path}}">
-                </ion-row>
-                <ion-row align-items-center>
-                    
-                    <ion-col text-center>
-                        <button ion-button icon-only round (click)="deleteOldImage()">
-                            <ion-icon name="trash"></ion-icon>
-                        </button>
-                        <div text-center>Eliminar</div>    
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+    
 
     <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">           
                                       
@@ -119,8 +171,8 @@
             <ion-list>
                 <ion-item>
                   <ion-label>Categoría</ion-label>
-                  <ion-select [(ngModel)]="offerNew.main_subcategory" #main_subcategory="ngModel" name="main_subcategory" required>
-                    <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
+                  <ion-select [(ngModel)]="offerNew.categories" multiple="true" #categories="ngModel" name="categories" required>
+                    <ion-option *ngFor="let category of allCategories" [value]="category.id">{{category.name}}</ion-option>
                   </ion-select>
                 </ion-item>
               </ion-list>              
