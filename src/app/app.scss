@@ -34,21 +34,42 @@ ion-spinner * {
   .spinner-md-crescent circle {
     stroke: #fff;
   }
+  .menu-inner .content-md{
+    background: #B40F00;
+  }
+  .menu-inner .list-md{ 
+    border-top: 1px solid #f6a7a7;
+  }
+  .menu-inner .item-md {
+    background: #B40F00;
+    border-bottom: 1px solid #f6a7a7;
+  }
+  .label, .icon {
+    color: #fff;
+  }
   .menu-avatar {
     padding: 2rem;
     background: #B40F00;
-    float: left;
     width: 100%;
-  }
+    text-align: center;
+
+ 
+background: #b40f00; /* Old browsers */
+background: -moz-linear-gradient(top, #b40f00 0%, #990c00 9%, #990c00 79%, #b40f00 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b40f00', endColorstr='#b40f00',GradientType=0 ); /* IE6-9 */
+ }
   .menu-avatar img {
     border-radius: 50%;
-    float: left;
+    max-width: 100px;
+  }
+  .menu-avatar .sidemenuimagecontainer {
+    width: 100%;
   }
   .menu-avatar .user-first_name {
-    float: left;
     color: #fff;
     margin-top: 1rem;
-    margin-left: 1rem;
   }
 /* card-list*/
 

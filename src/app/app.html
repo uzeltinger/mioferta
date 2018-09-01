@@ -3,7 +3,10 @@
     <div *ngIf="!userInfo.isUserLoggedIn"><img width="100%" src="assets/img/topleftmenu.png"></div> 
    
    <div class="menu-avatar" *ngIf="userInfo.isUserLoggedIn">
-     <img src="{{userInfo.picture}}">
+     <div class="sidemenuimagecontainer">
+       <img src="{{userInfo.picture}}">
+     </div>
+     
      <div class="user-first_name">{{userInfo.first_name}}</div>
     </div> 
     <ion-list>

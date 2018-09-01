@@ -8,12 +8,12 @@ import { HomePage } from '../pages/home/home';
 import { OffersPage } from '../pages/offers/offers';
 import { ProfilePage } from '../pages/profile/profile';
 import { AboutPage } from '../pages/about/about';
-import { CategoriesPage } from '../pages/categories/categories';
+//import { CategoriesPage } from '../pages/categories/categories';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 //import { EditOffersPage } from '../pages/edit-offers/edit-offers';
-import { EditOfferPage } from '../pages/edit-offer/edit-offer';
+//import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,9 +37,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage, icon: 'home' },
       { title: 'Ofertas', component: OffersPage, icon: 'list-box' },
-      { title: 'Mi Perfil', component: ProfilePage, icon: 'person' },
-      { title: 'Acerca de Mi Oferta', component: AboutPage, icon: 'information-circle' },
-      { title: 'Categorías', component: CategoriesPage, icon: 'albums' }
+      { title: 'Mi Negocio', component: ProfilePage, icon: 'person' },
+      { title: 'Acerca de Mi Oferta', component: AboutPage, icon: 'information-circle' }
     ];
 
   }
