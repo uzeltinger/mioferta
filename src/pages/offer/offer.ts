@@ -23,4 +23,8 @@ export class OfferPage {
     console.log('ionViewDidLoad OfferPage');
   }
 
+  increaseWhatsappCount(offer){
+    
+  }
+
 }

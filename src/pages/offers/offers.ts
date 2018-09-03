@@ -3,7 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { OfferPage } from '../offer/offer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ProveedorProvider } from '../../providers/proveedor/proveedor';
-
+import { ModalController } from 'ionic-angular';
+import { ModalSearchPage } from '../modal-search/modal-search';
 
 /**
  * Generated class for the OffersPage page.
@@ -25,7 +26,8 @@ export class OffersPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public proveedor:ProveedorProvider, 
-    public statusBar: StatusBar) {
+    public statusBar: StatusBar,
+    public modalCtrl: ModalController) {
     this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
   
   }
@@ -56,4 +58,10 @@ export class OffersPage {
   increaseWhatsappCount(offer){
     
   }
+
+  presentModal() {
+    const modal = this.modalCtrl.create(ModalSearchPage);
+    modal.present();
+  }
+
 }

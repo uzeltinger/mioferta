@@ -9,5 +9,14 @@ page-offers {
     .text-white {
         color: #fff;
     }
-    
+    .boton-buscar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: none;
+    }    
+    .boton-buscar .item {
+        background: none;
+    }
 }
