@@ -11,6 +11,7 @@ import { AboutPage } from '../pages/about/about';
 //import { CategoriesPage } from '../pages/categories/categories';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-test';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 //import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 //import { EditOfferPage } from '../pages/edit-offer/edit-offer';
@@ -21,7 +22,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProfilePage;
+  rootPage: any = OffersPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

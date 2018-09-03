@@ -28,6 +28,7 @@ import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 import { ProfileAutocompleteAddressPage } from '../pages/profile-autocomplete-address/profile-autocomplete-address';
+import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-test';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -46,7 +47,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
-    ProfileAddressPage, ProfileAutocompleteAddressPage
+    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
-    ProfileAddressPage, ProfileAutocompleteAddressPage
+    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage
   ],
   providers: [
     StatusBar,
