@@ -17,17 +17,21 @@
             <div class="offer-list-card-img">
                 <img src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">        
                 <div class="offer-list-discount"><span>-{{offer.priceDiscount}}%</span></div>
-                <div class="offer-list-icon-whatsapp">
+                
+            </div>
+            
+      
+            <div class="offer-card-details">
+
+                <div class="offer-card-details-icon-whatsapp">
                     <ion-icon float-right>
                         <a target="_blank" (click)="increaseWhatsappCount(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
                             <img src="assets/img/whatsappicon.png">
                         </a>
                     </ion-icon>
                 </div>
-            </div>
-            
-      
-            <div class="offer-card-details">
+
+
                 <ion-card-content>
                   <p>{{offer.short_description}}</p>
                 </ion-card-content>
