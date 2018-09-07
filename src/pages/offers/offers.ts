@@ -61,6 +61,10 @@ export class OffersPage {
 
   presentModal() {
     const modal = this.modalCtrl.create(ModalSearchPage);
+    modal.onDidDismiss(data => {
+      console.log(data);
+      this.getOffers();
+    });
     modal.present();
   }
 

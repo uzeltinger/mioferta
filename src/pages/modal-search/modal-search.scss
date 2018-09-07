@@ -9,4 +9,21 @@ page-modal-search {
     .boton-buscar .item {
         background: none;
     }
+    .title {
+        padding: .4rem 0;
+        text-align: center;
+        color: #fff;
+    }
+    .listado {
+        background: #7C0000;
+        height: 40%;
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+    .listado .item {
+        background: none;
+    }
+    .listado .item .label {
+        color: #fff;
+    }
 }

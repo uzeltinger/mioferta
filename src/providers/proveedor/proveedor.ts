@@ -29,6 +29,12 @@ export class ProveedorProvider {
     return this.http.get(url);
   }
 
+  getLocalities(){
+    let url = '';
+    url = this.apiUrl + '/v1/localities/getLocalities';
+    return this.http.get(url);
+  }
+
   getOffersCategory(id: number){
     let url = this.apiUrl + '/v1/categories/getOffersCategory/' + id;
     return this.http.get(url);
