@@ -139,7 +139,7 @@ export class UserServiceProvider {
           this.company.latitude = company_latitude;
         });
         this.storage.get('company_longitude').then((company_longitude) => {
-          this.company.longitude = company_longitude;
+          this.company.longitude = company_longitude;          
         });
       }
     });
@@ -147,7 +147,7 @@ export class UserServiceProvider {
     //console.log('UserServiceProvider : getcompany : line 77 : this.company ', this.company);
     //setInterval(() => { return this.company }, 1000)
     return this.company;
-  }
+  } 
 
   getUser(){
     this.storage.get('userLogued').then((userLogued) => {

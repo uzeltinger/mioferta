@@ -22,7 +22,7 @@ import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-tes
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = OffersPage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

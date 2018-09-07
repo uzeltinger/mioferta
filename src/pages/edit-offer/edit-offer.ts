@@ -106,7 +106,7 @@ export class EditOfferPage {
     if (this.platform.is('android')) {
 
     }
-
+    let noGuardar: boolean = false;
     let formData = formulario.form.value;
     console.log('formData',formData);
     this.offerNew.user_id = this.userInfo.id;
@@ -124,8 +124,33 @@ export class EditOfferPage {
     if(this.base64Image!=''){
       this.offerNew.image = this.base64Image;
     }
-    
 
+    if(this.offerNew.picture_path=='' && this.base64Image==''){
+      this.showToast('Debe agregar una imágen!');
+      noGuardar=true;
+    }
+    if(this.offerNew.subject == ''){
+      this.showToast('Debe agregar un título!');
+      noGuardar=true;
+    }
+    if(this.offerNew.description == ''){
+      this.showToast('Debe agregar una descripción!');
+      noGuardar=true;
+    }
+    if(this.offerNew.price == ''){
+      this.showToast('Debe agregar un precio!');
+      noGuardar=true;
+    }
+    if(this.offerNew.specialPrice == ''){
+      this.showToast('Debe agregar un precio especial!');
+      noGuardar=true;
+    }
+    if(this.offerNew.categories.length == 0){
+      this.showToast('Debe agregar una categoría!');
+      noGuardar=true;
+    }
+        
+    if(!noGuardar){
     this.showSplash = true;     
 
     console.log('this.offerNew',this.offerNew);
@@ -152,10 +177,10 @@ export class EditOfferPage {
         this.showToast('Error: ' + error);     
         //console.log('error: ',error);          
       }
-    );  
-
+    );
+    
   }
-
+  }
   deleteOldImage(){
     this.offerNew.picture_path='';
   }

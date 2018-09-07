@@ -47,7 +47,10 @@ export class ProfilePage {
     this.userInfo = this.userService.getUser();
     this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     this.company = this.userService.getCompany();
-    this.formatCompanyAddress();    
+    setTimeout(() => {
+      this.formatCompanyAddress();    
+    }, 1000);
+    
   }
   formatCompanyAddress(){
     let addressFormated = this.company.address + ' ' + this.company.street_number;
