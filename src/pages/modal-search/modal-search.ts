@@ -15,7 +15,9 @@ import { ProveedorProvider } from '../../providers/proveedor/proveedor';
 })
 export class ModalSearchPage {
   categories: any;
-  localities: any;
+  cities: any;
+  categoriesFiltered: any = [];
+  citiesFiltered: any = [];
   showSplash = true;
 
   constructor(public navCtrl: NavController, 
@@ -26,23 +28,27 @@ export class ModalSearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalSearchPage');
+    this.getCitiesFiltered();
+    this.getCategoriesFiltered();
     this.getCategories();
-    this.getLocalities();
-    /*
-    if(value.state == 1){
-            value.isAssigned = true;
-            offersActives++;
-          }
-          */
+    this.getCities();
   }
 
-  getLocalities(){
-    this.proveedor.getLocalities()
+  getCities(){
+    this.proveedor.getCities()
     .subscribe(
       (data)=> {         
-        this.localities = data; 
+        this.cities = data; 
+        this.cities.forEach((valor : any) => {
+          console.log('valor.id',valor.city);
+          let a = this.citiesFiltered.indexOf(valor.city);
+          if(a!=-1){
+            valor.isAssigned = true;
+          }
+          console.log('a',a);          
+        });
         this.showSplash = false;
-        console.log('localities',data) ;
+        console.log('cities',data) ;
       },
       (error)=>{console.log('error',error);}
     )
@@ -51,29 +57,102 @@ export class ModalSearchPage {
   getCategories(){
     this.proveedor.getCategories()
     .subscribe(
-      (data)=> {         
+      (data)=> {
         this.categories = data; 
+        this.categories.forEach((valor : any) => {
+          let a = this.categoriesFiltered.indexOf(valor.id);
+          if(a!=-1){
+            valor.isAssigned = true;
+          }       
+        });
         this.showSplash = false;
-        console.log('data',data) ;
       },
       (error)=>{console.log('error',error);}
     )
   }
 
   toggleCategory(category){
-    console.log('toggleOfferState category : ',category);
-    let newState = 1;
-    if(category.state == 1){
-      newState = 2;
+    if (localStorage.getItem("categoriesFiltered") === null) {
+      this.categoriesFiltered = [];
+    }else{
+      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+    }
+    if(category.isAssigned){
+      let newCategoriesFiltered = [];
+      let existe:boolean = false;
+      this.categoriesFiltered.forEach((valor : any) => {
+        if(valor==category.id){
+          existe = true;
+        }        
+      });
+      if(!existe){
+        this.categoriesFiltered.push(category.id);
+      }
+    }else{
+      let newCategoriesFiltered = [];
+      this.categoriesFiltered.forEach((valor : any) => {
+        if(valor!=category.id){
+          newCategoriesFiltered.push(valor);
+        }
+      });
+      this.categoriesFiltered = newCategoriesFiltered;
+    }
+    this.setCategoriesFiltered();
+  }
+
+  toggleCity(city){  
+    if (localStorage.getItem("citiesFiltered") === null) {
+      this.citiesFiltered = [];
+    }else{
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+    }
+    if(city.isAssigned){
+      let newCitiesFiltered = [];
+      let existe:boolean = false;
+      this.citiesFiltered.forEach((valor : any) => {
+        if(valor==city.city){
+          existe = true;
+        }        
+      });
+      if(!existe){
+        this.citiesFiltered.push(city.city);
+      }
+    }else{
+      let newCitiesFiltered = [];
+      this.citiesFiltered.forEach((valor : any) => {
+        if(valor!=city.city){
+          newCitiesFiltered.push(valor);
+        }
+      });
+      this.citiesFiltered = newCitiesFiltered;
+    }
+    this.setCitiesFiltered();
+  }
+
+  getCitiesFiltered(){
+    if (localStorage.getItem("citiesFiltered") === null) {
+      this.citiesFiltered = [];
+    }else{
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
     }
   }
 
-  toggleLocality(locality){
-    console.log('toggleOfferState locality : ',locality);
-    let newState = 1;
-    if(locality.state == 1){
-      newState = 2;
+  getCategoriesFiltered(){
+    if (localStorage.getItem("categoriesFiltered") === null) {
+      this.categoriesFiltered = [];
+    }else{
+      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
     }
+  }
+
+  setCitiesFiltered(){    
+    localStorage.setItem("citiesFiltered", JSON.stringify(this.citiesFiltered))
+    console.log('citiesFiltered',this.citiesFiltered);    
+  }
+
+  setCategoriesFiltered(){    
+    localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered))
+    console.log('categoriesFiltered',this.categoriesFiltered);    
   }
 
   dismiss() { 

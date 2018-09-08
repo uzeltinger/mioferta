@@ -32,9 +32,9 @@
   <div class="title">LOCALIDADES</div>
   <div class="listado">
       <ion-list>
-        <ion-item *ngFor="let locality of localities">
-              <ion-label>{{locality.city}}</ion-label>
-              <ion-toggle color="verde" (ionChange)="toggleLocality(locality)" [(ngModel)]="locality.isAssigned"></ion-toggle>                
+        <ion-item *ngFor="let city of cities">
+              <ion-label>{{city.city}}</ion-label>
+              <ion-toggle color="verde" (ionChange)="toggleCity(city)" [(ngModel)]="city.isAssigned"></ion-toggle>                
             </ion-item>
       </ion-list>
     </div>

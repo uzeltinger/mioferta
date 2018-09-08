@@ -23,6 +23,9 @@ export class OffersPage {
   offers: any
   whatsappText:string
   showSplash = true; // <-- show animation
+  categoriesFiltered: any = [];
+  citiesFiltered: any = [];
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public proveedor:ProveedorProvider, 
@@ -40,7 +43,10 @@ export class OffersPage {
      //}, 1000);
   }
   getOffers(){
-    this.proveedor.obtenerOfertas()
+    this.getCitiesFiltered();
+    this.getCategoriesFiltered();
+    let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered};
+    this.proveedor.obtenerOfertas(sendData)
     .subscribe(
       (data)=> {         
         this.offers = data; 
@@ -66,6 +72,22 @@ export class OffersPage {
       this.getOffers();
     });
     modal.present();
+  }
+
+  getCitiesFiltered(){
+    if (localStorage.getItem("citiesFiltered") === null) {
+      this.citiesFiltered = [];
+    }else{
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+    }
+  }
+
+  getCategoriesFiltered(){
+    if (localStorage.getItem("categoriesFiltered") === null) {
+      this.categoriesFiltered = [];
+    }else{
+      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+    }
   }
 
 }
