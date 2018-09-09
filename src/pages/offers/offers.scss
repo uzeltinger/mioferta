@@ -19,4 +19,13 @@ page-offers {
     .boton-buscar .item {
         background: none;
     }
+    .title-container {
+        position:relative;
+    }
+    .offer-list-distance {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        color: #fff;
+    }
 }

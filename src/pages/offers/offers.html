@@ -32,11 +32,12 @@
                 </ion-icon>
             </div>
         </div>
-        <ion-card-content>
+        <ion-card-content class="title-container">
             <ion-card-title>
                 <div class="offer-list-price">{{offer.specialPriceFormated}}</div>
             </ion-card-title>
-            <div class="offer-list-title">{{offer.subject}}</div>            
+            <div class="offer-list-title">{{offer.subject}}</div>   
+            <div *ngIf="offer.distance" class="offer-list-distance">{{offer.distance}} Km</div>           
         </ion-card-content>
 
     </ion-card>

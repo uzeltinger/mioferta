@@ -71,14 +71,13 @@ export class ModalSearchPage {
     )
   }
 
-  toggleCategory(category){
+  toggleCategoryMULTIPLE(category){
     if (localStorage.getItem("categoriesFiltered") === null) {
       this.categoriesFiltered = [];
     }else{
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
     }
     if(category.isAssigned){
-      let newCategoriesFiltered = [];
       let existe:boolean = false;
       this.categoriesFiltered.forEach((valor : any) => {
         if(valor==category.id){
@@ -100,14 +99,65 @@ export class ModalSearchPage {
     this.setCategoriesFiltered();
   }
 
+  toggleCategory(category){  
+    console.log('togglecategory',category);
+    if (localStorage.getItem("categoriesFiltered") === null) {
+      this.categoriesFiltered = [];
+    }else{
+      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+    }    
+    this.categoriesFiltered = [];
+    this.categories.forEach((valor : any) => {
+      if(valor.id!=category.id){
+        console.log('valor',valor);
+        valor.isAssigned = false;         
+      }           
+    });    
+    if(category.isAssigned){
+      console.log('category.isAssigned',category.isAssigned);
+      this.categoriesFiltered = [];     
+    }
+    if(!category.isAssigned){
+      console.log('!category.isAssigned',category.isAssigned);
+      this.categoriesFiltered.push(category.id);   
+    }
+    this.setCategoriesFiltered();
+  }
+
   toggleCity(city){  
+    console.log('toggleCity',city);
+    if (localStorage.getItem("citiesFiltered") === null) {
+      this.citiesFiltered = [];
+    }else{
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+    }    
+    this.citiesFiltered = [];
+    this.cities.forEach((valor : any) => {
+      if(valor.city!=city.city){
+        console.log('valor city ',valor.city + " - " + city.city);
+        valor.isAssigned = false;         
+      }
+    });
+
+    if(city.isAssigned){
+      console.log('city.isAssigned',city.isAssigned);   
+      this.citiesFiltered = [];        
+    }
+    if(!city.isAssigned){
+      console.log('!city.isAssigned',city.isAssigned);
+      this.citiesFiltered.push(city.city);   
+    }
+
+    this.setCitiesFiltered();
+  }
+
+  toggleCityMULTIPLES(city){  
     if (localStorage.getItem("citiesFiltered") === null) {
       this.citiesFiltered = [];
     }else{
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
     }
     if(city.isAssigned){
-      let newCitiesFiltered = [];
       let existe:boolean = false;
       this.citiesFiltered.forEach((valor : any) => {
         if(valor==city.city){

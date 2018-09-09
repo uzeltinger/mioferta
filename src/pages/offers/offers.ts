@@ -25,6 +25,8 @@ export class OffersPage {
   showSplash = true; // <-- show animation
   categoriesFiltered: any = [];
   citiesFiltered: any = [];
+  latitude: number = 0;
+  longitude: number = 0;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -39,19 +41,42 @@ export class OffersPage {
     console.log('ionViewDidLoad OffersPage');
     //this.statusBar.hide();
     //setTimeout(() => {
-      this.getOffers();
+      this.setCurrentPosition();
+      //this.getOffers();
      //}, 1000);
   }
+  setCurrentPosition() {
+    console.log('setCurrentPosition');
+    if ("geolocation" in navigator) {
+      console.log('geolocation');
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+            console.log('setCurrentPosition latitude'+this.latitude);
+            this.getOffers();
+        });
+    }else{
+      console.log('NO geolocation');
+      this.getOffers();
+    }
+}
   getOffers(){
     this.getCitiesFiltered();
     this.getCategoriesFiltered();
-    let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered};
+    let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered,"latitude":this.latitude,"longitude":this.longitude};
     this.proveedor.obtenerOfertas(sendData)
     .subscribe(
       (data)=> {         
         this.offers = data; 
+        this.offers.forEach((element : any) => {
+          if(element.distance!=null){
+            element.distance = Math.round(element.distance * 100) / 100;
+          }          
+        });
+        
         this.showSplash = false;
         console.log('data',data) ;
+        console.log('this.offers',this.offers) ;
       },
       (error)=>{console.log('error',error);}
     )
@@ -69,9 +94,11 @@ export class OffersPage {
     const modal = this.modalCtrl.create(ModalSearchPage);
     modal.onDidDismiss(data => {
       console.log(data);
+      this.showSplash = true;
       this.getOffers();
     });
     modal.present();
+    this.showSplash = true;
   }
 
   getCitiesFiltered(){
