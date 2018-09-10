@@ -167,9 +167,7 @@
 
 
     <form (ngSubmit)="onSubmitSaveOffer(offerDataForm)" #offerDataForm="ngForm">
-
-
-
+    
         <ion-list>
             <ion-item class="ion-item-input-trans">
                 <ion-label>Categoría</ion-label>
@@ -201,21 +199,22 @@
                 [(ngModel)]="offerNew.description" required></ion-input>
         </ion-item>
 
-        <ion-item>
-
-
-            <div class="price-col" item-start>
+        
+            <ion-grid class="prices-grid">
+                <ion-row>
+            <div class="price-col-50 price">
                 <ion-label color="light" stacked>Precio</ion-label>
                 <ion-input class="ion-input-trans" type="text" name="price" placeholder="Precio" id="price" #price="ngModel" [(ngModel)]="offerNew.price"
                     required></ion-input>
             </div>
-            <div class="price-col" item-start>
+            <div class="price-col-50 specialPrice">
                 <ion-label color="light" stacked>Precio Especial</ion-label>
                 <ion-input class="ion-input-trans" type="text" name="specialPrice" placeholder="Precio Especial" id="specialPrice" #specialPrice="ngModel"
                     [(ngModel)]="offerNew.specialPrice" required></ion-input>
             </div>
+            </ion-row>
+            </ion-grid>
 
-        </ion-item>
 
         <ion-item text-center>
             <button class="button-action" ion-button color="verdeDaniel" type="submit" [disabled]="!offerDataForm.form.valid">Guardar

@@ -121,14 +121,19 @@ export class EditOfferPage {
     //return null;
     this.offerNew.categories = formData.categories;
 
+    console.log('this.base64Image',this.base64Image);
+    
+    console.log('this.offerNew.picture_path',this.offerNew.picture_path);
+    
     if(this.base64Image!=''){
       this.offerNew.image = this.base64Image;
     }
-
-    if(this.offerNew.picture_path=='' && this.base64Image==''){
+    
+    if(!this.offerNew.picture_path && !this.newPhoto && !this.galleryPhoto){
       this.showToast('Debe agregar una imágen!');
       noGuardar=true;
     }
+    
     if(this.offerNew.subject == ''){
       this.showToast('Debe agregar un título!');
       noGuardar=true;

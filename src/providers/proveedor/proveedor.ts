@@ -12,7 +12,7 @@ import { User } from '../../models/user';
 */
 @Injectable()
 export class ProveedorProvider {
-  apiUrl: string = 'https://mioferta.com.ar/api/';
+  apiUrl: string = 'https://mioferta.com.ar/api';
   httpOptions: any = {};
   user: User = new User;
   //apiUrl: string = 'http://mioferta.local/api/';

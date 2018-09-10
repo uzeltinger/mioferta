@@ -61,7 +61,21 @@ page-edit-offer {
         bottom: 0;
         width: 100%;
     }
-    .price-col {
+    .prices-grid {
+        padding: 0;
+    }
+    .price-col-50 {
         width: 50%;
+    }
+    .price-col-50.price{
+        padding-right: 5px;
+    }
+    .price-col-50.specialPrice{
+        padding-left: 5px;
+    }
+    
+    .price-col-50 input {
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 }
