@@ -18,6 +18,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
+import { OfferAddressMapModalPage } from '../pages/offer/offer-address-map-modal';
 import { LoginPage } from '../pages/login/login';
 import { LoginGooglePage } from '../pages/login-google/login-google';
 import { LoginFacebookPage } from '../pages/login-facebook/login-facebook';
@@ -48,7 +49,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
-    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage
+    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage,
+    OfferAddressMapModalPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     OfferPage,
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
-    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage
+    ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage,
+    OfferAddressMapModalPage
   ],
   providers: [
     StatusBar,
