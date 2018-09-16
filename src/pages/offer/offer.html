@@ -38,7 +38,15 @@
                 </ion-card-content>
       <ion-card-content>
         <p><ion-icon name='podium'></ion-icon> <span>{{offer.company_name}}</span></p>
-        <p><ion-icon name='pin'></ion-icon> <span>{{offer.full_address}}</span> <span><a href="https://maps.google.com/?saddr={{offer.latitude}},{{offer.longitude}}&daddr={{latitude}},{{longitude}}" onclick="window.open(this.href, '_system', 'location=yes'); return false;" >Ver Mapa</a></span></p>
+        <div class="offer-direction">
+          <p class="p-address"> <span>{{offer.full_address}}</span></p>
+       
+        <div class="icon-map-direction">
+          <!--<a href="https://maps.google.com/?saddr={{offer.latitude}},{{offer.longitude}}&daddr={{latitude}},{{longitude}}" onclick="window.open(this.href, '_self', 'location=yes'); return false;" ><ion-icon right name='map'></ion-icon></a>
+        -->
+        <a (click)="showAddressMapModal(offer)"><ion-icon right name='map'></ion-icon></a>
+        </div>
+ </div>
         <p><ion-icon name='calendar'></ion-icon> <span>Vigencia {{offer.start_to_end_date}}</span></p>
       </ion-card-content>
       

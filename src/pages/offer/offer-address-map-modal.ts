@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import {FormControl} from "@angular/forms";
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-offer-address-map-modal',
@@ -30,7 +31,7 @@ import { MapsAPILoader } from '@agm/core';
           //create search FormControl
           this.searchControl = new FormControl();
           //set current position
-          this.setCurrentPosition();
+          this.setCurrentPosition();          
       }
 
       ionViewDidLoad() {

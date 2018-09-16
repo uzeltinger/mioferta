@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { OfferAddressMapModalPage } from './offer-address-map-modal';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 /**
  * Generated class for the OfferPage page.
  *
@@ -20,7 +20,8 @@ export class OfferPage {
   mapUrl: string;
   public zoom: number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private iab: InAppBrowser) {
     this.offer = navParams.data.offer;
     console.log('this.offer', this.offer);
   }
@@ -30,7 +31,6 @@ export class OfferPage {
     this.latitude = 0;
     this.longitude = 0;
     this.setCurrentPosition();
-    this.mapUrl = 'https://maps.google.com/?saddr=-38.752038399999996,-62.2671155&daddr=-34.6611333,-58.5514339';
   }
 
   increaseWhatsappCount(offer) {
@@ -39,6 +39,11 @@ export class OfferPage {
 
   showAddressMapModal(offer) {
     console.log('offer', offer);
+    let mapUrl = 'https://maps.google.com/?saddr='+offer.latitude+',';
+    mapUrl = mapUrl + offer.longitude+'&daddr='+this.latitude+','+this.longitude;
+    console.log('mapUrl', mapUrl);
+    const browser = this.iab.create(mapUrl, '_blank', 'location=yes,toolbarcolor=#FD0000,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
+    //browser.insertCSS({ code: "body{color: red;}" });
     /*
     let longitude = offer.longitude;
     let latitude = offer.latitude;
