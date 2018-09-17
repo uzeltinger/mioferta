@@ -25,11 +25,11 @@ import { MapsAPILoader } from '@agm/core';
         private ngZone: NgZone) {
             console.log('latitude', navParams.get('latitude'));
             console.log('longitude', navParams.get('longitude'));
-          this.zoom = 12;
+          /*this.zoom = 12;
           this.latitude = -34.6611394;
           this.longitude = -58.550512;
           //create search FormControl
-          this.searchControl = new FormControl();
+          this.searchControl = new FormControl();*/
           //set current position
           this.setCurrentPosition();          
       }
@@ -37,7 +37,7 @@ import { MapsAPILoader } from '@agm/core';
       ionViewDidLoad() {
         console.log('ionViewDidLoad ProfileAutocompleteAddressPage');
         //set google maps defaults
-        this.zoom = 4;
+        this.zoom = 12;
         this.latitude = this.navParams.get('latitude');
         this.longitude = this.navParams.get('longitude');
         //create search FormControl

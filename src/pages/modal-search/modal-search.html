@@ -24,7 +24,7 @@
   <div class="listado">
   <ion-list>
     <ion-item *ngFor="let category of categories">
-          <ion-label>{{category.name}}</ion-label>
+          <ion-label class="font-18">{{category.name}}</ion-label>
           <ion-toggle color="verde" (ngModelChange)="toggleCategory(category)" [(ngModel)]="category.isAssigned"></ion-toggle>                
         </ion-item>
   </ion-list>
@@ -33,7 +33,7 @@
   <div class="listado">
       <ion-list>
         <ion-item *ngFor="let city of cities">
-              <ion-label>{{city.city}}</ion-label>
+              <ion-label class="font-18">{{city.city}}</ion-label>
               <ion-toggle color="verde" (ngModelChange)="toggleCity(city)" [(ngModel)]="city.isAssigned"></ion-toggle>                
             </ion-item>
       </ion-list>

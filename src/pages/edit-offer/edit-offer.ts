@@ -108,7 +108,7 @@ export class EditOfferPage {
     }
     let noGuardar: boolean = false;
     let formData = formulario.form.value;
-    console.log('formData',formData);
+    //console.log('formData',formData);
     this.offerNew.user_id = this.userInfo.id;
     //this.offerNew.offer_id = 0;
     this.offerNew.subject = formData.subject;
@@ -121,9 +121,11 @@ export class EditOfferPage {
     //return null;
     this.offerNew.categories = formData.categories;
 
-    console.log('this.base64Image',this.base64Image);
+    //console.log('this.offerNew',this.offerNew);
+
+    //console.log('this.base64Image',this.base64Image);
     
-    console.log('this.offerNew.picture_path',this.offerNew.picture_path);
+    //console.log('this.offerNew.picture_path',this.offerNew.picture_path);
     
     if(this.base64Image!=''){
       this.offerNew.image = this.base64Image;

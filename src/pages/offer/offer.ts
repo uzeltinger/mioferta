@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { OfferAddressMapModalPage } from './offer-address-map-modal';
+//import { OfferAddressMapModalPage } from './offer-address-map-modal';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 /**
  * Generated class for the OfferPage page.
