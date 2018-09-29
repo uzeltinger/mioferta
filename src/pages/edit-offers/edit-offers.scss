@@ -1,8 +1,8 @@
 page-edit-offers {
     ion-avatar img {
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 85px;
+    height: 85px;
     }
     .colorRojoOscurobackground {
         background: #7C0000;
@@ -17,9 +17,22 @@ page-edit-offers {
         margin-top: .5rem;
     }
     .ion-badge-x2 {
-    font-size: 2rem;
+        font-size: 2rem;
     }
     .ion-logo-whatsapp {
         color: #58b85d!important;
+    }
+    .toggle-container {
+        width: 30px;
+        height: 14px;
+    }
+    .col {
+        padding:0;
+    }
+    .card .row {        
+        margin-bottom: 1rem;
+    }
+    .icon.bigicon {
+        font-size: 3.6rem;
     }
 }

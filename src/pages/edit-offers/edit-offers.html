@@ -74,7 +74,7 @@
         <ion-col col-3 text-center>
             <ion-icon class="icon-share-x3" color="white" name="share" (click)="sendOffersList()"></ion-icon>
         </ion-col>
-    </ion-row>
+    </ion-row>    
     <ion-card color="colorRojoOscuro" *ngFor="let offer of offers">
         <ion-row>
             <ion-col col-3>
@@ -87,24 +87,26 @@
                 <ion-row>
                     <ion-col>
                         <button color="white" clear ion-button icon-only (click)="editOffer($event, offer)">
-                            <ion-icon name="create"></ion-icon>
+                            <ion-icon class="bigicon" name="create"></ion-icon>
                         </button>
                     </ion-col>
                     <ion-col>
                         <button color="white" clear ion-button icon-only (click)="deleteOffer($event, offer)">
-                            <ion-icon name="trash"></ion-icon>
+                            <ion-icon class="bigicon" name="trash"></ion-icon>
                         </button>
                     </ion-col>
                     <ion-col>
                         <button color="verde" clear ion-button icon-only (click)="itemsSelectedShare(offer)">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
+                            <ion-icon class="bigicon" name="logo-whatsapp"></ion-icon>
                         </button>
                     </ion-col>
                     <ion-col>
+                        <div class="toggle-container">
                         <ion-toggle color="verde" (ionChange)="toggleOfferState(offer)" [(ngModel)]="offer.isAssigned"></ion-toggle>
+                    </div>
                     </ion-col>
                 </ion-row>
             </ion-col>
         </ion-row>
-    </ion-card>
+    </ion-card>          
 </ion-content>

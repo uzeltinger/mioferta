@@ -53,6 +53,7 @@ ion-spinner * {
   .label, .icon {
     color: #fff;
   }
+
   .menu-avatar {
     padding: 2rem;
     background: #B40F00;
@@ -60,11 +61,11 @@ ion-spinner * {
     text-align: center;
 
  
-background: #b40f00; /* Old browsers */
-background: -moz-linear-gradient(top, #b40f00 0%, #990c00 9%, #990c00 79%, #b40f00 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b40f00', endColorstr='#b40f00',GradientType=0 ); /* IE6-9 */
+background: #b40f00; 
+background: -moz-linear-gradient(top, #b40f00 0%, #990c00 9%, #990c00 79%, #b40f00 100%); 
+background: -webkit-linear-gradient(top, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); 
+background: linear-gradient(to bottom, #b40f00 0%,#990c00 9%,#990c00 79%,#b40f00 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b40f00', endColorstr='#b40f00',GradientType=0 ); 
  }
   .menu-avatar img {
     border-radius: 50%;
@@ -77,6 +78,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b40f00', end
     color: #fff;
     margin-top: 1rem;
   }
+  
 /* card-list*/
 
 .darkbackground {
@@ -133,6 +135,7 @@ ion-app.md {
   margin-top: 1rem;
   height: auto;
 }  
+
 /*  formulario transparente */
 
 .bg-image.content-md {

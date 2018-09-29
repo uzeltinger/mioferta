@@ -10,6 +10,7 @@ import { User } from '../../models/user';
 import { Company } from '../../models/company';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { Toast } from '@ionic-native/toast';
+
 //import { EditOffersPage } from '../edit-offers/edit-offers';
 //import { ProfilePage } from '../profile/profile';
 /**
@@ -133,6 +134,7 @@ export class EditOfferPage {
     
     if(!this.offerNew.picture_path && !this.newPhoto && !this.galleryPhoto){
       this.showToast('Debe agregar una imágen!');
+      this.showAlert('Debe agregar una imágen!','');
       noGuardar=true;
     }
     
@@ -381,7 +383,14 @@ export class EditOfferPage {
     }
   }
 
-
+  showAlert(title_: string, subTitle_: string) {
+    const alert = this.alertController.create({
+      title: title_,
+      subTitle: subTitle_,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 }
 
