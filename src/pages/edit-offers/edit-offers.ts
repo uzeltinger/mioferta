@@ -121,8 +121,11 @@ export class EditOffersPage {
     .subscribe(
       dataOfferState => {
         console.log('dataOfferState: ',dataOfferState);
-
-        this.showToast('Oferta ocultada!');   
+        if(dataOfferState.post.state==2){
+          this.showToast('Oferta ocultada!');   
+        }else{
+          this.showToast('Oferta publicada!');   
+        }        
         this.showSplash = false;   
       },
       error => {
