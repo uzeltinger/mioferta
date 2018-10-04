@@ -12,8 +12,9 @@ import { AboutPage } from '../pages/about/about';
 import { User } from '../models/user';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-test';
+import { ShareOffersPage } from '../pages/share-offers/share-offers';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
-//import { EditOffersPage } from '../pages/edit-offers/edit-offers';
+import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 //import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({
@@ -22,7 +23,7 @@ import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-tes
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

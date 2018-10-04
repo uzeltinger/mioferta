@@ -8,6 +8,7 @@ import { EditOfferPage } from '../edit-offer/edit-offer';
 import { OfferPage } from '../offer/offer';
 import { Toast } from '@ionic-native/toast';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { ShareOffersPage } from '../share-offers/share-offers';
 /**
  * Generated class for the EditOffersPage page.
  *
@@ -87,6 +88,7 @@ export class EditOffersPage {
     this.offerService.getUserOffers(this.userInfo.id)
     .subscribe(
       (data)=> {
+        this.offerService.setUserOffersToShare(data);
         let offersActives = 0;
         this.offers = data; 
         this.offersTotal = this.offers.length;
@@ -125,7 +127,10 @@ export class EditOffersPage {
           this.showToast('Oferta ocultada!');   
         }else{
           this.showToast('Oferta publicada!');   
-        }        
+        }
+        
+        this.offerService.setUserOffersToShare(this.offers);         
+        
         this.showSplash = false;   
       },
       error => {
@@ -161,12 +166,12 @@ export class EditOffersPage {
       offer: offer
     });
   }
-
+/*
   sendOffersList(){
     //this.toolbarToggle();    
     this.socialSharing.shareViaWhatsApp('Listado de ofertas', '', this.linkToShare+this.company.id)
   }
-
+*/
   itemsSelectedShare(offerToShare){
     //this.toolbarToggle();
     //this.shareOffers  = Object.assign([], this.offers);    
@@ -216,6 +221,10 @@ export class EditOffersPage {
       console.log('canShareViaEmail Sharing via email is not possible');
     });
 */
+  }
+
+  goShareOffers(){
+    this.navCtrl.push(ShareOffersPage);
   }
 
   goNewOfferPage() {

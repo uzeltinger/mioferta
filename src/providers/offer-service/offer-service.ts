@@ -24,6 +24,8 @@ export class OfferServiceProvider {
   //picturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
   //getPicturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
 
+  myOffers: any = [];
+
   constructor(public httpClient: HttpClient, public storage: Storage) {
     console.log('Hello OfferServiceProvider Provider');
   }
@@ -35,7 +37,23 @@ export class OfferServiceProvider {
     let url = this.apiUrl + '/v1/user/getUserOffers/' + id;
     return this.httpClient.get(url);
   }
+  
+  
 
+  setUserOffersToShare(offers){
+    var myOffers:any = [];
+    offers.forEach(function (value) {
+      if(value.state==1){
+        myOffers.push(value);
+      }
+      
+    });
+    this.myOffers = myOffers;
+  }
+
+  getUserOffersToShare(){
+    return this.myOffers;
+  }
   saveOffer(offer: any): Observable<any> {
     console.log('url', this.apiUrl + "/v1/offer/saveOffer");
     console.log('offer', offer);

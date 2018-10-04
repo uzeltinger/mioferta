@@ -8,13 +8,6 @@
 
     <ion-navbar color="primary">
         <ion-title>Mis ofertas</ion-title>
-
-        <!--<ion-buttons end>
-            <button ion-button icon-only (click)="toolbarToggle()">
-                <ion-icon name="more"></ion-icon>
-            </button>
-        </ion-buttons>-->
-
     </ion-navbar>
 
     <ion-toolbar *ngIf="toolbarShow">
@@ -72,11 +65,11 @@
             <br><small>ACTIVOS</small>
         </ion-col>
         <ion-col col-3 text-center>
-            <ion-icon class="icon-share-x3" color="white" name="share" (click)="sendOffersList()"></ion-icon>
+            <ion-icon class="icon-share-x3" color="white" name="share" (click)="goShareOffers()"></ion-icon>
         </ion-col>
     </ion-row>    
     <ion-card color="colorRojoOscuro" *ngFor="let offer of offers">
-        <ion-row>
+        <ion-row class="item-renglon">
             <ion-col col-3>
                 <ion-avatar>
                     <img src="{{pictures_path}}{{offer.picture_path}}">
