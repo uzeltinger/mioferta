@@ -61,14 +61,19 @@ export class ShareOffersPage {
       let offersToShare = 0;
         this.offers = data; 
         this.offersTotal = this.offers.length;
-        this.offers.forEach(function (value) {    
-          if(value.share == 0){
-            value.isAssignedToShare = false;
-          }else{
+        this.offers.forEach(function (value) {
+          if(value.share===undefined){
+            console.log('value.share',value.share);
             value.isAssignedToShare = true;
             offersToShare++;
+            value.share = 1;
+          }else if(value.share == 1){
+            value.isAssignedToShare = true;
+          }else{
+            value.isAssignedToShare = false;
+            offersToShare++;
           }
-          
+          console.log('value.share',value.share);
         }); 
         this.offersToShare = offersToShare;
     }
