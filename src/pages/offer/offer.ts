@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 //import { OfferAddressMapModalPage } from './offer-address-map-modal';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { OfferServiceProvider } from '../../providers/offer-service/offer-service';
 /**
  * Generated class for the OfferPage page.
  *
@@ -21,6 +22,7 @@ export class OfferPage {
   public zoom: number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
+    public offerService: OfferServiceProvider, 
     private iab: InAppBrowser) {
     this.offer = navParams.data.offer;
     console.log('this.offer', this.offer);
@@ -33,8 +35,17 @@ export class OfferPage {
     this.setCurrentPosition();
   }
 
-  increaseWhatsappCount(offer) {
-
+  increaseWhatsappClick(offer){
+    console.log('increaseWhatsappClick');
+    this.offerService.increaseWhatsappClick(offer)
+    .subscribe(
+      data => {
+        console.log('increaseWhatsappClick data: ',data);        
+      },
+      error => {
+        console.log('increaseWhatsappClick error: ',error);             
+      }
+    ); 
   }
 
   showAddressMapModal(offer) {

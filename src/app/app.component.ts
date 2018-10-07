@@ -15,6 +15,7 @@ import { OfferDetailTestPage } from '../pages/offer-detail-test/offer-detail-tes
 import { ShareOffersPage } from '../pages/share-offers/share-offers';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 import { EditOffersPage } from '../pages/edit-offers/edit-offers';
+import { ConsultsPage } from '../pages/consults/consults';
 //import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({

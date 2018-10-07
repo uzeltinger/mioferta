@@ -20,19 +20,19 @@
 </div>
 
 <ion-content  class="darkbackground">
-    <ion-card *ngFor="let offer of offers" (click)="navToOfferPage($event, offer)" class="offer-list-card">    
+    <ion-card *ngFor="let offer of offers" class="offer-list-card">    
         <div class="offer-list-card-img">
-            <img src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">        
-            <div class="offer-list-discount"><span>-{{offer.priceDiscount}}%</span></div>
+            <img (click)="navToOfferPage($event, offer)" src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">        
+            <div class="offer-list-discount" (click)="navToOfferPage($event, offer)"><span>-{{offer.priceDiscount}}%</span></div>
             <div class="offer-list-icon-whatsapp">
                 <ion-icon float-right>
-                    <a target="_blank" (click)="increaseWhatsappCount(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
+                    <a target="_blank" (click)="increaseWhatsappClick(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
                         <img src="assets/img/whatsappbutton144.png">
                     </a>
                 </ion-icon>
             </div>
         </div>
-        <ion-card-content class="title-container">
+        <ion-card-content class="title-container" (click)="navToOfferPage($event, offer)">
             <ion-card-title>
                 <div class="offer-list-price">{{offer.specialPriceFormated}}</div>
             </ion-card-title>

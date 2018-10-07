@@ -30,14 +30,16 @@
     <div class="user-first_name">{{userInfo.name}}</div>
 </div>
 
+    <div *ngIf="!userInfo.isUserLoggedIn" class="mioferta-logo"></div>
+
     <div *ngIf="!userInfo.isUserLoggedIn" style="text-align:center">
-        <button ion-button icon-start color="facebookButton" (click)="goLoginFacebookPage()">
+        <button class="login-with" ion-button icon-start color="facebookButton" (click)="goLoginFacebookPage()">
             <ion-icon name="logo-facebook"></ion-icon>
             Ingresar con Facebook
         </button>
     </div>
     <div *ngIf="!userInfo.isUserLoggedIn" style="text-align:center">
-        <button ion-button icon-start color="googleButton" (click)="goLoginGooglePage()">
+        <button class="login-with" ion-button icon-start color="googleButton" (click)="goLoginGooglePage()">
             <ion-icon name="logo-googleplus"></ion-icon>
             Ingresar con Google
         </button>
@@ -60,7 +62,7 @@
                             
             </ion-item>
             <ion-item text-center class="item-guardar-comercio">
-                <button class="button-action guardar-comercio" ion-button color="verdeDaniel" type="submit" >Guardar Comercio</button>
+                <button class="button-action guardar-comercio" ion-button color="verdeDaniel" type="submit" >Alta del Comercio</button>
             </ion-item>           
 
         </form>        

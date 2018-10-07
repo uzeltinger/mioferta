@@ -17,6 +17,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ConsultsPage } from '../pages/consults/consults';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
 //import { OfferAddressMapModalPage } from '../pages/offer/offer-address-map-modal';
@@ -52,7 +53,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
     ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, 
-    ModalSearchPage, ShareOffersPage//,    OfferAddressMapModalPage
+    ModalSearchPage, ShareOffersPage, ConsultsPage//,    OfferAddressMapModalPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +74,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
     ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage,
-    ShareOffersPage //,    OfferAddressMapModalPage
+    ShareOffersPage, ConsultsPage //,    OfferAddressMapModalPage
   ],
   providers: [
     StatusBar,

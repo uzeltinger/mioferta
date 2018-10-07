@@ -9,6 +9,7 @@ import { OfferPage } from '../offer/offer';
 import { Toast } from '@ionic-native/toast';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ShareOffersPage } from '../share-offers/share-offers';
+import { ConsultsPage } from '../consults/consults';
 /**
  * Generated class for the EditOffersPage page.
  *
@@ -34,6 +35,7 @@ export class EditOffersPage {
   taskCreate: boolean = false;
   taskShare: boolean = false;
   taskDelete: boolean = false;
+  taskConsults: boolean = false;
   shareOffers:any ;
   linkToShare: string = 'https://mioferta.com.ar/index.php?option=com_jbusinessdirectory&view=companies&companyId=';
   offersTotal:number=0;
@@ -55,7 +57,7 @@ export class EditOffersPage {
     this.pictures_path = this.offerService.picturesPath; 
     this.isUserLoggedIn = this.userService.isUserLoggedIn;
     this.userInfo = this.userService.getUser();    
-    this.company = this.userService.getCompany();
+    this.company = this.userService.getCompany();   
     console.log('this.company',this.company);
     //this.getUserOffers();    
   }
@@ -63,6 +65,9 @@ export class EditOffersPage {
     console.log('ionViewWillEnter EditOffersPage');
     this.getUserOffers();
     this.toolbarShow = false;
+    this.taskCreate = true;
+    this.taskConsults = true;
+    this.taskShare = true;
     //setTimeout(() => {    }, 2000);
   }
   ionViewDidEnter(){
@@ -89,6 +94,7 @@ export class EditOffersPage {
     .subscribe(
       (data)=> {
         this.offerService.setUserOffersToShare(data);
+        this.offerService.setUserOffersCache(data);
         let offersActives = 0;
         this.offers = data; 
         this.offersTotal = this.offers.length;
@@ -221,6 +227,11 @@ export class EditOffersPage {
       console.log('canShareViaEmail Sharing via email is not possible');
     });
 */
+  }
+
+  goConsultsPage(){
+    console.log('goConsultsPage');
+    this.navCtrl.push(ConsultsPage);
   }
 
   goShareOffers(){

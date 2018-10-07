@@ -25,6 +25,7 @@ export class OfferServiceProvider {
   //getPicturesPath: string = 'http://mioferta.local/media/com_jbusinessdirectory/pictures';
 
   myOffers: any = [];
+  myOffersCache: any = [];
 
   constructor(public httpClient: HttpClient, public storage: Storage) {
     console.log('Hello OfferServiceProvider Provider');
@@ -36,17 +37,26 @@ export class OfferServiceProvider {
   getUserOffers(id: number) {
     let url = this.apiUrl + '/v1/user/getUserOffers/' + id;
     return this.httpClient.get(url);
+  }  
+  
+  setUserOffersCache(offers){
+    this.myOffersCache = offers;
   }
-  
-  
+  getUserOffersCache(){
+    return this.myOffersCache;
+  }
+
+  getUserContacts(id: number) {
+    let url = this.apiUrl + '/v1/user/getUserContacts/' + id;
+    return this.httpClient.get(url);
+  }  
 
   setUserOffersToShare(offers){
     var myOffers:any = [];
     offers.forEach(function (value) {
       if(value.state==1){
         myOffers.push(value);
-      }
-      
+      }      
     });
     this.myOffers = myOffers;
   }
@@ -80,14 +90,32 @@ export class OfferServiceProvider {
         catchError(this.handleError)
       );
   }
+  increaseWhatsappClick(offer: any): Observable<any> {
+    console.log('offer', offer);
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl + "/v1/offer/increaseWhatsappClick", offer.id, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   getHeader() {
     console.log('UserServiceProvider : getHeader : line 130 this.user.token : ', this.user.token);
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.user.token ? 'Bearer ' + this.user.token : ''
-      })
-    };
+    if(this.user.token!=undefined){
+      console.log('this.user.token',this.user.token);
+      return {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.user.token ? 'Bearer ' + this.user.token : ''
+        })
+      };
+    }else{
+      return {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+    }
+    
   }
 
   private handleError(error: Response | any) {

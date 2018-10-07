@@ -2,6 +2,19 @@ page-profile {
   .bg-image{
       background: url('../assets/img/perfilFondo.jpg') no-repeat center center;
   }  
+  
+  .mioferta-logo {
+    margin: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 128px;
+    height: 128px;
+    text-align: center;
+    background: url('../assets/img/home-logo.png') no-repeat center center;
+}
+.login-with {
+  width: 75%;
+}
   .profile-avatar-center {
     z-index: 99;    
     width: 100%;    

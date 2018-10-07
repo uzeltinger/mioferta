@@ -8,6 +8,11 @@
 
     <ion-navbar color="primary">
         <ion-title>Mis ofertas</ion-title>
+        <ion-buttons end>
+            <button (click)="toolbarToggle()" ion-button icon-only>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
     <ion-toolbar *ngIf="toolbarShow">
@@ -15,13 +20,10 @@
             <button *ngIf="taskCreate" ion-button icon-only (click)="goNewOfferPage()">
                 <ion-icon name="add-circle"></ion-icon>
             </button>
-            <button *ngIf="taskCreate" ion-button icon-only (click)="itemsSelectedEdit()">
-                <ion-icon name="create"></ion-icon>
+            <button *ngIf="taskConsults" ion-button icon-only (click)="goConsultsPage()">
+                <ion-icon name="contacts"></ion-icon>
             </button>
-            <button *ngIf="taskDelete" ion-button icon-only (click)="itemsSelectedTrash()">
-                <ion-icon name="trash"></ion-icon>
-            </button>
-            <button *ngIf="taskShare" ion-button icon-only (click)="itemsSelectedShare()">
+            <button *ngIf="taskShare" ion-button icon-only (click)="goShareOffers()">
                 <ion-icon name="share"></ion-icon>
             </button>
         </ion-buttons>

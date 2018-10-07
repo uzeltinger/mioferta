@@ -49,8 +49,18 @@ export class ProfilePage {
     this.company = this.userService.getCompany();
     setTimeout(() => {
       this.formatCompanyAddress();    
-    }, 1000);
+    }, 1000);    
     
+    let date = new Date();    
+    var lastDay = new Date(date.getFullYear(), date.getMonth(), 0);
+    var toDay = new Date();
+    console.log('lastDay',lastDay);
+    console.log('toDay',toDay);
+    var options = {
+      year: "numeric", month: "short", day: "numeric"     
+  };
+  console.log('toLocaleDateString',date.toLocaleDateString("es-ar", options));
+
   }
   formatCompanyAddress(){
     let addressFormated = this.company.address + ' ' + this.company.street_number;
