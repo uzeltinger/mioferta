@@ -15,6 +15,7 @@ export class ProveedorProvider {
   apiUrl: string = 'https://mioferta.com.ar/api';
   httpOptions: any = {};
   user: User = new User;
+  conectadoAinternet: boolean = false;
   //apiUrl: string = 'http://mioferta.local/api/';
   constructor(public httpClient: HttpClient) {
     console.log('Hello ProveedorProvider Provider');
@@ -28,28 +29,46 @@ export class ProveedorProvider {
     url = this.apiUrl + '/v1/offers/getOffers';
     return this.http.get(url);
   }*/
-  
-  obtenerOfertas(data: any): Observable<any> {
-    console.log('obtenerOfertas data',data);
-    this.httpOptions = this.getHeader();
-    return this.httpClient.post<any>(this.apiUrl + "/v1/offers/getOffers", data, this.httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+
+  setConectadoAinternet(conectadoAinternet) {
+    console.log('ProveedorProvider setConectadoAinternet', conectadoAinternet);
+    this.conectadoAinternet = conectadoAinternet;
   }
-  getCategories(){
+  getConectadoAinternet() {
+    return this.conectadoAinternet;
+  }
+
+  obtenerOfertas(data: any): Observable<any> {
+    if (this.conectadoAinternet) {
+      console.log('obtenerOfertas data', data);
+      this.httpOptions = this.getHeader();
+      return this.httpClient.post<any>(this.apiUrl + "/v1/offers/getOffers", data, this.httpOptions)
+        .pipe(
+          catchError(this.handleError)
+        );
+    } else {
+      let error: Response | any;
+      error = 'No estás conectado a internet';
+      return Observable.throw(error);
+      /*return new Observable((observer) => {
+        return observer.next(error);
+    });*/
+    }
+
+  }
+  getCategories() {
     let url = '';
     url = this.apiUrl + '/v1/categories/getCategories';
     return this.httpClient.get(url);
   }
 
-  getCities(){
+  getCities() {
     let url = '';
     url = this.apiUrl + '/v1/cities/getCities';
     return this.httpClient.get(url);
   }
 
-  getOffersCategory(id: number){
+  getOffersCategory(id: number) {
     let url = this.apiUrl + '/v1/categories/getOffersCategory/' + id;
     return this.httpClient.get(url);
   }

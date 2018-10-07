@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { OfferPage } from '../offer/offer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ProveedorProvider } from '../../providers/proveedor/proveedor';
 import { ModalController } from 'ionic-angular';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { OfferServiceProvider } from '../../providers/offer-service/offer-service';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the OffersPage page.
@@ -33,6 +34,7 @@ export class OffersPage {
     public navParams: NavParams, 
     public proveedor:ProveedorProvider, 
     public offerService: OfferServiceProvider, 
+    private alertController: AlertController,
     public statusBar: StatusBar,
     public modalCtrl: ModalController) {
     this.whatsappText = "Dentro%20de%20las%2048hs.%20paso%20a%20retirar%20la%20oferta.%0AMuchas%20gracias.%0A";
@@ -80,7 +82,12 @@ export class OffersPage {
         console.log('data',data) ;
         console.log('this.offers',this.offers) ;
       },
-      (error)=>{console.log('error',error);}
+      (error)=>{
+        console.log('error',error);
+        this.showSplash = false;
+        this.navCtrl.setRoot(HomePage);    
+        this.showAlert('Ocurrió un error',error);
+      }
     )
   }
   navToOfferPage(event, offer){
@@ -128,5 +135,15 @@ export class OffersPage {
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
     }
   }
+
+  showAlert(title_: string, subTitle_: string) {
+    const alert = this.alertController.create({
+      title: title_,
+      subTitle: subTitle_,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 
 }

@@ -14,6 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { AgmCoreModule } from '@agm/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Network } from '@ionic-native/network';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -92,7 +93,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     Base64,
     SocialSharing,
     Geolocation,
-    NativeGeocoder, InAppBrowser
+    NativeGeocoder, InAppBrowser,
+    Network
   ]
 })
 export class AppModule {}

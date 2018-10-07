@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //import { HeaderColor } from '@ionic-native/header-color';
@@ -16,6 +16,9 @@ import { ShareOffersPage } from '../pages/share-offers/share-offers';
 //import { ProfileAddressPage } from '../pages/profile-address/profile-address';
 import { EditOffersPage } from '../pages/edit-offers/edit-offers';
 import { ConsultsPage } from '../pages/consults/consults';
+import { Network } from '@ionic-native/network';
+import { Toast } from '@ionic-native/toast';
+import { ProveedorProvider } from '../providers/proveedor/proveedor';
 //import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({
@@ -33,8 +36,12 @@ export class MyApp {
 
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
+    private network: Network,
     public splashScreen: SplashScreen,/*, public headerColor: HeaderColor*/
-    public userService: UserServiceProvider) {        
+    public userService: UserServiceProvider,
+    private alertController: AlertController,
+    public proveedor:ProveedorProvider, 
+    private toast: Toast) {        
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -57,6 +64,7 @@ export class MyApp {
       console.log('I am an core platform!');
     }
     this.platform.ready().then(() => {
+      this.listenConnection();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleBlackOpaque();
@@ -69,6 +77,48 @@ export class MyApp {
       this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
     });
     
+  }
+
+  private listenConnection(): void {
+    console.log('this.network.type',this.network.type);
+    if(this.network.type=='none'){
+      this.proveedor.setConectadoAinternet(false);
+      console.log('this.network.type es == none');
+    }else{
+      this.proveedor.setConectadoAinternet(true);
+    }
+    this.network.onDisconnect()
+      .subscribe(() => {
+        this.proveedor.setConectadoAinternet(false);
+        this.showToast('Dispositivo desconectado. Por favor verifique su conección a internet!');
+        this.showAlert();
+      });
+      this.network.onConnect().subscribe(() => {
+        this.proveedor.setConectadoAinternet(true);
+        this.showToast('Dispositivo Conectado!');
+       });
+  }
+  showAlert() {
+    var title_ :string = 'Error de conección del dispositivo';
+    var subTitle_ :string = 'Por favor verifique su conección a internet!';
+    const alert = this.alertController.create({
+      title: title_,
+      subTitle: subTitle_,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showToast(text: string, duration: string = '3000', position: string = 'bottom') {
+    if (this.platform.is('android')) {
+      this.toast.show(text, duration, position).subscribe(
+        toast => {
+          console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
+        }
+      );
+    }else{
+      console.log('showToast ', text);
+    }
   }
 
   openPage(page) {
