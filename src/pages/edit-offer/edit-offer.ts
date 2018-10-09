@@ -77,8 +77,8 @@ export class EditOfferPage {
     this.getCategories();    
     if(this.offer.id==0){
       this.isNewOffer = true;      
-      this.offerNew.main_subcategory = 105;      
-      this.offerNew.categories[0] = 105;
+      this.offerNew.main_subcategory = 0;      
+      this.offerNew.categories[0] = 0;
       this.offerNew.subject = '';
     }else{
       this.offerNew = this.offer;

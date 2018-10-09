@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, BlockerDelegate } from 'ionic-angular';
 import { OfferPage } from '../offer/offer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ProveedorProvider } from '../../providers/proveedor/proveedor';
@@ -29,6 +29,7 @@ export class OffersPage {
   citiesFiltered: any = [];
   latitude: number = 0;
   longitude: number = 0;
+  filtrosAplicados: boolean = false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -67,6 +68,13 @@ export class OffersPage {
   getOffers(){
     this.getCitiesFiltered();
     this.getCategoriesFiltered();
+    
+    if(this.citiesFiltered.length > 0 || this.categoriesFiltered.length > 0){
+      console.log('filtrosAplicados');
+      this.filtrosAplicados = true;
+    }else{
+      this.filtrosAplicados = false;
+    }
     let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered,"latitude":this.latitude,"longitude":this.longitude};
     this.proveedor.obtenerOfertas(sendData)
     .subscribe(
