@@ -18,6 +18,7 @@ import { Network } from '@ionic-native/network';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { AdminEmpresasPage } from '../pages/admin/empresas/empresas';
 import { ConsultsPage } from '../pages/consults/consults';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
@@ -44,6 +45,7 @@ import { ProveedorProvider } from '../providers/proveedor/proveedor';
 import { AboutPage } from '../pages/about/about';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { OfferServiceProvider } from '../providers/offer-service/offer-service';
+import { AdminProvider } from '../providers/admin/admin';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
     ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, 
-    ModalSearchPage, ShareOffersPage, ConsultsPage//,    OfferAddressMapModalPage
+    ModalSearchPage, ShareOffersPage, ConsultsPage,AdminEmpresasPage
+    //,    OfferAddressMapModalPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,LoginGooglePage,LoginFacebookPage,AboutPage,
     ProfilePage,CategoriesPage,CategoryPage,EditOffersPage,EditOfferPage,
     ProfileAddressPage, ProfileAutocompleteAddressPage, OfferDetailTestPage, ModalSearchPage,
-    ShareOffersPage, ConsultsPage //,    OfferAddressMapModalPage
+    ShareOffersPage, ConsultsPage, AdminEmpresasPage
+    //,    OfferAddressMapModalPage
   ],
   providers: [
     StatusBar,
@@ -94,7 +98,8 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     SocialSharing,
     Geolocation,
     NativeGeocoder, InAppBrowser,
-    Network
+    Network,
+    AdminProvider
   ]
 })
 export class AppModule {}

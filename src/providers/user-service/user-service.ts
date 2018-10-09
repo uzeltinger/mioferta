@@ -149,6 +149,54 @@ export class UserServiceProvider {
     return this.company;
   } 
 
+
+  suscribeUserInfo(): Observable<any> {
+    this.storage.get('userLogued').then((userLogued) => {
+      //console.log('line 49 : userLogued is ', userLogued);
+      this.isUserLoggedIn = userLogued;
+      if(userLogued){
+        this.user.isUserLoggedIn = userLogued;         
+        this.storage.get('user_id').then((user_id) => {
+          this.user.id = user_id;
+        });
+        this.storage.get('name').then((name) => {
+          this.user.name = name;            
+        });
+        this.storage.get('facebook_id').then((facebook_id) => {
+          this.user.facebook_id = facebook_id;
+        });
+        this.storage.get('google_id').then((google_id) => {
+          this.user.google_id = google_id;
+        });
+        this.storage.get('email').then((email) => {
+          this.user.email = email;
+        });
+        this.storage.get('first_name').then((first_name) => {
+          this.user.first_name = first_name;            
+        });
+        this.storage.get('last_name').then((last_name) => {
+          this.user.last_name = last_name;            
+        }); 
+        this.storage.get('picture').then((picture) => {
+          this.user.picture = picture;
+        });
+        this.storage.get('token').then((token) => {
+          this.user.token = token;
+        });
+        this.storage.get('company_id').then((company_id) => {
+          this.company.id = company_id;
+        });
+      }
+    });
+    
+    return new Observable((observer) => {
+        return observer.next(this.user);
+    });
+    
+
+  }
+
+
   getUser(){
     this.storage.get('userLogued').then((userLogued) => {
       //console.log('line 49 : userLogued is ', userLogued);

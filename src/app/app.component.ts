@@ -19,6 +19,7 @@ import { ConsultsPage } from '../pages/consults/consults';
 import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
 import { ProveedorProvider } from '../providers/proveedor/proveedor';
+import { AdminEmpresasPage } from '../pages/admin/empresas/empresas';
 //import { EditOfferPage } from '../pages/edit-offer/edit-offer';
 
 @Component({
@@ -29,19 +30,19 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
 
   isUserLoggedIn: boolean = false;
-  userInfo: User = new User;
+  userInfo: any = [];
 
-  constructor(public platform: Platform, 
-    public statusBar: StatusBar, 
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
     private network: Network,
     public splashScreen: SplashScreen,/*, public headerColor: HeaderColor*/
     public userService: UserServiceProvider,
     private alertController: AlertController,
-    public proveedor:ProveedorProvider, 
-    private toast: Toast) {        
+    public proveedor: ProveedorProvider,
+    private toast: Toast) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -53,7 +54,7 @@ export class MyApp {
 
   }
 
-  initializeApp() {    
+  initializeApp() {
     if (this.platform.is('android')) {
       console.log('I am an android device!');
     }
@@ -73,18 +74,41 @@ export class MyApp {
       //this.headerColor.tint('#E72000');
       this.splashScreen.hide();
 
-      this.userInfo = this.userService.getUser();
-      this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
+      this.userService.suscribeUserInfo()
+        .subscribe(
+          (data) => {
+            setTimeout(() => {
+              console.log('data', data);
+              this.checkUserData(data);
+            }, 1000);
+          },
+          (error) => {
+            console.log('error', error);
+          }
+        )
     });
-    
+
   }
 
+  checkUserData(data) {
+    this.userInfo = data;
+    this.isUserLoggedIn = this.userInfo.isUserLoggedIn;
+    console.log('data.email ', data.email);
+    if (data.email == "emiliouzeltinger@gmail.com" 
+    || data.email == "fabiouz@gmail.com"
+    || data.email == "riverasdaniel@gmail.com") {
+      console.log('this.userInfo ', this.userInfo);
+      this.pages.push({ title: 'Empresas', component: AdminEmpresasPage, icon: 'podium' });
+    }else{
+      console.log('ninguno');
+    }
+  }
   private listenConnection(): void {
-    console.log('this.network.type',this.network.type);
-    if(this.network.type=='none'){
+    console.log('this.network.type', this.network.type);
+    if (this.network.type == 'none') {
       this.proveedor.setConectadoAinternet(false);
       console.log('this.network.type es == none');
-    }else{
+    } else {
       this.proveedor.setConectadoAinternet(true);
     }
     this.network.onDisconnect()
@@ -93,14 +117,14 @@ export class MyApp {
         this.showToast('Dispositivo desconectado. Por favor verifique su conección a internet!');
         this.showAlert();
       });
-      this.network.onConnect().subscribe(() => {
-        this.proveedor.setConectadoAinternet(true);
-        this.showToast('Dispositivo Conectado!');
-       });
+    this.network.onConnect().subscribe(() => {
+      this.proveedor.setConectadoAinternet(true);
+      this.showToast('Dispositivo Conectado!');
+    });
   }
   showAlert() {
-    var title_ :string = 'Error de conección del dispositivo';
-    var subTitle_ :string = 'Por favor verifique su conección a internet!';
+    var title_: string = 'Error de conección del dispositivo';
+    var subTitle_: string = 'Por favor verifique su conección a internet!';
     const alert = this.alertController.create({
       title: title_,
       subTitle: subTitle_,
@@ -116,7 +140,7 @@ export class MyApp {
           console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
         }
       );
-    }else{
+    } else {
       console.log('showToast ', text);
     }
   }
