@@ -54,12 +54,24 @@ export class OffersPage {
     console.log('setCurrentPosition');
     if ("geolocation" in navigator) {
       console.log('geolocation');
-        navigator.geolocation.getCurrentPosition((position) => {
+      //navigator.geolocation.getCurrentPosition(success, error, options)
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
             console.log('setCurrentPosition latitude'+this.latitude);
             this.getOffers();
-        });
+        }, 
+        (error) => {
+          console.warn('ERROR(' + error.code + '): ' + error.message);
+          this.getOffers();
+        },options
+        );
     }else{
       console.log('NO geolocation');
       this.getOffers();
