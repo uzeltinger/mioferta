@@ -109,7 +109,7 @@ export class ShareOffersPage {
 
         console.log('offersIdToShare',offersIdToShare);
            
-          whatsappUrl = "\r\n" + 'https://mioferta.com.ar/index.php?option=com_jbusinessdirectory&view=sharedoffers&offers='+offersIdToShare.toString();          
+          whatsappUrl = "\r\n" + 'https://mioferta.com.ar/index.php?option=com_jbusinessdirectory&Itemid=1008&view=sharedoffers&offers='+offersIdToShare.toString();          
        
       console.log('whatsappText',whatsappText);
       console.log('whatsappImage',whatsappImage);
